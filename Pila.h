@@ -1,20 +1,25 @@
 #ifndef PILA_H
 #define PILA_H
 #include "NodoPila.h"
+#include "Proceso.h"
 
-class Pila{
+class Pila //clase amiga de nodopila.h
+{
     private:
-        pNodoPila cima;
+        pNodoPila cima; //puntero al 1er elemento, cima pila 
+
     public:
-        Pila();
-        ~Pila();
+        Pila(); //constructor
+        ~Pila(); //destructor
         bool esVacia();
-        void apilar(Proceso proceso);
+        void añadir(Proceso proceso); //apila un elemento e la cima de la pila sin ordenarla
+        void apilar(Proceso proceso); //apila elemento y lo ordena
         void desapilar();
         Proceso mostrar();
-        void mostrarPila();
         int contar();
         Pila copiarPila();
-        void mostrarProcesosPila();
+        //void ordenar();
+        void mostrarPila();
 };
-#endif PILA_H;
+
+#endif // PILA_H

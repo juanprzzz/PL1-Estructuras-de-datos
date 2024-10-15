@@ -1,17 +1,21 @@
 #ifndef NODOPILA_H
 #define NODOPILA_H
-#include "Proceso.h"
 #include <iostream>
+#include "Proceso.h"
 
-class NodoPila{
+class NodoPila
+{
     private:
-        Proceso proceso;
         NodoPila *siguiente;
-        friend class Pila;
+        Proceso proceso;
+        friend class Pila;//claase pila podra acceder tanto a metodos publicos como privados
+
     public:
-        NodoPila();
-        NodoPila(Proceso proceso, NodoPila *siguiente=NULL);
-        ~NodoPila();
+        NodoPila(); //constructor
+        NodoPila(Proceso proceso, NodoPila *sig = NULL); //constructor donde meto elemento proceso y puntero null, se hace asi por defecto
+        ~NodoPila(); //destructor
 };
-typedef NodoPila *pNodoPila;
-#endif;
+
+typedef NodoPila *pNodoPila; //creas nuevo tipo de dato nodopila que es un puntero
+
+#endif // NODOPILA_H
