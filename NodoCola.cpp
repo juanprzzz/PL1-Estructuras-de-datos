@@ -1,13 +1,13 @@
 #include "NodoCola.h"
 
 NodoCola::NodoCola(){
-elemento='0';
+proceso=Proceso();
 siguiente=NULL;
 //constructor por defecto
 }
 
-NodoCola::NodoCola(char e, NodoCola*sig ){
-elemento = e;
+NodoCola::NodoCola(Proceso p, NodoCola*sig ){
+proceso=p;
 siguiente = sig;
 }
 

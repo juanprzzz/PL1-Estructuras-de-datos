@@ -4,12 +4,12 @@ using namespace std;
 
 
 Proceso::Proceso(){
-PID=0;
-PPID=1;
-inicioProceso=0;
-tiempoVida=0;
-prioridad=0;
-nucleo=0;
+PID=-1;
+PPID=-1;
+inicioProceso=-1;
+tiempoVida=-1;
+prioridad=-1;
+nucleo=-1;
 //constructor por defecto
 }
 

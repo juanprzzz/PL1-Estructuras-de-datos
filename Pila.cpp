@@ -51,64 +51,6 @@ void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
 }
 
 
-
-
-
-
-
-
-/*
-    void Pila::añadir(Proceso proceso) //solo apila
-        { 
-            pNodoPila nuevo = new NodoPila(proceso,cima);//comienzo de la pila nuevo nodo
-            cima = nuevo; //cima puntero apunta a nvo nodo
-        }
-
-    void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
-        bool ordenado=true;
-        if (!esVacia() && proceso.inicioProceso>mostrar().inicioProceso){ //si el tiempo nuevo es mayor al de la antigua cima no está ordenada
-            ordenado=false;
-        }
-        añadir(proceso);
-        if (ordenado==false){ //si la pila no está ordenada. Si es vacía o está ordenada no hace nada
-            ordenar();
-        }
-    }
-
-    void Pila::ordenar(){
-        Pila aux;
-
-        int procesoNuevoTiempo=mostrar().inicioProceso;
-        Proceso nuevoNodo=mostrar();
-        desapilar(); //elimino el elemento nuevo ya guardado
-
-        //bool salir=false;
-        bool insertado=false;
-        while (!esVacia()){
-            if (procesoNuevoTiempo<=mostrar().inicioProceso){
-                añadir(nuevoNodo);
-                insertado=true;
-            }
-            aux.añadir(mostrar());
-            desapilar();
-        }
-        if (insertado==false){
-            añadir(nuevoNodo);
-        }
-
-        while (!aux.esVacia()){ //recuperar lo que sea que haya perdido de la pila
-                    añadir(aux.mostrar());
-                    aux.desapilar();
-                }
-
-    }
-*/
-
-
-
-
-
-
     Pila Pila::copiarPila(){ //copia pila actual en aux sin perder pila
         Pila aux;
         Pila pilaCopia;

@@ -15,6 +15,8 @@ class Proceso
 
     friend class NodoPila;//clase pila y nodopila podra acceder tanto a metodos publicos como privados
     friend class Pila;
+    friend class NodoCola;
+    friend class Cola;
 
     public:
         Proceso(); //constructor
