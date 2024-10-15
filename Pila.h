@@ -15,5 +15,6 @@ class Pila{
         void mostrarPila();
         int contar();
         Pila copiarPila();
+        void mostrarProcesosPila();
 };
 #endif PILA_H;

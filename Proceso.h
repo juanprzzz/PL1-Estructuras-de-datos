@@ -1,6 +1,6 @@
 #ifndef PROCESO_H
 #define PROCESO_H
-#include <ctime>
+#include <string>
 
 class Proceso{
     
@@ -17,6 +17,7 @@ class Proceso{
         Proceso(); //Constructor
         Proceso(int PID, int PPID = 1, int inicioProceso, int tiempoVida, int prioridad, int nucleo);
         ~Proceso(); //Destructor
+        string toString();
 
 };
 
