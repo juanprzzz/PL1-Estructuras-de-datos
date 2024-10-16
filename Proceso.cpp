@@ -1,5 +1,6 @@
 #include "Proceso.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 
@@ -24,4 +25,8 @@ nucleo=n;
 
 Proceso::~Proceso(){
 //dtor
+}
+string Proceso::toString(){
+    string procesoToString = "________________________\n\nPROCESO: \nPID: "+ to_string(PID) + "\nPPID: "+ to_string(PPID) + "\n" + "Inicio del proceso: " + to_string(inicioProceso) + "\n" + "Tiempo de vida: " + to_string(tiempoVida) + "\nPrioridad: " + to_string(prioridad) + "\nNúcleo: " + to_string(nucleo) + "\n________________________\n";
+    return procesoToString;
 }
