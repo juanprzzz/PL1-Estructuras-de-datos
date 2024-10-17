@@ -19,9 +19,7 @@ class Cola{
         void desencolar();
         bool es_vacia();
         void mostrarCola(); //No es correcto, se implementa para ver que está creada correctamente
-
-        //ejercicios
-        Cola invertir();
+        Cola copiarCola();
 
 };
 #endif // COLA_H

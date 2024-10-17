@@ -6,23 +6,21 @@
 class Sistema{
     private:
         Pila pilaProcesos;
-        Cola colaPrioridadUno;
-        Cola colaPrioridadDos;
-        Cola colaPrioridadTres;
+        Cola colaEspera;
         Proceso nucleos[3];
     public:
         Sistema();
         ~Sistema();
-        Sistema(Pila pilaProcesos, Cola colaPrioridadUno, Cola colaPrioridadDos, Cola colaPrioridadTres);
+        Sistema(Pila p, Cola c);
         void mostrarProcesosNucleo();
         void pasarTiempo(int N);
+        Proceso buscarProcesoSiguiente(int N);
         bool asignarSiguienteProceso(int nucleoLibre);
         void apilar(Proceso proceso);
         void desapilar();
         Proceso mostrarCima();
-
-        void encolarCola(Proceso proceso, int nucleo);
-        void desencolarCola(Proceso proceso, int nucleo);
+        void encolar(Proceso p);
+        void desencolar();
         
 };
 

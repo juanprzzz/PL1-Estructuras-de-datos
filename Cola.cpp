@@ -28,6 +28,9 @@ void Cola::encolar(Proceso proceso){
 void Cola::encolarPrioridad(Proceso proceso){
     Cola aux;
         
+    if (proceso.nucleo!=-1){ //solamente se encola si el proceso existe. si es un proceso vacío su núcleo default será -1 y no se añadirá
+
+
     if (es_vacia() || (proceso.prioridad>=fin().prioridad) ){ //si la prioridad del nuevo es mayor a la del último elemento de la cola o si la cola está vacía, se mete al final
         encolar(proceso);        
     }
@@ -83,38 +86,8 @@ void Cola::encolarPrioridad(Proceso proceso){
             encolar(proceso);
         }*/
     }
-}
-
-
-/*
-void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
-    if (esVacia() || (proceso.inicioProceso>=mostrar().inicioProceso)){
-        añadir(proceso);
     }
-    else{ // (!esVacia() && !(proceso.inicioProceso<=mostrar().inicioProceso)){
-        Pila aux;
-        bool insertado=false;
-        while (!esVacia() && insertado==false){
-            aux.añadir(mostrar());
-            desapilar();
-            if (proceso.inicioProceso>=mostrar().inicioProceso){
-                añadir(proceso);
-                insertado=true;
-            }
-        }
-        if (insertado==false){
-            añadir(proceso);
-        }
-
-        while (!aux.esVacia()){ //recuperar lo que sea que haya perdido de la pila
-                    añadir(aux.mostrar());
-                    aux.desapilar();
-                }
-    }
-    
 }
-
-*/
 
 
 void Cola::desencolar(){ 
@@ -178,4 +151,17 @@ void Cola::mostrarCola()
     }
 }
 
-
+Cola Cola::copiarCola(){
+    Cola aux;
+    Cola copia;
+    while(!es_vacia()){
+        aux.encolar(inicio());
+        copia.encolar(inicio());
+        desencolar();
+    }
+    while(!aux.es_vacia()){
+        encolar(aux.inicio());
+        aux.desencolar();
+    }
+    return copia;
+}
