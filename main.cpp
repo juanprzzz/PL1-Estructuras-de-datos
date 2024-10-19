@@ -32,8 +32,8 @@ p.apilar(p6);
 
 Sistema sistemaPrincipal;
 sistemaPrincipal.addPilaProcesos(p);
-sistemaPrincipal.pasarTiempo(20);
-
+//sistemaPrincipal.pasarTiempo(20);
+sistemaPrincipal.acabarProcesos();
 
 
 return 0;

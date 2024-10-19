@@ -41,7 +41,7 @@ void Sistema::pasarTiempo(int N){
                     cout<<(i == 1 ?"Minuto transcurrido " : "Minutos transcurridos: ")<<i<<", el nucleo "<< n+1<<" se encontraba libre y se le ha asignado el proceso correspondiente."<<endl; 
                 }
                 else{
-                    cout<<"¡La cola del nucleo "<<n+1<<" está vacía!"<<endl;
+                    cout<<"¡La cola del nucleo "<<n+1<<" está vacia!"<<endl;
                     colasVacia[n] = 1;
                     nucleos[n].nucleo = -1;
                 }
@@ -66,6 +66,34 @@ void Sistema::pasarTiempo(int N){
         cout<<"Estado de los nucleos ("<<i<<(i == 1 ? " minuto transcurrido)." : " minutos transcurridos).")<<endl;
         mostrarProcesosNucleo();
     }
+}
+int Sistema::sumarTiempos(){
+    Cola aux= colaEspera.copiarCola();
+    int tiempoN1=0;
+    int tiempoN2=0;
+    int tiempoN3=0;
+    while(!aux.es_vacia()){
+        int n=aux.inicio().nucleo;
+        switch(n){//guarda el tiempo que va a tardar en finalizar cada uno de los tres núcleos
+            case 1: tiempoN1+=aux.inicio().tiempoVida;
+            break;
+            case 2: tiempoN2+=aux.inicio().tiempoVida;
+            break;
+            case 3: tiempoN3+=aux.inicio().tiempoVida;
+            break;
+            default: cout<<"Proceso con nucleo no válido"<<endl;
+        }
+        aux.desencolar();
+    }
+    if(tiempoN1>=tiempoN2 && tiempoN1>=tiempoN3){return tiempoN1;} //devuelve el tiempo del núcleo que vaya a tardar más en terminar de ejecutarse
+    else if(tiempoN2>=tiempoN1 && tiempoN2>=tiempoN3){return tiempoN2;}
+    else if(tiempoN3>=tiempoN2 && tiempoN3>=tiempoN1){return tiempoN3;}
+    else{return 0;}
+}
+
+void Sistema::acabarProcesos(){
+    int n=sumarTiempos()+1; //1 min mas para comprobar que todo queda vacío
+    pasarTiempo(n);
 }
 
 
@@ -139,7 +167,7 @@ bool Sistema::asignarSiguienteProceso(int nucleo){
     return false; ////sobra con el default??
 }
 
-*/
+
 
 
 //métodos de utilización de las estructuras guardadas dentro de sistema para poder acceder a los atributos privados del mismo
@@ -159,6 +187,8 @@ void Sistema::encolar(Proceso p){
 void Sistema::desencolar(){
     colaEspera.desencolar();
 }
+
+*/
 
 
 void Sistema::addPilaProcesos(Pila p){
@@ -181,6 +211,8 @@ void Sistema::addPilaProcesos(Pila p){
         pilaProcesos.desapilar();
     }
 }
+
+
 
 /*
 void Sistema::encolarCola(Proceso p, int n){

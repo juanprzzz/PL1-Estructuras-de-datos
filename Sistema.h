@@ -18,6 +18,8 @@ class Sistema{
         bool asignarSiguienteProceso(int nucleoLibre);
         void apilar(Proceso proceso);
         void desapilar();
+        int sumarTiempos();
+        void acabarProcesos();
         Proceso mostrarCima();
         void encolar(Proceso p);
         void desencolar();
