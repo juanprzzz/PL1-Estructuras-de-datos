@@ -11,11 +11,6 @@ Sistema::Sistema(){
 }
 
 
-Sistema::Sistema(Pila p, Cola c){
-    pilaProcesos=p;
-    colaEspera=c;
-    Proceso nucleos[3];
-}
 
 Sistema::~Sistema(){
     //Destructor
@@ -163,6 +158,28 @@ void Sistema::encolar(Proceso p){
 }
 void Sistema::desencolar(){
     colaEspera.desencolar();
+}
+
+
+void Sistema::addPilaProcesos(Pila p){
+    Pila aux;
+    //Mover todos los elementos de p a una pila auxiliar; se introducirán en orden inverso
+    while (!p.esVacia()) {
+        aux.apilar(p.mostrar());
+        p.desapilar();      
+    }
+
+    // Copiar aux a p2 de nuevo en el orden correcto
+    while (!aux.esVacia()) {
+        pilaProcesos.apilar(aux.mostrar());
+        aux.desapilar();
+    }
+    
+    //pasar la pila a la cola
+    while(!pilaProcesos.esVacia()){
+        colaEspera.encolarPrioridad(pilaProcesos.mostrar());
+        pilaProcesos.desapilar();
+    }
 }
 
 /*

@@ -11,7 +11,7 @@ class Sistema{
     public:
         Sistema();
         ~Sistema();
-        Sistema(Pila p, Cola c);
+        void addPilaProcesos(Pila p);
         void mostrarProcesosNucleo();
         void pasarTiempo(int N);
         Proceso buscarProcesoSiguiente(int N);

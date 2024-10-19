@@ -21,7 +21,44 @@ Proceso p3= Proceso(3,1,6,5,3,2);
 Proceso p4= Proceso(4,1,1,2,2,3);
 Proceso p5= Proceso(5,1,624,1,3,2);
 Proceso p6 = Proceso(6, 1,3,4,0,1);
+
+Pila p;
+p.apilar(p1);
+p.apilar(p2);
+p.apilar(p3);
+p.apilar(p4);
+p.apilar(p5);
+p.apilar(p6);
+
+Sistema sistemaPrincipal;
+sistemaPrincipal.addPilaProcesos(p);
+sistemaPrincipal.pasarTiempo(20);
+
+
+
+return 0;
+}
+
+
 /*
+
+
+sistemaPrincipal.apilar(p1);
+sistemaPrincipal.apilar(p2);
+sistemaPrincipal.apilar(p3);
+sistemaPrincipal.apilar(p4);
+sistemaPrincipal.apilar(p5);
+sistemaPrincipal.apilar(p6);
+
+sistemaPrincipal.encolar(p1);
+sistemaPrincipal.encolar(p2);
+sistemaPrincipal.encolar(p3);
+sistemaPrincipal.encolar(p4);
+sistemaPrincipal.encolar(p5);
+sistemaPrincipal.encolar(p6);
+
+
+
 cout<<p1.toString()<<endl;
 cout << "Creamos la cola Vacia" << endl;
 Cola c; 
@@ -51,28 +88,8 @@ c.mostrarCola();
 cout << "encolo p5" << endl;
 c.encolarPrioridad(p5);
 c.mostrarCola();
-*/
-Sistema sistemaPrincipal;
-sistemaPrincipal.apilar(p1);
-sistemaPrincipal.apilar(p2);
-sistemaPrincipal.apilar(p3);
-sistemaPrincipal.apilar(p4);
-sistemaPrincipal.apilar(p5);
-sistemaPrincipal.apilar(p6);
-
-sistemaPrincipal.encolar(p1);
-sistemaPrincipal.encolar(p2);
-sistemaPrincipal.encolar(p3);
-sistemaPrincipal.encolar(p4);
-sistemaPrincipal.encolar(p5);
-sistemaPrincipal.encolar(p6);
-sistemaPrincipal.pasarTiempo(20);
 
 
-
-
-
-/*
 cout << "Creamos la pila Vacia" << endl;
 Pila p; 
 p.mostrarPila();
@@ -100,5 +117,3 @@ p.mostrarPila();
 //int PID, int PPID=1,int inicioProceso, int tiempoVida, int prioridad, int nucleo
 
 */
-return 0;
-}
