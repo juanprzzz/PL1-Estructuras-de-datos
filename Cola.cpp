@@ -24,18 +24,21 @@ void Cola::encolar(Proceso proceso){
         }
     longitud++;
 }
+/*
+*Se encarga de introducir un proceso en el lugar que le corresponde por prioridad en la cola
+*/
 void Cola::encolarPrioridad(Proceso proceso){
     Cola aux;
-    while(!es_vacia() && inicio().prioridad >= proceso.prioridad){
+    while(!es_vacia() && inicio().prioridad >= proceso.prioridad){ //Mientras que la cola no esté vacía y el primer elemento de la cola sea más prioritario que el otro proceso
+        aux.encolar(inicio()); //Introduzco el proceso más prioritario en la cola aux
+        desencolar();
+    }
+    aux.encolar(proceso); //Cuando la prioridad del primer proceso de la cola es menor, entonces se encola el proceso que quiero (ya que es más prioritario)
+    while(!es_vacia()){ //Tengo que encolar en la cola aux el resto de elementos que se han quedado en la cola principal
         aux.encolar(inicio());
         desencolar();
     }
-    aux.encolar(proceso);
-    while(!es_vacia()){
-        aux.encolar(inicio());
-        desencolar();
-    }
-    while(!aux.es_vacia()){
+    while(!aux.es_vacia()){ //Como la función no devuelve nada, si no que modifica la cola principal, tengo que introducir los elementos de la cola aux en la principal
         encolar(aux.inicio());
         aux.desencolar();
     }
