@@ -15,11 +15,11 @@ using namespace std;
 
 int main()
 {
-Proceso p1= Proceso(1,1,10,5,3,1);
+Proceso p1= Proceso(1,1,10,5,7,1);
 Proceso p2= Proceso(2,1,3,10,2,2);
 Proceso p3= Proceso(3,1,6,5,3,2);
-Proceso p4= Proceso(4,1,1,2,2,3);
-Proceso p5= Proceso(5,1,624,1,3,2);
+Proceso p4= Proceso(4,1,1,2,5,3);
+Proceso p5= Proceso(5,1,624,1,4,2);
 Proceso p6 = Proceso(6, 1,3,4,0,1);
 
 Pila p;
@@ -31,12 +31,18 @@ p.apilar(p5);
 p.apilar(p6);
 
 Sistema sistemaPrincipal;
-sistemaPrincipal.addPilaProcesos(p);
-
-sistemaPrincipal.pasarTiempo(20);
-
-
-
+//sistemaPrincipal.addPilaProcesos(p);
+sistemaPrincipal.añadirCola(p1);
+sistemaPrincipal.añadirCola(p2);
+sistemaPrincipal.añadirCola(p3);
+sistemaPrincipal.añadirCola(p4);
+sistemaPrincipal.añadirCola(p5);
+sistemaPrincipal.añadirCola(p6);
+//sistemaPrincipal.pasarTiempo(20);
+for(int i = 0; i < 6; i++){
+    cout<<sistemaPrincipal.colaEsperaE()<<endl;
+    sistemaPrincipal.desencolarCola();
+}
 return 0;
 }
 

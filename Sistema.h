@@ -24,8 +24,11 @@ class Sistema{
         void desencolar();
         bool pilaVacia();
         */
+       void añadirCola(Proceso proceso);
+       int colaEsperaE();
        int sumarTiempos();
        void acabarProcesos();
+       void desencolarCola();
         
 };
 

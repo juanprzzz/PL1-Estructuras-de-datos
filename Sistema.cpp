@@ -18,6 +18,15 @@ Sistema::~Sistema(){
 /*
 *Muestra el estado de cada uno de los núcleos
 */
+int Sistema::colaEsperaE(){
+    return colaEspera.inicio().prioridad;
+}
+void Sistema::añadirCola(Proceso p){
+    colaEspera.encolarPrioridad(p);
+}
+void Sistema::desencolarCola(){
+    colaEspera.desencolar();
+}
 void Sistema::mostrarProcesosNucleo(){
     for(int i = 0; i < 3; i++){
         if(nucleos[i].nucleo!=-1){ 

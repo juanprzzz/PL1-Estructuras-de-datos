@@ -24,68 +24,20 @@ void Cola::encolar(Proceso proceso){
         }
     longitud++;
 }
-
 void Cola::encolarPrioridad(Proceso proceso){
     Cola aux;
-        
-    if (proceso.nucleo!=-1){ //solamente se encola si el proceso existe. si es un proceso vacío su núcleo default será -1 y no se añadirá
-
-
-    if (es_vacia() || (proceso.prioridad>=fin().prioridad) ){ //si la prioridad del nuevo es mayor a la del último elemento de la cola o si la cola está vacía, se mete al final
-        encolar(proceso);        
+    while(!es_vacia() && inicio().prioridad >= proceso.prioridad){
+        aux.encolar(inicio());
+        desencolar();
     }
-    else if ((proceso.prioridad<inicio().prioridad)){ //si la prioridad del nuevo es menor a la del primero, se mete primero
-        aux.encolar(proceso); //añado a la auxiliar el nuevo para que sea el 1er elemento
-        while (!es_vacia()){ //después añado a la auxiliar todo el resto de la cola
-            aux.encolar(inicio());
-            desencolar();
-        }
-        while(!aux.es_vacia()){ //recupero la cola original
-            encolar(aux.inicio());
-            aux.desencolar();
-        }
-
-    }else{ // (!es_vacia() && !(proceso.prioridad<=inicio().prioridad)){
-        bool insertado=false;
-        while(!es_vacia() && insertado==false){
-            aux.encolar(inicio());
-            desencolar();
-            if(proceso.prioridad<inicio().prioridad){//si la prioridad del nuevo es menor que la del actual primero de la cola
-                aux.encolar(proceso); //entonces añado a la auxiliar el nuevo
-                insertado=true;
-
-                while (!es_vacia()){ //después añado a la auxiliar todo el resto de la cola
-                    aux.encolar(inicio());
-                    desencolar();
-                }
-            }
-            if(proceso.prioridad==inicio().prioridad){//si la prioridad del nuevo es igual que la del actual primero 
-            //el nuevo se añade después del último con esa prioridad ya que va por tiempo de espera
-                while(proceso.prioridad==inicio().prioridad){ //se añaden los de la misma prioridad a la auxiliar hasta que deje de haber. 
-                //Nunca se llegará al final de la cola en este bucle por comprobación anterior
-                    aux.encolar(inicio());
-                    desencolar();
-                }
-                aux.encolar(proceso); //entonces añado a la auxiliar el nuevo
-                insertado=true;
-
-                while (!es_vacia()){ //después añado a la auxiliar todo el resto de la cola
-                    aux.encolar(inicio());
-                    desencolar();
-                }
-            }
-        }
-        while(!aux.es_vacia()){ //recupero la cola original
-            encolar(aux.inicio());
-            aux.desencolar();
-        }
-        
-        /*
-        //no creo que sea necesario por comprobaciones iniciales
-        if (insertado==false){ //si después de recuperar la cola original aun no se ha insertado el nuevo, lo metemos al final
-            encolar(proceso);
-        }*/
+    aux.encolar(proceso);
+    while(!es_vacia()){
+        aux.encolar(inicio());
+        desencolar();
     }
+    while(!aux.es_vacia()){
+        encolar(aux.inicio());
+        aux.desencolar();
     }
 }
 
