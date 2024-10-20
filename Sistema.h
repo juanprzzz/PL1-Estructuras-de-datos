@@ -16,11 +16,16 @@ class Sistema{
         void pasarTiempo(int N);
         Proceso buscarProcesoSiguiente(int N);
         bool asignarSiguienteProceso(int nucleoLibre);
+        /*
         void apilar(Proceso proceso);
         void desapilar();
         Proceso mostrarCima();
         void encolar(Proceso p);
         void desencolar();
+        bool pilaVacia();
+        */
+       int sumarTiempos();
+       void acabarProcesos();
         
 };
 

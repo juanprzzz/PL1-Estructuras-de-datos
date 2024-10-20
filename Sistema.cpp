@@ -15,39 +15,43 @@ Sistema::Sistema(){
 Sistema::~Sistema(){
     //Destructor
 }
-
+/*
+*Muestra el estado de cada uno de los núcleos
+*/
 void Sistema::mostrarProcesosNucleo(){
     for(int i = 0; i < 3; i++){
         if(nucleos[i].nucleo!=-1){ 
-            cout<<nucleos[i].toString()<<endl;
+            cout<<"Núcleo "<<i+1<<": \n"<<nucleos[i].toString()<<endl;
         }
         else{
-            cout<<"Nucleo: "<< i+1 <<" libre."<<endl;     
+            cout<<"Núcleo "<< i+1 <<": "<<" libre."<<endl;     
         }
         
     }
 }
 
-
+/*
+* Se encarga de que transcurra en el sistema N minutos. Se encarga de llamar a las funciones correspondientes para mostrar 
+* los núcleos cada minuto, asignación de procesos...
+*/
 void Sistema::pasarTiempo(int N){
-    int colasVacia[3] = {0,0,0};
+    int colasVacia[3] = {0,0,0}; //Se introduce esta variable para saber qué nucleos no tienen ningún proceso en la cola
     for(int i = 1; i < N + 1; i++){
         for(int n = 0; n < 3; n++){
             if(nucleos[n].nucleo !=-1){
-                nucleos[n].tiempoVida --;
+                nucleos[n].tiempoVida --; //Si hay un proceso, le resto uno cada minuto
             }
-            if(nucleos[n].nucleo == -1 && colasVacia[n] == 0){
-                if(asignarSiguienteProceso(n+1)){//Se mira la cola de prioridad correspondiente al siguiente núcleo
+            if(nucleos[n].nucleo == -1 && colasVacia[n] == 0){ //Para poder asignar un proceso, el núcleo tiene que estar libre, y debe de tener en la cola algún proceso para ese núcleo
+                if(asignarSiguienteProceso(n+1)){//Se mira la cola de prioridad
                     cout<<(i == 1 ?"Minuto transcurrido " : "Minutos transcurridos: ")<<i<<", el nucleo "<< n+1<<" se encontraba libre y se le ha asignado el proceso correspondiente."<<endl; 
                 }
-                else{
+                else{ //Si no puedo encontrar un proceso en la cola para ese núcleo, entonces no hay proceso para ese núcleo en la cola
                     cout<<"¡La cola del nucleo "<<n+1<<" está vacía!"<<endl;
                     colasVacia[n] = 1;
                     nucleos[n].nucleo = -1;
                 }
             }
             else if(nucleos[n].tiempoVida == 0 && colasVacia[n] == 0){
-                cout<<"_________________"<<endl;
                 cout<<"Minuto "<<i<<" transcurrido: "<<endl;
                 cout<<"Ha finalizado el siguiente proceso:"<<endl;
                 cout<<nucleos[n].toString()<<endl;
@@ -62,9 +66,11 @@ void Sistema::pasarTiempo(int N){
                     nucleos[n].nucleo = -1;
                 }
             }
+            
         }
-        cout<<"Estado de los nucleos ("<<i<<(i == 1 ? " minuto transcurrido)." : " minutos transcurridos).")<<endl;
+        cout<<"\nEstado de los núcleos ("<<i<<(i == 1 ? " minuto transcurrido)." : " minutos transcurridos).")<<endl;
         mostrarProcesosNucleo();
+        cout<<"___________________________________________________________________________________________________"<<endl;
     }
 }
 
@@ -88,9 +94,12 @@ Proceso Sistema::buscarProcesoSiguiente(int n){ //recorre la cola de espera hast
     Proceso resultado=Proceso();
     while(!colaEspera.es_vacia() && salir==false){ 
         if(colaEspera.inicio().nucleo==n){
-            salir=true;
             resultado=colaEspera.inicio();
-        }else{aux.encolar(colaEspera.inicio());} //si no he añadido el proceso de la cima se guarda en la auxiliar, si lo añado se quita de la cola de espera
+            salir=true;
+        }
+        else{
+            aux.encolar(colaEspera.inicio());
+            } //si no he añadido el proceso de la cima se guarda en la auxiliar, si lo añado se quita de la cola de espera
         colaEspera.desencolar();
     }
     while (!colaEspera.es_vacia()){ //después añado a la auxiliar todo el resto de la cola
@@ -104,7 +113,33 @@ Proceso Sistema::buscarProcesoSiguiente(int n){ //recorre la cola de espera hast
 
     return resultado; //devuelve proceso() si no hay ninguno que cumpla las condiciones
 }
-
+int Sistema::sumarTiempos(){
+    Cola aux= colaEspera.copiarCola();
+    int tiempoN1=0;
+    int tiempoN2=0;
+    int tiempoN3=0;
+    while(!aux.es_vacia()){
+        int n=aux.inicio().nucleo;
+        switch(n){//guarda el tiempo que va a tardar en finalizar cada uno de los tres núcleos
+            case 1: tiempoN1+=aux.inicio().tiempoVida;
+            break;
+            case 2: tiempoN2+=aux.inicio().tiempoVida;
+            break;
+            case 3: tiempoN3+=aux.inicio().tiempoVida;
+            break;
+            default: cout<<"Proceso con nucleo no válido"<<endl;
+        }
+        aux.desencolar();
+    }
+    if(tiempoN1>=tiempoN2 && tiempoN1>=tiempoN3){return tiempoN1;} //devuelve el tiempo del núcleo que vaya a tardar más en terminar de ejecutarse
+    else if(tiempoN2>=tiempoN1 && tiempoN2>=tiempoN3){return tiempoN2;}
+    else if(tiempoN3>=tiempoN2 && tiempoN3>=tiempoN1){return tiempoN3;}
+    else{return 0;}
+}
+void Sistema::acabarProcesos(){
+    int n=sumarTiempos()+1; //1 min mas para comprobar que todo queda vacío
+    pasarTiempo(n);
+}
 
 
 /*
@@ -143,6 +178,7 @@ bool Sistema::asignarSiguienteProceso(int nucleo){
 
 
 //métodos de utilización de las estructuras guardadas dentro de sistema para poder acceder a los atributos privados del mismo
+/*
 void Sistema::apilar(Proceso p){
     pilaProcesos.apilar(p);
 }
@@ -159,27 +195,27 @@ void Sistema::encolar(Proceso p){
 void Sistema::desencolar(){
     colaEspera.desencolar();
 }
-
+bool Sistema::pilaVacia(){
+    return pilaProcesos.esVacia();
+}
+*/
 
 void Sistema::addPilaProcesos(Pila p){
     Pila aux;
-    //Mover todos los elementos de p a una pila auxiliar; se introducirán en orden inverso
-    while (!p.esVacia()) {
+    while(!p.esVacia()){
         aux.apilar(p.mostrar());
-        p.desapilar();      
+        p.desapilar();
     }
-
-    // Copiar aux a p2 de nuevo en el orden correcto
-    while (!aux.esVacia()) {
+    while(!aux.esVacia()){
         pilaProcesos.apilar(aux.mostrar());
         aux.desapilar();
     }
-    
-    //pasar la pila a la cola
     while(!pilaProcesos.esVacia()){
         colaEspera.encolarPrioridad(pilaProcesos.mostrar());
         pilaProcesos.desapilar();
     }
+    
+
 }
 
 /*

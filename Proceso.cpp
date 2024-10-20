@@ -29,6 +29,6 @@ Proceso::~Proceso(){
 //dtor
 }
 string Proceso::toString(){
-    string procesoToString = "________________________\n\nPROCESO: \nPID: "+ to_string(PID) + "\nPPID: "+ to_string(PPID) + "\n" + "Inicio del proceso: " + to_string(inicioProceso) + "\n" + "Tiempo de vida: " + to_string(tiempoVida) + "\nPrioridad: " + to_string(prioridad) + "\nNucleo: " + to_string(nucleo) + "\n________________________\n";
+    string procesoToString = "PROCESO ---> PID: "+ to_string(PID) + ", PPID: "+ to_string(PPID) + ", Inicio del proceso: " + to_string(inicioProceso) + ", Tiempo de vida: " + to_string(tiempoVida) + ", Prioridad: " + to_string(prioridad) + ", Núcleo: " + to_string(nucleo);
     return procesoToString;
 }
