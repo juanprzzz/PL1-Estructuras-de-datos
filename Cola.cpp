@@ -120,3 +120,17 @@ Cola Cola::copiarCola(){
     }
     return copia;
 }
+
+
+int Cola::contarElementos(){
+    int ctd=0;
+    if (es_vacia()){return ctd;}
+    else{
+        Cola aux=copiarCola();
+        while(!aux.es_vacia()){
+            ctd++;
+            aux.desencolar();
+        }
+        return ctd;
+    }
+}
