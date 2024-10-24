@@ -16,7 +16,7 @@ class Sistema{
         void mostrarProcesosNucleo();
         void pasarTiempo(int N);
         Proceso buscarProcesoSiguiente(int N); //Busca proceso en cola de prioridades
-        bool asignarSiguienteProceso(int nucleoLibre); //Asigna proceso a núcleo vacío
+        bool asignarSiguienteProcesoDesdeCola(int nucleoLibre); //Asigna proceso a núcleo vacío
         void añadirCola(Proceso proceso);
         int colaEsperaE();
         int sumarTiempos();

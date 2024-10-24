@@ -40,34 +40,34 @@ void Sistema::mostrarProcesosNucleo(){
     }
 }
 
+
+void Sistema::apilarSistema(Proceso p){
+    pilaProcesos.apilar(p);
+}
 /*
 * Se encarga de que transcurra en el sistema N minutos. Se encarga de llamar a las funciones correspondientes para mostrar 
 * los núcleos cada minuto, asignación de procesos...
 */
-void Sistema::apilarSistema(Proceso p){
-    pilaProcesos.apilar(p);
-}
 void Sistema::pasarTiempo(int N){
     int colasVacia[3] = {0,0,0}; //Se introduce esta variable para saber qué nucleos no tienen ningún proceso en la cola
     for(int i = 1; i < N + 1; i++){
         procesoComienzo();
         for(int n = 0; n < 3; n++){
-            if(nucleos[n].nucleo == -1 && !colaEspera.es_vacia()){
-
-                if(asignarSiguienteProceso(n + 1)){
+            if(nucleos[n].nucleo == -1 && !colaEspera.es_vacia()){ //Si el núcleo está vacío y la cola no está vacía
+                if(asignarSiguienteProcesoDesdeCola(n)){ //Aquí todos los procesos se cogen desde la cola, ya que tienen un tiempo de inicio, por lo que se tienen que coger de ahí
                     cout<<"Se ha introducido en el minuto "<<tiempoTranscurrido<<" del sistema, el siguiente proceso: "<<nucleos[n].toString()<<endl;
                 }
                 
             }
             if(nucleos[n].tiempoVida == 0){
-                cout<<"Ha finalizado el siguiente proceso en el minuto "<<tiempoTranscurrido<<" del sistema: "<<nucleos[n].toString()<<endl;
+                cout<<"Ha finalizado el siguiente proceso en el minuto "<<tiempoTranscurrido-1<<" del sistema: "<<nucleos[n].toString()<<endl;
                 nucleos[n] = Proceso();
             }
             nucleos[n].tiempoVida --;
         }
         cout<<"\n Estado de los núcleos. Minuto: "<<tiempoTranscurrido<<endl;
         mostrarProcesosNucleo();
-        
+
         tiempoTranscurrido ++;
     }
 }
@@ -78,24 +78,74 @@ void Sistema::pasarTiempo(int N){
 */
 void Sistema::procesoComienzo(){
     while(tiempoTranscurrido == pilaProcesos.mostrar().inicioProceso){
-        colaEspera.encolarPrioridad(pilaProcesos.mostrar());
-        pilaProcesos.desapilar();
+        if(nucleos[0].nucleo == -1){
+            Proceso procesoUno = pilaProcesos.mostrar();
+            procesoUno.nucleo = 1;
+            nucleos[0] = procesoUno; //El núcleo uno está vacío, por lo que lo meto ahí
+            pilaProcesos.desapilar();
+
+            cout<<"\nSe introduce en el minuto "<<tiempoTranscurrido<<" del sistema, el siguiente proceso: "<<nucleos[0].toString()<<endl;
+        }
+        else if(nucleos[1].nucleo == -1){
+            Proceso procesoDos = pilaProcesos.mostrar();
+            procesoDos.nucleo = 2;
+            nucleos[1] = procesoDos; //El núcleo dos está vacío, por lo que lo meto ahí
+            pilaProcesos.desapilar();
+
+            cout<<"\nSe introduce en el minuto "<<tiempoTranscurrido<<" del sistema, el siguiente proceso: "<<nucleos[1].toString()<<endl;
+        }
+        else if(nucleos[2].nucleo == -1){
+            Proceso procesoTres = pilaProcesos.mostrar();
+            procesoTres.nucleo = 3;
+            nucleos[2] = procesoTres; //El núcleo tres está vacío, por lo que lo meto ahí
+            pilaProcesos.desapilar();
+
+            cout<<"\nSe introduce en el minuto "<<tiempoTranscurrido<<" del sistema, el siguiente proceso: "<<nucleos[2].toString()<<endl;
+        }
+        else{   //Si todos los nucleos están ocupados, entonces lo meto en la cola de prioridades
+            colaEspera.encolarPrioridad(pilaProcesos.mostrar());
+            pilaProcesos.desapilar();
+        }
+        
     }
         
 }
-bool Sistema::asignarSiguienteProceso(int nucleo){ //nucleo introducido es del 1 al 3
-    if (!colaEspera.es_vacia() && (nucleo==1 || nucleo==2 ||nucleo==3)){
-        Proceso asignado = buscarProcesoSiguiente(nucleo); //del 1 al 3
-        if (asignado.nucleo!=-1){ //si "asignado" es un proceso real
-            nucleos[nucleo-1] = asignado; //nucleos[0-2]
-            return true;}
-        else{
-            return false;}
-    }else{
-        return false;}
+/*
+* Se encarga de que si un núcleo se queda libre, introduce otro proceso en el núcleo desde la cola (ya que procesoComienzo es que se encarga de introducir en la cola si es necesario)
+*/
+bool Sistema::asignarSiguienteProcesoDesdeCola(int nucleoLibre){ //nucleo introducido es del 0 al 2
+    if (!colaEspera.es_vacia()){
+        Proceso procesoNuevo = colaEspera.inicio();
+        procesoNuevo.nucleo = nucleoLibre;
+        nucleos[nucleoLibre] = procesoNuevo;
+        colaEspera.desencolar();
+        return true;
+    }
+    else{
+        return false;
+    }
 
 }
 
+
+
+void Sistema::acabarProcesos(){
+    while(!pilaProcesos.esVacia() ||nucleos[0].nucleo!=-1 || nucleos[1].nucleo!=-1 || nucleos[2].nucleo!=-1 ){
+        pasarTiempo(1);
+    }
+    //pasarTiempo(1);
+}
+void Sistema::borrarPila(){
+    pilaProcesos.~Pila();
+}
+void Sistema::mostrarPilaProcesos(){
+    pilaProcesos.mostrarPila();
+}
+void Sistema::mostrarColaPrioridad(){
+    colaEspera.mostrarCola();
+}
+
+/*
 Proceso Sistema::buscarProcesoSiguiente(int n){ //recorre la cola de espera hasta encontrar un proceso que pertenezca al núcleo indicado
     Cola aux;
     bool salir=false;
@@ -121,24 +171,7 @@ Proceso Sistema::buscarProcesoSiguiente(int n){ //recorre la cola de espera hast
 
     return resultado; //devuelve proceso() si no hay ninguno que cumpla las condiciones
 }
-
-void Sistema::acabarProcesos(){
-    while(!pilaProcesos.esVacia() ||nucleos[0].nucleo!=-1 || nucleos[1].nucleo!=-1 || nucleos[2].nucleo!=-1 ){
-        pasarTiempo(1);
-    }
-    //pasarTiempo(1);
-}
-void Sistema::borrarPila(){
-    pilaProcesos.~Pila();
-}
-void Sistema::mostrarPilaProcesos(){
-    pilaProcesos.mostrarPila();
-}
-void Sistema::mostrarColaPrioridad(){
-    colaEspera.mostrarCola();
-}
-
-
+*/
 /*
 int Sistema::sumarTiempos(){
     Cola aux= colaEspera.copiarCola();

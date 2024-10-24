@@ -16,13 +16,12 @@ using namespace std;
 
 
 int main(){
-Proceso p1= Proceso(1,1,10,5,7,1);
-Proceso p2= Proceso(2,1,3,10,2,2);
-Proceso p3= Proceso(3,1,6,5,3,2);
-Proceso p4= Proceso(4,1,1,2,5,3);
-Proceso p5= Proceso(5,1,624,9,4,2);
-Proceso p6 = Proceso(6, 1,3,4,0,1);
-
+Proceso p1= Proceso(1,1,10,5,7,0);
+Proceso p2= Proceso(2,1,3,10,2,0);
+Proceso p3= Proceso(3,1,6,5,3,0);
+Proceso p4= Proceso(4,1,1,2,5,0);
+Proceso p5= Proceso(5,1,624,9,4,0);
+Proceso p6 = Proceso(6, 1,3,4,0,0);
 
 Sistema sistemaPrincipal;
 
@@ -46,11 +45,20 @@ while(!salir){
         salir=true;
         break;
 
-    case 1: //5
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+
+    case 5:
         sistemaPrincipal.mostrarProcesosNucleo();
         break;
 
-    case 2://Pasa n minutos en el sistema    6
+    case 6://Pasa n minutos en el sistema   
         int minutos;
         cout << "Cuantos minutos quieres que pasen: ";
         cin >> minutos;
@@ -61,7 +69,7 @@ while(!salir){
             cout << "Minutos<0 ??? "<<endl;}
         break;
 
-    case 3:  //Pasa todo el tiempo hasta que acaben todos los procesos    7
+    case 7:  //Pasa todo el tiempo hasta que acaben todos los procesos   
         sistemaPrincipal.acabarProcesos();
         break;
 
