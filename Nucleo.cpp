@@ -6,9 +6,15 @@
 
 
 
+Nucleo::Nucleo(){
+    colaEspera=Cola();
+    procesoEjecucion=Proceso();
+    ID=-1;
+}
 
 Nucleo::Nucleo(int id){
     colaEspera=Cola();
+    procesoEjecucion=Proceso();
     ID=id;
 }
 

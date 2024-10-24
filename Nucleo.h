@@ -8,10 +8,18 @@ class Nucleo
     private:
         Cola colaEspera;
         int ID;
-        //pid de proceso en ejecución?
+        Proceso procesoEjecucion;
 
+    friend class NodoPila;//para que puedan acceder tanto a metodos publicos como privados
+    friend class Pila;
+    friend class Sistema;
+    friend class NodoCola;
+    friend class Cola;
+    friend class NodoLista;
+    friend class Lista;
        
     public:
+        Nucleo();
         Nucleo(int id); //constructor. cola vacía
         ~Nucleo(); //destructor
         void añadir(Proceso proceso); 

@@ -59,7 +59,6 @@ void Cola::desencolar(){
             aux->siguiente = NULL;
             delete(aux);}
          longitud--;
-         //return elemento; si fuera Proceso Cola::desencolar
     }
 }
 

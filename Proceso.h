@@ -14,20 +14,21 @@ class Proceso
         int prioridad;
         int nucleo;
 
-    friend class NodoPila;//clase pila y nodopila podra acceder tanto a metodos publicos como privados
+    friend class NodoPila;//para que puedan acceder tanto a metodos publicos como privados
     friend class Pila;
     friend class Sistema;
     friend class NodoCola;
     friend class Cola;
+    friend class Nucleo;
+    friend class NodoLista;
+    friend class Lista;
 
     public:
         Proceso(); //constructor
-        Proceso(int PID, int PPID,int inicioProceso, int tiempoVida, int prioridad, int nucleo); //constructor donde meto elemento y ountero null, se hace asi por defecto
+        Proceso(int PID, int PPID=1,int inicioProceso, int tiempoVida, int prioridad, int nucleo); 
         ~Proceso(); //destructor
         string toString(); 
 
 };
-
-//typedef Proceso *pProceso; //creas nuevo tipo de dato nodopila que es un puntero
 
 #endif // PROCESO_H
