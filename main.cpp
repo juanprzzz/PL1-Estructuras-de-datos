@@ -35,7 +35,7 @@ sistemaPrincipal.apilarSistema(p6);
 bool salir=false;
 while(!salir){
     int opcion;
-    cout << "Qué opción quieres? (-1:salir, 1:crear pila de procesos del sistema,\n 2:mostrar procesos de la pila 3:borrar pila, 4:mostrar cola espera,5:mostrar procesos en nucleos,\n 6:pasar N minutos, 7:acabar todos los procesos): ";
+    cout << "Qué opción quieres?:\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n|-1 -> Salir\t\t\t1 -> Crear pila de procesos del sistema\t\t2 -> Mostrar procesos de la pila \t3 -> Borrar pila                  |\n|                                                                                                                                                         |\n| 4 -> Mostrar cola espera\t5 -> Mostrar procesos en nucleos\t\t6 -> Pasar N minutos\t\t\t7 -> Acabar todos los procesos    |\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n\nIntroduce una opción: ";
     cin >> opcion;
     cout << opcion<<endl;
 
@@ -44,14 +44,22 @@ while(!salir){
     case -1:
         salir=true;
         break;
-
     case 1:
+        sistemaPrincipal.apilarSistema(p1);
+        sistemaPrincipal.apilarSistema(p2);
+        sistemaPrincipal.apilarSistema(p3);
+        sistemaPrincipal.apilarSistema(p4);
+        sistemaPrincipal.apilarSistema(p5);
+        sistemaPrincipal.apilarSistema(p6);
         break;
     case 2:
+        sistemaPrincipal.mostrarPilaProcesos();
         break;
     case 3:
+        sistemaPrincipal.borrarPila();
         break;
     case 4:
+        sistemaPrincipal.mostrarColaPrioridad();
         break;
 
     case 5:
