@@ -65,7 +65,7 @@ void Sistema::pasarTiempo(int N){
             }
             nucleos[n].tiempoVida --;
         }
-        cout<<"\n Estado de los núcleos. Minuto: "<<i<<endl;
+        cout<<"\n Estado de los núcleos. Minuto: "<<tiempoTranscurrido<<endl;
         mostrarProcesosNucleo();
         
         tiempoTranscurrido ++;
@@ -121,6 +121,14 @@ Proceso Sistema::buscarProcesoSiguiente(int n){ //recorre la cola de espera hast
 
     return resultado; //devuelve proceso() si no hay ninguno que cumpla las condiciones
 }
+
+void Sistema::acabarProcesos(){
+    while(!pilaProcesos.esVacia() ||nucleos[0].nucleo!=-1 || nucleos[1].nucleo!=-1 || nucleos[2].nucleo!=-1 ){
+        pasarTiempo(1);
+    }
+    //pasarTiempo(1);
+}
+/*
 int Sistema::sumarTiempos(){
     Cola aux= colaEspera.copiarCola();
     int tiempoN1=0;
@@ -148,7 +156,7 @@ void Sistema::acabarProcesos(){
     int n=sumarTiempos()+1; //1 min mas para comprobar que todo queda vacío
     pasarTiempo(n);
 }
-
+*/
 
 /*
 bool Sistema::asignarSiguienteProceso(int nucleo){

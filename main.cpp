@@ -19,7 +19,7 @@ Proceso p1= Proceso(1,1,10,5,7,1);
 Proceso p2= Proceso(2,1,3,10,2,2);
 Proceso p3= Proceso(3,1,6,5,3,2);
 Proceso p4= Proceso(4,1,1,2,5,3);
-Proceso p5= Proceso(5,1,624,1,4,2);
+Proceso p5= Proceso(5,1,624,9,4,2);
 Proceso p6 = Proceso(6, 1,3,4,0,1);
 
 
@@ -51,7 +51,7 @@ sistemaPrincipal.apilarSistema(p6);
 //}
 //return 0;
 //}
-sistemaPrincipal.pasarTiempo(20); 
+sistemaPrincipal.acabarProcesos();
 }
 /*
 
