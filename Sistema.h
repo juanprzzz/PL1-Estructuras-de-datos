@@ -24,8 +24,10 @@ class Sistema{
         void desencolarCola();
         void procesoComienzo();
         void apilarSistema(Proceso proceso);
-
+        void borrarPila();
         int mostrarHora();
+        void mostrarPilaProcesos();
+        void mostrarColaPrioridad();
 };
     
 #endif

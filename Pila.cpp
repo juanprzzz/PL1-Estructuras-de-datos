@@ -118,16 +118,7 @@ void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
         if (!aux.esVacia()){
             while(!aux.esVacia()){
                 Proceso actual=aux.mostrar();
-                std::cout<< "_________________"<<std::endl;
-                std::cout<<" PROCESO:"<<std::endl;
-                std::cout<<" PID: "<< actual.PID <<std::endl;
-                std::cout<<" PPID: "<<actual.PPID <<std::endl;
-                std::cout<<" inicio p: "<< actual.inicioProceso <<std::endl;
-                std::cout<<" t vida: "<<actual.tiempoVida <<std::endl;
-                std::cout<< " prioridad: "<< actual.prioridad<<std::endl;
-                std::cout<< " nucleo: "<<actual.nucleo<<std::endl;
-                std::cout<< "_________________"<<std::endl;
-
+                std::cout<<actual.toString()<<endl;
                 aux.desapilar();
 
             }

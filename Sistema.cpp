@@ -128,7 +128,15 @@ void Sistema::acabarProcesos(){
     }
     //pasarTiempo(1);
 }
-
+void Sistema::borrarPila(){
+    pilaProcesos.~Pila();
+}
+void Sistema::mostrarPilaProcesos(){
+    pilaProcesos.mostrarPila();
+}
+void Sistema::mostrarColaPrioridad(){
+    colaEspera.mostrarCola();
+}
 
 
 /*
