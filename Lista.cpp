@@ -43,7 +43,7 @@ void Lista::eliminarInicio(){ ////////////////////warning- puede haber error de 
     if(!esVacia()){ //////////////cuidado, siempre tiene que haber al menos 1 nucleo en lista!
          Nucleo elemento = primero->nucleo; 
          NodoLista* aux = primero;
-         if((primero == ultimo) && (primero->siguiente == NULL)){ //si solo hay 1 elemento. podria ser if (ctdNucleos==1)
+         if((primero == ultimo) && (primero->siguiente == NULL)){ //si solo hay 1 elemento. podria ser if (ctdNucleos==1) DUDA: Si primero es el último entonces su puntero al siguiente será null, entonces ¿Por qué comprobarlo?
             primero = NULL;
             ultimo = NULL;
             aux->siguiente = NULL;
