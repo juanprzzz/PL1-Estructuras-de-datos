@@ -8,6 +8,7 @@ Sistema::Sistema(){
     Pila pilaProcesos;
     Cola colaEspera;
     Proceso nucleos[3];
+    int tiempoTranscurrido = 0;
 }
 
 
@@ -43,47 +44,45 @@ void Sistema::mostrarProcesosNucleo(){
 * Se encarga de que transcurra en el sistema N minutos. Se encarga de llamar a las funciones correspondientes para mostrar 
 * los núcleos cada minuto, asignación de procesos...
 */
+void Sistema::apilarSistema(Proceso p){
+    pilaProcesos.apilar(p);
+}
 void Sistema::pasarTiempo(int N){
     int colasVacia[3] = {0,0,0}; //Se introduce esta variable para saber qué nucleos no tienen ningún proceso en la cola
     for(int i = 1; i < N + 1; i++){
+        procesoComienzo();
         for(int n = 0; n < 3; n++){
-            if(nucleos[n].nucleo !=-1){
-                nucleos[n].tiempoVida --; //Si hay un proceso, le resto uno cada minuto
-            }
-            if(nucleos[n].nucleo == -1 && colasVacia[n] == 0){ //Para poder asignar un proceso, el núcleo tiene que estar libre, y debe de tener en la cola algún proceso para ese núcleo
-                if(asignarSiguienteProceso(n+1)){//Se mira la cola de prioridad
-                    cout<<(i == 1 ?"Minuto transcurrido " : "Minutos transcurridos: ")<<i<<", el nucleo "<< n+1<<" se encontraba libre y se le ha asignado el proceso correspondiente."<<endl; 
-                }
-                else{ //Si no puedo encontrar un proceso en la cola para ese núcleo, entonces no hay proceso para ese núcleo en la cola
-                    cout<<"¡La cola del nucleo "<<n+1<<" está vacía!"<<endl;
-                    colasVacia[n] = 1;
-                    nucleos[n].nucleo = -1;
-                }
-            }
-            else if(nucleos[n].tiempoVida == 0 && colasVacia[n] == 0){
-                cout<<"Minuto "<<i<<" transcurrido: "<<endl;
-                cout<<"Ha finalizado el siguiente proceso:"<<endl;
-                cout<<nucleos[n].toString()<<endl;
+            if(nucleos[n].nucleo == -1 && !colaEspera.es_vacia()){
 
-                bool asignado = asignarSiguienteProceso(nucleos[n].nucleo);
-                if(asignado){
-                    cout<<"Se ha agregado un nuevo proceso al nucleo "<<n+1<<"."<<endl;
+                if(asignarSiguienteProceso(n + 1)){
+                    cout<<"Se ha introducido en el minuto "<<tiempoTranscurrido<<" del sistema, el siguiente proceso: "<<nucleos[n].toString()<<endl;
                 }
-                else{
-                    cout<<"La cola del nucleo "<<n+1<<" esta vacia!"<<endl;
-                    colasVacia[n] = 1;
-                    nucleos[n].nucleo = -1;
-                }
+                
             }
-            
+            if(nucleos[n].tiempoVida == 0){
+                cout<<"Ha finalizado el siguiente proceso en el minuto "<<tiempoTranscurrido<<" del sistema: "<<nucleos[n].toString()<<endl;
+                nucleos[n] = Proceso();
+            }
+            nucleos[n].tiempoVida --;
         }
-        cout<<"\nEstado de los núcleos ("<<i<<(i == 1 ? " minuto transcurrido)." : " minutos transcurridos).")<<endl;
+        cout<<"\n Estado de los núcleos. Minuto: "<<i<<endl;
         mostrarProcesosNucleo();
-        cout<<"___________________________________________________________________________________________________"<<endl;
+        
+        tiempoTranscurrido ++;
     }
 }
 
 
+/*
+* Mira la pila de procesos, si nos encontramos en el minuto en el que se inicia un nuevo proceso, lo mete en el núcleo si está libre, y si no, lo mete en la cola
+*/
+void Sistema::procesoComienzo(){
+    while(tiempoTranscurrido == pilaProcesos.mostrar().inicioProceso){
+        colaEspera.encolarPrioridad(pilaProcesos.mostrar());
+        pilaProcesos.desapilar();
+    }
+        
+}
 bool Sistema::asignarSiguienteProceso(int nucleo){ //nucleo introducido es del 1 al 3
     if (!colaEspera.es_vacia() && (nucleo==1 || nucleo==2 ||nucleo==3)){
         Proceso asignado = buscarProcesoSiguiente(nucleo); //del 1 al 3
@@ -183,6 +182,47 @@ bool Sistema::asignarSiguienteProceso(int nucleo){
     return false; ////sobra con el default??
 }
 
+void Sistema::pasarTiempo(int N){
+    int colasVacia[3] = {0,0,0}; //Se introduce esta variable para saber qué nucleos no tienen ningún proceso en la cola
+    for(int i = 1; i < N + 1; i++){
+        for(int n = 0; n < 3; n++){
+            if(nucleos[n].nucleo !=-1){
+                nucleos[n].tiempoVida --; //Si hay un proceso, le resto uno cada minuto
+            }
+            if(nucleos[n].nucleo == -1 && colasVacia[n] == 0){ //Para poder asignar un proceso, el núcleo tiene que estar libre, y debe de tener en la cola algún proceso para ese núcleo
+                if(asignarSiguienteProceso(n+1)){//Se mira la cola de prioridad
+                    cout<<(i == 1 ?"Minuto transcurrido " : "Minutos transcurridos: ")<<i<<", el nucleo "<< n+1<<" se encontraba libre y se le ha asignado el proceso correspondiente."<<endl; 
+                }
+                else{ //Si no puedo encontrar un proceso en la cola para ese núcleo, entonces no hay proceso para ese núcleo en la cola
+                    cout<<"¡La cola del nucleo "<<n+1<<" está vacía!"<<endl;
+                    colasVacia[n] = 1;
+                    nucleos[n].nucleo = -1;
+                }
+            }
+            else if(nucleos[n].tiempoVida == 0 && colasVacia[n] == 0){
+                cout<<"Minuto "<<i<<" transcurrido: "<<endl;
+                cout<<"Ha finalizado el siguiente proceso:"<<endl;
+                cout<<nucleos[n].toString()<<endl;
+
+                bool asignado = asignarSiguienteProceso(nucleos[n].nucleo);
+                if(asignado){
+                    cout<<"Se ha agregado un nuevo proceso al nucleo "<<n+1<<"."<<endl;
+                }
+                else{
+                    cout<<"La cola del nucleo "<<n+1<<" esta vacia!"<<endl;
+                    colasVacia[n] = 1;
+                    nucleos[n].nucleo = -1;
+                }
+            }
+            
+        }
+        cout<<"\nEstado de los núcleos ("<<i<<(i == 1 ? " minuto transcurrido)." : " minutos transcurridos).")<<endl;
+        mostrarProcesosNucleo();
+        cout<<"___________________________________________________________________________________________________"<<endl;
+    }
+}
+
+
 */
 
 
@@ -208,7 +248,7 @@ bool Sistema::pilaVacia(){
     return pilaProcesos.esVacia();
 }
 */
-
+/*
 void Sistema::addPilaProcesos(Pila p){
     Pila aux;
     while(!p.esVacia()){
@@ -226,7 +266,7 @@ void Sistema::addPilaProcesos(Pila p){
     
 
 }
-
+*/
 /*
 void Sistema::encolarCola(Proceso p, int n){
     switch(n){

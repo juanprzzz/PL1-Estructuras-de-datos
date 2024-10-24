@@ -22,31 +22,37 @@ Proceso p4= Proceso(4,1,1,2,5,3);
 Proceso p5= Proceso(5,1,624,1,4,2);
 Proceso p6 = Proceso(6, 1,3,4,0,1);
 
-Pila p;
-p.apilar(p1);
-p.apilar(p2);
-p.apilar(p3);
-p.apilar(p4);
-p.apilar(p5);
-p.apilar(p6);
 
 Sistema sistemaPrincipal;
+
+sistemaPrincipal.apilarSistema(p1);
+sistemaPrincipal.apilarSistema(p2);
+
+sistemaPrincipal.apilarSistema(p3);
+
+sistemaPrincipal.apilarSistema(p4);
+
+sistemaPrincipal.apilarSistema(p5);
+
+sistemaPrincipal.apilarSistema(p6);
+
+
 //sistemaPrincipal.addPilaProcesos(p);
-sistemaPrincipal.añadirCola(p1);
-sistemaPrincipal.añadirCola(p2);
-sistemaPrincipal.añadirCola(p3);
-sistemaPrincipal.añadirCola(p4);
-sistemaPrincipal.añadirCola(p5);
-sistemaPrincipal.añadirCola(p6);
+//sistemaPrincipal.añadirCola(p1);
+//sistemaPrincipal.añadirCola(p2);
+//sistemaPrincipal.añadirCola(p3);
+//sistemaPrincipal.añadirCola(p4);
+//sistemaPrincipal.añadirCola(p5);
+//sistemaPrincipal.añadirCola(p6);
 //sistemaPrincipal.pasarTiempo(20);
-for(int i = 0; i < 6; i++){
-    cout<<sistemaPrincipal.colaEsperaE()<<endl;
-    sistemaPrincipal.desencolarCola();
+//for(int i = 0; i < 6; i++){
+//    cout<<sistemaPrincipal.colaEsperaE()<<endl;
+//    sistemaPrincipal.desencolarCola();
+//}
+//return 0;
+//}
+sistemaPrincipal.pasarTiempo(20); 
 }
-return 0;
-}
-
-
 /*
 
 

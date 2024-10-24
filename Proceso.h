@@ -25,7 +25,7 @@ class Proceso
 
     public:
         Proceso(); //constructor
-        Proceso(int PID, int PPID=1,int inicioProceso, int tiempoVida, int prioridad, int nucleo); 
+        Proceso(int PID, int PPID,int inicioProceso, int tiempoVida, int prioridad, int nucleo); 
         ~Proceso(); //destructor
         string toString(); 
 

@@ -24,7 +24,7 @@ Pila::~Pila()
         }
 
 void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
-    if (esVacia() || (proceso.inicioProceso>=mostrar().inicioProceso)){
+    if (esVacia() || (proceso.inicioProceso<=mostrar().inicioProceso)){
         añadir(proceso);
     }
     else{ // (!esVacia() && !(proceso.inicioProceso<=mostrar().inicioProceso)){
@@ -33,7 +33,7 @@ void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
         while (!esVacia() && insertado==false){
             aux.añadir(mostrar());
             desapilar();
-            if (proceso.inicioProceso>=mostrar().inicioProceso){
+            if (proceso.inicioProceso<=mostrar().inicioProceso){
                 añadir(proceso);
                 insertado=true;
             }
@@ -91,6 +91,7 @@ void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
             else{
             //std::cout << "Cima pila: "<< cima->valor<<std::endl;
             return cima->proceso; //-> para acceder al valor del puntero cima
+            
             }
         }
 
