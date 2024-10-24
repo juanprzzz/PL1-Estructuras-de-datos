@@ -29,7 +29,7 @@ void Cola::encolar(Proceso proceso){
 */
 void Cola::encolarPrioridad(Proceso proceso){
     Cola aux;
-    while(!es_vacia() && inicio().prioridad >= proceso.prioridad){ //Mientras que la cola no esté vacía y el primer elemento de la cola sea más prioritario que el otro proceso
+    while(!es_vacia() && inicio().prioridad <= proceso.prioridad){ //Mientras que la cola no esté vacía y el primer elemento de la cola sea más prioritario que el otro proceso
         aux.encolar(inicio()); //Introduzco el proceso más prioritario en la cola aux
         desencolar();
     }
@@ -92,14 +92,12 @@ void Cola::mostrarCola()
 {
     NodoCola* aux = primero;
     if (es_vacia()) {
-        cout<<"Cola Vacia:3"<<endl;}
+        cout<<"La cola está vacía\n"<<endl;}
     else {
+        cout<<"el primero es: "<<aux->proceso.toString()<<endl;
+        cout<<"COLA: "<<endl;
         while (aux){
-            cout<< "_________________"<<endl;
-            cout<< "PROCESO"<<endl;
-            cout << "PID: "<<aux->proceso.PID<<endl;
-            cout << "prioridad: "<<aux->proceso.prioridad<<endl; 
-            cout<< "_________________"<<endl;//TODO--------------------------------------------------------- 
+            cout<<aux->proceso.toString()<<endl;
             aux = aux->siguiente;
         }
     }

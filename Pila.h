@@ -16,9 +16,7 @@ class Pila //clase amiga de nodopila.h
         void apilar(Proceso proceso); //apila elemento y lo ordena
         void desapilar();
         Proceso mostrar();
-        int contar();
         Pila copiarPila();
-        //void ordenar();
         void mostrarPila();
 };
 

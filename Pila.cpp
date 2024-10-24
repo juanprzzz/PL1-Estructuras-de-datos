@@ -1,4 +1,3 @@
-
 #include "Pila.h"
 #include "NodoPila.h"
 #include "Proceso.h"
@@ -16,7 +15,6 @@ Pila::~Pila()
     }
 
 
-
  void Pila::añadir(Proceso proceso) //solo apila
         { 
             pNodoPila nuevo = new NodoPila(proceso,cima);//comienzo de la pila nuevo nodo
@@ -24,21 +22,21 @@ Pila::~Pila()
         }
 
 void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
-    if (esVacia() || (proceso.inicioProceso<=mostrar().inicioProceso)){
-        añadir(proceso);
+    if (esVacia() || (proceso.inicioProceso<=mostrar().inicioProceso)){ //si la pila es vacia o si el tiempo del nuevo es menor o igual al de la cima
+        añadir(proceso); //apilo el nuevo directamente
     }
-    else{ // (!esVacia() && !(proceso.inicioProceso<=mostrar().inicioProceso)){
+    else{ 
         Pila aux;
         bool insertado=false;
         while (!esVacia() && insertado==false){
-            aux.añadir(mostrar());
+            aux.añadir(mostrar()); //voy guardando los que no cumplan la condición del if de abajo. Se guarda directamente el primer elemento por la condicion del if arriba
             desapilar();
             if (proceso.inicioProceso<=mostrar().inicioProceso){
                 añadir(proceso);
                 insertado=true;
             }
         }
-        if (insertado==false){
+        if (insertado==false){ //si la pila se quedó vacía y el tiempo del nuevo era mayor a todos, se mete al fondo 
             añadir(proceso);
         }
 
@@ -67,7 +65,6 @@ void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
     }
 
 
-
     void Pila::desapilar()
         { pNodoPila aux; //puntero aux para manipular el nodo
         if(cima){ //si cima !=NULL
@@ -84,44 +81,25 @@ void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
 
     Proceso Pila::mostrar() 
         {   
-            if(esVacia()) {
-           // std::cout << "Pila vacia"<<std::endl;
-            return Proceso(); //NULL?
+        if(esVacia()) {
+            return Proceso(); 
             }
-            else{
-            //std::cout << "Cima pila: "<< cima->valor<<std::endl;
-            return cima->proceso; //-> para acceder al valor del puntero cima
-            
+        else{
+            return cima->proceso; 
             }
         }
-
-
-    int Pila::contar(){
-       //puedo hacer Pila aux; y despues usarla por ej como aux.cima
-       Pila aux; 
-        int ctd=0;
-        while(cima){
-            ctd++;
-            aux.añadir(mostrar()); //apilar(cima->valor)
-            desapilar(); 
-        }
-        while(aux.cima){
-            añadir(aux.mostrar());
-            aux.desapilar();
-        }
-        return ctd;
-    }
 
 
     void Pila::mostrarPila(){
         Pila aux=copiarPila();
+        cout<<"La cima es: "<<mostrar().toString()<<endl;
+        cout<<"PILA: "<<endl;
         if (!aux.esVacia()){
             while(!aux.esVacia()){
                 Proceso actual=aux.mostrar();
                 std::cout<<actual.toString()<<endl;
                 aux.desapilar();
-
             }
         }
-        else{std::cout<<"VACIA:D"<<std::endl;}
+        else{std::cout<<"La pila está vacía"<<std::endl;}
     }
