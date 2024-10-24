@@ -12,9 +12,10 @@ using namespace std;
 
 
 
+//TIEMPO MEDIO DE UN PROCESO
 
-int main()
-{
+
+int main(){
 Proceso p1= Proceso(1,1,10,5,7,1);
 Proceso p2= Proceso(2,1,3,10,2,2);
 Proceso p3= Proceso(3,1,6,5,3,2);
@@ -27,14 +28,55 @@ Sistema sistemaPrincipal;
 
 sistemaPrincipal.apilarSistema(p1);
 sistemaPrincipal.apilarSistema(p2);
-
 sistemaPrincipal.apilarSistema(p3);
-
 sistemaPrincipal.apilarSistema(p4);
-
 sistemaPrincipal.apilarSistema(p5);
-
 sistemaPrincipal.apilarSistema(p6);
+
+bool salir=false;
+while(!salir){
+    int opcion;
+    cout << "Qué opción quieres? (-1:salir, 1:crear pila de procesos del sistema,\n 2:mostrar procesos de la pila 3:borrar pila, 4:mostrar cola espera,5:mostrar procesos en nucleos,\n 6:pasar N minutos, 7:acabar todos los procesos): ";
+    cin >> opcion;
+    cout << opcion<<endl;
+
+    switch (opcion)
+    {
+    case -1:
+        salir=true;
+        break;
+
+    case 1: //5
+        sistemaPrincipal.mostrarProcesosNucleo();
+        break;
+
+    case 2://Pasa n minutos en el sistema    6
+        int minutos;
+        cout << "Cuantos minutos quieres que pasen: ";
+        cin >> minutos;
+        if (minutos>0){
+            sistemaPrincipal.pasarTiempo(minutos);
+        }
+        else{
+            cout << "Minutos<0 ??? "<<endl;}
+        break;
+
+    case 3:  //Pasa todo el tiempo hasta que acaben todos los procesos    7
+        sistemaPrincipal.acabarProcesos();
+        break;
+
+    default:
+        cout << "Opcion no valida "<<endl;
+        break;
+    }
+}
+
+
+return 0;
+}
+
+
+/*
 
 
 //sistemaPrincipal.addPilaProcesos(p);
@@ -51,9 +93,10 @@ sistemaPrincipal.apilarSistema(p6);
 //}
 //return 0;
 //}
-sistemaPrincipal.acabarProcesos();
-}
-/*
+
+
+
+
 
 
 sistemaPrincipal.apilar(p1);

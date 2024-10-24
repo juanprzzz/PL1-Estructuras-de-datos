@@ -128,6 +128,9 @@ void Sistema::acabarProcesos(){
     }
     //pasarTiempo(1);
 }
+
+
+
 /*
 int Sistema::sumarTiempos(){
     Cola aux= colaEspera.copiarCola();

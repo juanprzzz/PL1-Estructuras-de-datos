@@ -24,6 +24,8 @@ class Sistema{
         void desencolarCola();
         void procesoComienzo();
         void apilarSistema(Proceso proceso);
+
+        int mostrarHora();
 };
     
 #endif
