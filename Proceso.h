@@ -8,11 +8,11 @@ class Proceso
 {
     private:
         int PID;
-        int PPID;
+        int PPID=1;
         int inicioProceso;
         int tiempoVida;
         int prioridad;
-        int nucleo;
+        int nucleo=0;
 
     friend class NodoPila;//para que puedan acceder tanto a metodos publicos como privados
     friend class Pila;
@@ -25,7 +25,7 @@ class Proceso
 
     public:
         Proceso(); //constructor
-        Proceso(int PID, int PPID,int inicioProceso, int tiempoVida, int prioridad, int nucleo); 
+        Proceso(int PID,int inicioProceso, int tiempoVida, int prioridad); 
         ~Proceso(); //destructor
         string toString(); 
 

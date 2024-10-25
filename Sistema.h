@@ -9,6 +9,12 @@ class Sistema{
         Cola colaEspera;
         Proceso nucleos[3];
         int tiempoTranscurrido = 0;
+
+
+        //variables para calcular tiempo medio de proceso
+        int tiempoLlegada=0;
+        int tiempoFinalizacion=0;
+        int ctdProcesos=0;
     public:
         Sistema();
         ~Sistema();

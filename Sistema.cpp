@@ -52,6 +52,8 @@ void Sistema::mostrarProcesosNucleo(){
 
 void Sistema::apilarSistema(Proceso p){
     pilaProcesos.apilar(p);
+    ctdProcesos++;
+    cout<<"\n metiendo en pila. ctd procesos: "<<ctdProcesos<<endl;
 }
 /*
 * Se encarga de que transcurra en el sistema N minutos. Se encarga de llamar a las funciones correspondientes para mostrar 
@@ -70,6 +72,8 @@ void Sistema::pasarTiempo(int N){
             }
             if(nucleos[n].tiempoVida == 0){
                 cout<<"Ha finalizado el siguiente proceso en el minuto "<<tiempoTranscurrido-1<<" del sistema: "<<nucleos[n].toString()<<endl;
+                tiempoFinalizacion+=tiempoTranscurrido;
+                cout<<"\n ACABO UN PROCESO! el tiempo de finalizacion total es: "<<tiempoFinalizacion<<endl;
                 nucleos[n] = Proceso();
             }
             nucleos[n].tiempoVida --;
@@ -114,6 +118,9 @@ void Sistema::procesoComienzo(){
         else{ */  //Si todos los nucleos están ocupados o hay más procesos en espera, entonces lo meto en la cola de prioridades 
             colaEspera.encolarPrioridad(pilaProcesos.mostrar());
             pilaProcesos.desapilar();
+            tiempoLlegada+=tiempoTranscurrido;
+            cout<<"\n metiendo en cola. El tiempo total de llegada es: "<<tiempoTranscurrido<<endl;
+            
         //}
         
     }
@@ -125,7 +132,7 @@ void Sistema::procesoComienzo(){
 bool Sistema::asignarSiguienteProcesoDesdeCola(int nucleoLibre){ //nucleo introducido es del 0 al 2
     if (!colaEspera.es_vacia()){
         Proceso procesoNuevo = colaEspera.inicio();
-        procesoNuevo.nucleo = nucleoLibre; //modificar numero de nucleo del proceso (era 0 si no esta asignado)
+        procesoNuevo.nucleo = nucleoLibre+1; //modificar numero de nucleo del proceso (era 0 si no esta asignado)
         nucleos[nucleoLibre] = procesoNuevo;
         colaEspera.desencolar();
         return true;
@@ -142,7 +149,9 @@ void Sistema::acabarProcesos(){
     while(!pilaProcesos.esVacia() ||nucleos[0].nucleo!=-1 || nucleos[1].nucleo!=-1 || nucleos[2].nucleo!=-1 ){
         pasarTiempo(1);
     }
-    //pasarTiempo(1);
+
+    float tiempoMedio= (tiempoFinalizacion-tiempoLlegada)/ctdProcesos;
+    cout<<"\n El tiempo medio de proceso es: "<<tiempoMedio<<endl;
 }
 
 

@@ -14,14 +14,14 @@ nucleo=-1;
 //constructor por defecto
 }
 
-Proceso::Proceso(int pid, int ppid,int inicioproceso, int tiempovida, int prior, int n){
+Proceso::Proceso(int pid, int inicioproceso, int tiempovida, int prior){
     if  (pid>0  && inicioproceso>0 && tiempovida>0 && prior>=0 &&prior<=9){
         PID=pid;
-        PPID=ppid;
+        
         inicioProceso=inicioproceso;
         tiempoVida=tiempovida;
         prioridad=prior;
-        nucleo=n;
+       
     }else{Proceso();}
 }
 
