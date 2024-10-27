@@ -3,6 +3,8 @@
 #include "Proceso.h"
 #include <iostream>
 
+using namespace std;
+
 
 Pila::Pila(){
     cima = NULL;
@@ -105,11 +107,11 @@ void Pila::mostrarPila(){
         cout<<"\nLa cima es: "<<mostrar().toString()<<endl;
         while(!aux.esVacia()){
             Proceso actual=aux.mostrar();
-            std::cout<<actual.toString()<<endl;
+            cout<<actual.toString()<<endl;
             aux.desapilar();
         }
     }
     else{
-        std::cout<<"La pila está vacía"<<std::endl;
+        cout<<"La pila está vacía"<<endl;
     }
 }
