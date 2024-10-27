@@ -1,4 +1,3 @@
-
 #include "NodoPila.h"
 
 NodoPila::NodoPila() //constructor si hago NodoPila(); vacio

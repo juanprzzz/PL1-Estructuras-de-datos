@@ -1,6 +1,7 @@
 #include "NodoCola.h"
 #include "Cola.h"
 #include <iostream>
+
 using namespace std;
 
 
@@ -31,7 +32,7 @@ void Cola::encolar(Proceso proceso){
 void Cola::encolarPrioridad(Proceso proceso){
     Cola aux;
     while(!es_vacia() && inicio().prioridad <= proceso.prioridad){ //Mientras que la cola no esté vacía y el primer elemento de la cola sea más prioritario que el otro proceso
-        aux.encolar(inicio()); //Introduzco el proceso más prioritario en la cola aux
+        aux.encolar(inicio());
         desencolar();
     }
     aux.encolar(proceso); //Cuando la prioridad del primer proceso de la cola es menor, entonces se encola el proceso que quiero (ya que es más prioritario)

@@ -21,15 +21,15 @@ class Sistema{
         
         void mostrarProcesosNucleo();
         void pasarTiempo(int N);
-        bool asignarSiguienteProcesoDesdeCola(int nucleoLibre); //Asigna proceso a núcleo vacío
+        bool asignarSiguienteProcesoDesdeCola(int nucleoLibre);
         void añadirCola(Proceso proceso);
         void acabarProcesos();
         void procesoComienzo();
         void apilarSistema(Proceso proceso);
         void borrarPila();
-        //int mostrarHora();
         void mostrarPilaProcesos();
         void mostrarColaPrioridad();
+        bool pilaVacia();
 };
     
 #endif

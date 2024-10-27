@@ -4,101 +4,112 @@
 #include <iostream>
 
 
-Pila::Pila()
-{
-    cima = NULL;}
-
-Pila::~Pila()
-{   
+Pila::Pila(){
+    cima = NULL;
+}
+Pila::~Pila(){   
     while(cima) {
-        desapilar();}
+        desapilar();
     }
+}
 
-
- void Pila::añadir(Proceso proceso) //solo apila
-        { 
-            pNodoPila nuevo = new NodoPila(proceso,cima);//comienzo de la pila nuevo nodo
-            cima = nuevo; //cima puntero apunta a nvo nodo
-        }
-
-void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
-    if (esVacia() || (proceso.inicioProceso<=mostrar().inicioProceso)){ //si la pila es vacia o si el tiempo del nuevo es menor o igual al de la cima
-        añadir(proceso); //apilo el nuevo directamente
+/*
+*Se encarga de apilar en la pila (sin ordenar por prioridad)
+*/
+ void Pila::añadir(Proceso proceso){ 
+            pNodoPila nuevo = new NodoPila(proceso,cima);
+            cima = nuevo;
+}
+/*
+*Apila ordenando por prioridad (si es necesario)
+*/
+void Pila::apilar(Proceso proceso){
+    if (esVacia() || (proceso.inicioProceso<=mostrar().inicioProceso)){
+        añadir(proceso);
     }
+    //Si la pila es vacía o el tiempo de inicio del nuevo es menor al del primero, añado el nuevo a la cima directamente
     else{ 
         Pila aux;
         bool insertado=false;
         while (!esVacia() && insertado==false){
             aux.añadir(mostrar()); //voy guardando los que no cumplan la condición del if de abajo. Se guarda directamente el primer elemento por la condicion del if arriba
             desapilar();
+            //Voy guardando en una pila auxiliar las cimas cuyo tiempo de inicio sea menor al del nuevo y desapilando.
             if (proceso.inicioProceso<=mostrar().inicioProceso){
                 añadir(proceso);
                 insertado=true;
+                //si el tiempo del nuevo es menor, apilo el proceso directamente a la pila original e indico que ya ha sido insertado para salir del bucle while.
+
             }
         }
-        if (insertado==false){ //si la pila se quedó vacía y el tiempo del nuevo era mayor a todos, se mete al fondo 
+        if (insertado==false){
             añadir(proceso);
+            //si la pila se quedó vacía y el tiempo del nuevo era mayor a todos, se mete al fondo
         }
 
-        while (!aux.esVacia()){ //recuperar lo que sea que haya perdido de la pila
+        while (!aux.esVacia()){
                     añadir(aux.mostrar());
                     aux.desapilar();
+                    //una vez terminado, recuperar lo que se haya perdido de la pila, apilando los elementos en el orden en el que estaban originalmente.
                 }
     }
     
 }
-
-    Pila Pila::copiarPila(){ //copia pila actual en aux sin perder pila
+/*
+*Se encarga de devolver una copia de una pila
+*/
+Pila Pila::copiarPila(){
         Pila aux;
         Pila pilaCopia;
         while (!esVacia()){
             aux.añadir(mostrar());
-            pilaCopia.añadir(mostrar());
+            //pilaCopia.añadir(mostrar());
             desapilar();
         }
         while(!aux.esVacia()){
             añadir(aux.mostrar());
+            pilaCopia.añadir(aux.mostrar());
             aux.desapilar();
         }
         return pilaCopia;
-    }
+}
 
 
-    void Pila::desapilar()
-        { pNodoPila aux; //puntero aux para manipular el nodo
-        if(cima){ //si cima !=NULL
+void Pila::desapilar(){ 
+    pNodoPila aux;
+        if(cima){
             aux = cima;
-            cima = aux->siguiente; //cima= el valor (que es un puntero por el tipo de dato) de la variable siguiente de aux(=cima)
+            cima = aux->siguiente;
             delete aux;  
             }
         }
 
-     bool Pila::esVacia() 
-        { return cima == NULL; }
+bool Pila::esVacia(){
+    return cima == NULL; 
+}
 
 
-
-    Proceso Pila::mostrar() 
-        {   
-        if(esVacia()) {
-            return Proceso(); 
-            }
-        else{
-            return cima->proceso; 
-            }
-        }
-
-
-    void Pila::mostrarPila(){
-        Pila aux=copiarPila();
-        cout<<"La cima es: "<<mostrar().toString()<<endl;
-        cout<<"PILA: "<<endl;
-        if (!aux.esVacia()){
-            while(!aux.esVacia()){
-                Proceso actual=aux.mostrar();
-                std::cout<<actual.toString()<<endl;
-                aux.desapilar();
-            }
-        }
-        else{std::cout<<"La pila está vacía"<<std::endl;}
+Proceso Pila::mostrar(){   
+    if(esVacia()) {
+        return Proceso(); 
     }
+    else{
+        return cima->proceso; 
+    }
+}
+
+
+void Pila::mostrarPila(){
+    Pila aux=copiarPila();
+    if(!esVacia()){
+        cout<<"\nLa cima es: "<<mostrar().toString()<<endl;
+        while(!aux.esVacia()){
+            Proceso actual=aux.mostrar();
+            std::cout<<actual.toString()<<endl;
+            aux.desapilar();
+        }
+    }
+    else{
+        std::cout<<"La pila está vacía"<<std::endl;
+    }
+}

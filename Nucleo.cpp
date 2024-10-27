@@ -1,9 +1,6 @@
 #include "Nucleo.h"
 #include "Cola.h"
 #include "Proceso.h"
-#include <iostream>
-
-
 
 
 Nucleo::Nucleo(){

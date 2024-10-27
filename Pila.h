@@ -3,21 +3,21 @@
 #include "NodoPila.h"
 #include "Proceso.h"
 
-class Pila //clase amiga de nodopila.h
+class Pila
 {
     private:
-        pNodoPila cima; //puntero al 1er elemento, cima pila 
+        pNodoPila cima;
 
     public:
-        Pila(); //constructor
-        ~Pila(); //destructor
+        Pila(); 
+        ~Pila();
         bool esVacia();
-        void añadir(Proceso proceso); //apila un elemento e la cima de la pila sin ordenarla
-        void apilar(Proceso proceso); //apila elemento y lo ordena
+        void añadir(Proceso proceso); 
+        void apilar(Proceso proceso);
         void desapilar();
         Proceso mostrar();
         Pila copiarPila();
         void mostrarPila();
 };
 
-#endif // PILA_H
+#endif

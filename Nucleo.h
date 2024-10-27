@@ -10,7 +10,7 @@ class Nucleo
         int ID;
         Proceso procesoEjecucion;
 
-    friend class NodoPila;//para que puedan acceder tanto a metodos publicos como privados
+    friend class NodoPila;
     friend class Pila;
     friend class Sistema;
     friend class NodoCola;
@@ -20,10 +20,10 @@ class Nucleo
        
     public:
         Nucleo();
-        Nucleo(int id); //constructor. cola vacía
-        ~Nucleo(); //destructor
+        Nucleo(int id);
+        ~Nucleo();
         void añadir(Proceso proceso); 
         void mostrarNucleo();
 };
 
-#endif // NUCLEO_H
+#endif

@@ -1,10 +1,10 @@
 #ifndef PROCESO_H 
 #define PROCESO_H
-#include <iostream>
 #include <string>
+
 using namespace std;
-class Proceso
-{
+
+class Proceso{
     private:
         int PID;
         int PPID=1;
@@ -13,19 +13,19 @@ class Proceso
         int prioridad;
         int nucleo=0;
 
-    friend class NodoPila;//para que puedan acceder tanto a metodos publicos como privados
-    friend class Pila;
-    friend class Sistema;
-    friend class NodoCola;
-    friend class Cola;
-    friend class Nucleo;
-    friend class NodoLista;
-    friend class Lista;
+        friend class NodoPila;
+        friend class Pila;
+        friend class Sistema;
+        friend class NodoCola;
+        friend class Cola;
+        friend class Nucleo;
+        //friend class NodoLista; Necesario para parte 2
+        //friend class Lista; Necesario para Parte 2
 
     public:
-        Proceso(); //constructor
+        Proceso();
         Proceso(int PID,int inicioProceso, int tiempoVida, int prioridad); 
-        ~Proceso(); //destructor
+        ~Proceso();
         string toString(); 
 
 };

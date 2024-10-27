@@ -1,6 +1,6 @@
 #include "Proceso.h"
-#include <iostream>
 #include <string>
+
 using namespace std;
 
 
@@ -11,7 +11,6 @@ inicioProceso=-1;
 tiempoVida=-1;
 prioridad=-1;
 nucleo=-1;
-//constructor por defecto
 }
 
 Proceso::Proceso(int pid, int inicioproceso, int tiempovida, int prior){
@@ -21,7 +20,9 @@ Proceso::Proceso(int pid, int inicioproceso, int tiempovida, int prior){
         tiempoVida=tiempovida;
         prioridad=prior;
        
-    }else{Proceso();}
+    }else{
+        Proceso();
+    }
 }
 
 Proceso::~Proceso(){

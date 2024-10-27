@@ -1,23 +1,21 @@
 #include "Pila.h"
 #include "Cola.h"
-#include <iostream>
-#include <string>
 #include "Sistema.h"
+#include <iostream>
+
 using namespace std;
 
-
 int main(){
-Proceso p1= Proceso(1,10,5,7);//( PID,  inicioProceso, tiempoVida,  prioridad)
+Proceso p1= Proceso(1,10,5,7);
 Proceso p2= Proceso(2,1,10,2); 
 Proceso p3= Proceso(3,1,5,3);
 Proceso p4= Proceso(4,1,2,5);
-
-//Proceso p5= Proceso(5,1,624,9,4,0);
-//Proceso p6 = Proceso(6,1,3,4,0,0);
-//Proceso p7= Proceso(7,1,2,2,5,0);
-//Proceso p8= Proceso(8,1,1,5,0,0);
-//Proceso p9= Proceso(9,1,11,15,1,0);
-//Proceso p10= Proceso(10,1,10,2,9,0);
+Proceso p5 = Proceso(5,12,5,2);
+Proceso p6 = Proceso(6,3,9,9);
+Proceso p7 = Proceso(7,15,5,4);
+Proceso p8 = Proceso(8,12,2,4);
+Proceso p9 = Proceso(9,23,9,5);
+Proceso p10 = Proceso(10,2,4,4);
 Sistema sistemaPrincipal;
 
 
@@ -35,15 +33,23 @@ while(!salir){
         break;
 
     case 1: //crear pila de procesos
-        cout << "Creando pila"<<endl;
-        sistemaPrincipal.apilarSistema(p1);
-        sistemaPrincipal.apilarSistema(p2);
-        sistemaPrincipal.apilarSistema(p3);
-        sistemaPrincipal.apilarSistema(p4);
-        //sistemaPrincipal.apilarSistema(p5);
-        //sistemaPrincipal.apilarSistema(p6);
-        //sistemaPrincipal.apilarSistema(p7);
-        //sistemaPrincipal.apilarSistema(p8);
+        if(sistemaPrincipal.pilaVacia()){
+            cout << "Creando pila..."<<endl;
+            sistemaPrincipal.apilarSistema(p1);
+            sistemaPrincipal.apilarSistema(p2);
+            sistemaPrincipal.apilarSistema(p3);
+            sistemaPrincipal.apilarSistema(p4);
+            sistemaPrincipal.apilarSistema(p5);
+            sistemaPrincipal.apilarSistema(p6);
+            sistemaPrincipal.apilarSistema(p7);
+            sistemaPrincipal.apilarSistema(p8);
+            sistemaPrincipal.apilarSistema(p9);
+            sistemaPrincipal.apilarSistema(p10);
+        }
+        else{
+            cout<<"¡Ya tienes una pila con procesos!"<<endl;
+        }
+        
         break;
 
     case 2: //mostrar la pila de procesos
@@ -63,23 +69,36 @@ while(!salir){
         sistemaPrincipal.mostrarProcesosNucleo();
         break;
 
-    case 6://Pasa n minutos en el sistema   
-        int minutos;
-        cout << "Cuantos minutos quieres que pasen: ";
-        cin >> minutos;
-        if (minutos>0){
-            sistemaPrincipal.pasarTiempo(minutos);
+    case 6://Pasa n minutos en el sistema  
+        if(sistemaPrincipal.pilaVacia()){
+            cout<<"No hay procesos que ejecutar"<<endl;
         }
         else{
-            cout << "Por favor, introduzca un número mayor que 0 "<<endl;}
+            int minutos;
+            cout << "Cuantos minutos quieres que pasen: ";
+            cin >> minutos;
+            if (minutos>0){
+                sistemaPrincipal.pasarTiempo(minutos);
+            }
+            else{
+                cout << "Por favor, introduzca un número mayor que 0 "<<endl;
+            }
+        } 
+        
         break;
 
-    case 7:  //Pasa todo el tiempo hasta que acaben todos los procesos   
-        sistemaPrincipal.acabarProcesos();
+    case 7:  //Pasa todo el tiempo hasta que acaben todos los procesos
+        if(sistemaPrincipal.pilaVacia()){
+            cout<<"No hay procesos que ejecutar"<<endl;
+        }
+        else{
+            sistemaPrincipal.acabarProcesos();
+        }   
+        
         break;
 
     default:
-        cout << "Opcion no valida "<<endl;
+        cout << "Opción no válida "<<endl;
         break;
     }
 }
