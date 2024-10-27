@@ -31,7 +31,9 @@ void Sistema::mostrarPilaProcesos(){
 void Sistema::mostrarColaPrioridad(){
     colaEspera.mostrarCola();
 }
-
+bool Sistema::pilaVacia(){
+    return pilaProcesos.esVacia();
+}
 
 
 void Sistema::mostrarProcesosNucleo(){
@@ -54,7 +56,6 @@ void Sistema::apilarSistema(Proceso p){
     else{
         pilaProcesos.apilar(p);
         ctdProcesos++;
-        cout<<"\n metiendo en pila. ctd procesos: "<<ctdProcesos<<endl;
     }
     
 }
@@ -65,18 +66,20 @@ void Sistema::apilarSistema(Proceso p){
 void Sistema::pasarTiempo(int N){
 
     for(int i = 1; i < N + 1; i++){
-        procesoComienzo();
-        for(int n = 0; n < 3; n++){
+        procesoComienzo(); //Primero se comprueba si hay algún proceso que inicie en este minuto. Si lo hay, se añade a la cola 
+        for(int n = 0; n < 3; n++){//por cada núcleo
+            if(nucleos[n].tiempoVida == 0){
+                cout<<"\nHa finalizado el siguiente proceso al final del minuto "<<tiempoTranscurrido-1<<" del sistema: "<<nucleos[n].toString()<<endl; 
+                tiempoFinalizacion+=(tiempoTranscurrido-1);  //como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
+                nucleos[n] = Proceso(); // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
+            
+            }
             if(nucleos[n].nucleo == -1 && !colaEspera.es_vacia()){ //Si el núcleo está vacío y la cola no está vacía
                 if(asignarSiguienteProcesoDesdeCola(n)){ 
-                    cout<<"Se ha introducido en el minuto "<<tiempoTranscurrido<<" del sistema, el siguiente proceso: "<<nucleos[n].toString()<<endl;
+                    cout<<"\nSe ha introducido al inicio del minuto "<<tiempoTranscurrido<<" del sistema, el siguiente proceso: "<<nucleos[n].toString()<<endl; 
                 } 
             }
-            if(nucleos[n].tiempoVida == 0){
-                cout<<"Ha finalizado el siguiente proceso en el minuto "<<tiempoTranscurrido-1<<" del sistema: "<<nucleos[n].toString()<<endl;
-                tiempoFinalizacion+=(tiempoTranscurrido-1); 
-                nucleos[n] = Proceso();
-            }
+            
             nucleos[n].tiempoVida --;
         }
 
@@ -95,8 +98,6 @@ void Sistema::procesoComienzo(){
             colaEspera.encolarPrioridad(pilaProcesos.mostrar());
             pilaProcesos.desapilar();
             tiempoLlegada+=tiempoTranscurrido;
-            cout<<"\n metiendo en cola. El tiempo total de llegada es: "<<tiempoLlegada<<endl;
-        
     }
         
 }
@@ -118,16 +119,17 @@ bool Sistema::asignarSiguienteProcesoDesdeCola(int nucleoLibre){ //nucleo introd
 }
 
 
-
 void Sistema::acabarProcesos(){
     cout<<pilaProcesos.esVacia()<<endl;
+    //solo saldrá del bucle una vez que ninguna condición se cumpla. Es decir, cuando la pila sea vacía y todos los núcleos estén vacíos
     while(!pilaProcesos.esVacia() ||nucleos[0].nucleo!=-1 || nucleos[1].nucleo!=-1 || nucleos[2].nucleo!=-1){
         pasarTiempo(1);
     }
     double tiempoMedio=(double) (tiempoFinalizacion-tiempoLlegada)/ctdProcesos;
-    cout<<"\n El tiempo medio de proceso es: "<<tiempoMedio<<endl;
+    cout<<"La suma de los tiempos de llegada de todos los procesos es: "<<tiempoLlegada<<endl;
+    cout<<"La suma de los tiempos de finalización de todos los procesos es: "<<tiempoFinalizacion<<endl;
+    cout<<"\n El tiempo medio de estancia es: "<<tiempoMedio<<endl;
 }
-bool Sistema::pilaVacia(){
-    return pilaProcesos.esVacia();
-}
+
+
 
