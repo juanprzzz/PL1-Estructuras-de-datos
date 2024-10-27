@@ -1,7 +1,6 @@
-#ifndef PROCESO_H ////??????????????????
+#ifndef PROCESO_H 
 #define PROCESO_H
 #include <iostream>
-//#include <ctime>
 #include <string>
 using namespace std;
 class Proceso

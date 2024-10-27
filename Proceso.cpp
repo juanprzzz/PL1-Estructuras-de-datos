@@ -15,9 +15,8 @@ nucleo=-1;
 }
 
 Proceso::Proceso(int pid, int inicioproceso, int tiempovida, int prior){
-    if  (pid>0  && inicioproceso>0 && tiempovida>0 && prior>=0 &&prior<=9){
+    if  (pid>0  && inicioproceso>0 && tiempovida>0 && prior>=0 && prior<=9){
         PID=pid;
-        
         inicioProceso=inicioproceso;
         tiempoVida=tiempovida;
         prioridad=prior;
@@ -28,6 +27,7 @@ Proceso::Proceso(int pid, int inicioproceso, int tiempovida, int prior){
 Proceso::~Proceso(){
 //dtor
 }
+
 string Proceso::toString(){
     string procesoToString = "PROCESO ---> PID: "+ to_string(PID) + ", PPID: "+ to_string(PPID) + ", Inicio del proceso: " + to_string(inicioProceso) + ", Tiempo de vida: " + to_string(tiempoVida) + ", Prioridad: " + to_string(prioridad) + ", Núcleo: " + to_string(nucleo);
     return procesoToString;

@@ -21,6 +21,7 @@ void Cola::encolar(Proceso proceso){
     else{ 
         ultimo->siguiente = nuevo_nodo; //puntero->atributo
         ultimo = nuevo_nodo;
+        
         }
     longitud++;
 }

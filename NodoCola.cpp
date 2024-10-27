@@ -6,7 +6,7 @@ siguiente=NULL;
 //constructor por defecto
 }
 
-NodoCola::NodoCola(Proceso p, NodoCola*sig ){
+NodoCola::NodoCola(Proceso p, NodoCola*sig){
 proceso=p;
 siguiente = sig;
 }

@@ -48,7 +48,6 @@ void Pila::apilar(Proceso proceso){ //apila y ordena si es necesario
     
 }
 
-
     Pila Pila::copiarPila(){ //copia pila actual en aux sin perder pila
         Pila aux;
         Pila pilaCopia;

@@ -6,17 +6,8 @@
 using namespace std;
 
 
-//tengo procesos metidos en una cola, los saco por la hora y los meto en una cola
-//3 núcleos, pueden ser 1 array, si los 3 tienen procesos ejecutandose, proceso entra en cola de espera
-
-
-
-
-//TIEMPO MEDIO DE UN PROCESO
-
-
 int main(){
-Proceso p1= Proceso(1,10,5,7);//( PID,  PPID=1, inicioProceso, tiempoVida,  prioridad,  nucleo=0)
+Proceso p1= Proceso(1,10,5,7);//( PID,  inicioProceso, tiempoVida,  prioridad)
 Proceso p2= Proceso(2,1,10,2); 
 Proceso p3= Proceso(3,1,5,3);
 Proceso p4= Proceso(4,1,2,5);
@@ -29,9 +20,6 @@ Proceso p4= Proceso(4,1,2,5);
 //Proceso p10= Proceso(10,1,10,2,9,0);
 Sistema sistemaPrincipal;
 
-
-Pila ptest;
-Cola ctest;
 
 bool salir=false;
 while(!salir){
@@ -83,31 +71,11 @@ while(!salir){
             sistemaPrincipal.pasarTiempo(minutos);
         }
         else{
-            cout << "Minutos<0 ??? "<<endl;}
+            cout << "Por favor, introduzca un número mayor que 0 "<<endl;}
         break;
 
     case 7:  //Pasa todo el tiempo hasta que acaben todos los procesos   
         sistemaPrincipal.acabarProcesos();
-        break;
-
-    case 8: //////////////////////////debug de metodos de apilar y encolar
-        ptest.apilar(p1);
-        ptest.apilar(p2);
-        ptest.apilar(p3);
-        ptest.apilar(p4);
-        //ptest.apilar(p5);
-        //ptest.apilar(p6);
-       // ptest.apilar(p7);
-       // ptest.apilar(p8);
-        cout << "Pila: "<<endl;
-        ptest.mostrarPila();
-
-        while(!ptest.esVacia()){
-            ctest.encolarPrioridad(ptest.mostrar());
-            ptest.desapilar();
-        }
-        cout << "cola: "<<endl;
-        ctest.mostrarCola();
         break;
 
     default:

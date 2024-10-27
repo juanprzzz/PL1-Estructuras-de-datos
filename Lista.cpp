@@ -52,7 +52,6 @@ void Lista::eliminarInicio(){ ////////////////////warning- puede haber error de 
             primero = primero->siguiente;
             aux->siguiente = NULL;
             delete aux;}
-         //ver que hacer con ctdNucleos/////////////////////////////////
     }
     }
 
