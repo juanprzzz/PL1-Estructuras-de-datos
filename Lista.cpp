@@ -48,12 +48,8 @@ void Lista::añadirDerecha(Nucleo nucleo)
     else
     {
         // Nucleo nucleo=Nucleo(ctdNucleos);
-        cout << 6 << endl;
-        cout << 8 << endl;
         ultimo->siguiente = nuevo_nodo; // puntero->atributo -------Falla<<<<
-        cout << 10 << endl;
         ultimo = nuevo_nodo;
-        cout << 5 << endl;
     }
 }
 
@@ -122,11 +118,11 @@ Nucleo Lista::fin()
 
 void Lista::mostrarLista()
 {
-
-    while (!esVacia())
+    Lista listaCopia = copiarLista();
+    while (!listaCopia.esVacia())
     {
-        inicio().mostrarNucleo();
-        eliminarInicio();
+        listaCopia.inicio().mostrarNucleo();
+        listaCopia.eliminarInicio();
     }
 }
 Lista Lista::copiarLista()
@@ -135,16 +131,12 @@ Lista Lista::copiarLista()
     Lista listaResultado;
     while (!esVacia())
     {
-        cout << "!!!" << endl;
-        inicio().mostrarNucleo();
         listaAux.añadirDerecha(inicio());
         listaResultado.añadirDerecha(inicio());
         eliminarInicio();
     }
     while (!listaAux.esVacia())
     {
-        cout << "???" << endl;
-        listaAux.inicio().mostrarNucleo();
         añadirDerecha(listaAux.inicio());
         listaAux.eliminarInicio();
     }

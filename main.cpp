@@ -22,12 +22,13 @@ Proceso p6 = Proceso(6,0,8,3);
 //bool salir=false;
 
 Lista l;
-cout<<"p"<<endl;
 l.añadirIzquierda(Nucleo(2));
 
-
 l.añadirDerecha(Nucleo(3));
+cout<<"Lista original: "<<endl;
+l.mostrarLista();
 Lista listaR = l.copiarLista();
+cout<<"Esta es la lista clonada: "<<endl;
 listaR.mostrarLista();
 
 
