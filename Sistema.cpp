@@ -34,6 +34,12 @@ void Sistema::mostrarColaPrioridad(){
 bool Sistema::pilaVacia(){
     return pilaProcesos.esVacia();
 }
+bool Sistema::colaVacia(){
+    return colaEspera.es_vacia();
+}
+bool Sistema::nucleosVacios(){
+    return nucleos[0].nucleo == -1 && nucleos[1].nucleo == -1 && nucleos[2].nucleo == -1;
+}
 
 
 void Sistema::mostrarProcesosNucleo(){

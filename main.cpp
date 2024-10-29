@@ -6,16 +6,16 @@
 using namespace std;
 
 int main(){
-Proceso p1= Proceso(1,10,5,7);
-Proceso p2= Proceso(2,1,10,2); 
-Proceso p3= Proceso(3,1,5,3);
-Proceso p4= Proceso(4,1,2,5);
-Proceso p5 = Proceso(5,12,5,2);
-Proceso p6 = Proceso(6,3,9,9);
-Proceso p7 = Proceso(7,15,5,4);
-Proceso p8 = Proceso(8,12,2,4);
-Proceso p9 = Proceso(9,23,9,5);
-Proceso p10 = Proceso(10,2,4,4);
+Proceso p1= Proceso(1,1,5,1);
+Proceso p2= Proceso(2,1,3,2); 
+Proceso p3= Proceso(3,1,6,9);
+Proceso p4= Proceso(4,1,7,5);
+Proceso p5 = Proceso(5,1,6,1);
+Proceso p6 = Proceso(6,1,8,3);
+//Proceso p7 = Proceso(7,15,5,4);
+//Proceso p8 = Proceso(8,12,2,4);
+//Proceso p9 = Proceso(9,23,9,5);
+//Proceso p10 = Proceso(10,2,4,4);
 Sistema sistemaPrincipal;
 
 
@@ -41,10 +41,10 @@ while(!salir){
             sistemaPrincipal.apilarSistema(p4);
             sistemaPrincipal.apilarSistema(p5);
             sistemaPrincipal.apilarSistema(p6);
-            sistemaPrincipal.apilarSistema(p7);
-            sistemaPrincipal.apilarSistema(p8);
-            sistemaPrincipal.apilarSistema(p9);
-            sistemaPrincipal.apilarSistema(p10);
+            //sistemaPrincipal.apilarSistema(p7);
+            //sistemaPrincipal.apilarSistema(p8);
+            //sistemaPrincipal.apilarSistema(p9);
+            //sistemaPrincipal.apilarSistema(p10);
         }
         else{
             cout<<"¡Ya tienes una pila con procesos!"<<endl;
@@ -70,7 +70,7 @@ while(!salir){
         break;
 
     case 6://Pasa n minutos en el sistema  
-        if(sistemaPrincipal.pilaVacia()){
+        if(sistemaPrincipal.pilaVacia() && sistemaPrincipal.colaVacia() && sistemaPrincipal.nucleosVacios()){
             cout<<"No hay procesos que ejecutar"<<endl;
         }
         else{
@@ -81,14 +81,14 @@ while(!salir){
                 sistemaPrincipal.pasarTiempo(minutos);
             }
             else{
-                cout << "Por favor, introduzca un número mayor que 0 "<<endl;
+                cout << "Por favor, introduzca un núme10ro mayor que 0 "<<endl;
             }
         } 
         
         break;
 
     case 7:  //Pasa todo el tiempo hasta que acaben todos los procesos
-        if(sistemaPrincipal.pilaVacia()){
+        if(sistemaPrincipal.pilaVacia() && sistemaPrincipal.colaVacia() && sistemaPrincipal.nucleosVacios()){
             cout<<"No hay procesos que ejecutar"<<endl;
         }
         else{

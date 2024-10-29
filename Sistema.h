@@ -30,6 +30,8 @@ class Sistema{
         void mostrarPilaProcesos();
         void mostrarColaPrioridad();
         bool pilaVacia();
+        bool colaVacia();
+        bool nucleosVacios();
 };
     
 #endif
