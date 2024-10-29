@@ -27,8 +27,8 @@ l.añadirIzquierda(Nucleo(2));
 
 
 l.añadirDerecha(Nucleo(3));
-//Lista listaR = l.copiarLista();
-//listaR.mostrarLista();
+Lista listaR = l.copiarLista();
+listaR.mostrarLista();
 
 
 /*
