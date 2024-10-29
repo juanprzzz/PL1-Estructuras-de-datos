@@ -2,24 +2,37 @@
 #include "Cola.h"
 #include "Sistema.h"
 #include <iostream>
-
+#include "Lista.h"
 using namespace std;
 
 int main(){
-Proceso p1= Proceso(1,1,5,1);
-Proceso p2= Proceso(2,1,3,2); 
-Proceso p3= Proceso(3,1,6,9);
-Proceso p4= Proceso(4,1,7,5);
-Proceso p5 = Proceso(5,1,6,1);
-Proceso p6 = Proceso(6,1,8,3);
+Proceso p1= Proceso(1,0,5,1);
+Proceso p2= Proceso(2,0,3,2); 
+Proceso p3= Proceso(3,0,6,9);
+Proceso p4= Proceso(4,0,7,5);
+Proceso p5 = Proceso(5,0,6,1);
+Proceso p6 = Proceso(6,0,8,3);
 //Proceso p7 = Proceso(7,15,5,4);
 //Proceso p8 = Proceso(8,12,2,4);
 //Proceso p9 = Proceso(9,23,9,5);
 //Proceso p10 = Proceso(10,2,4,4);
-Sistema sistemaPrincipal;
+//Sistema sistemaPrincipal;
 
 
-bool salir=false;
+//bool salir=false;
+
+Lista l;
+cout<<"p"<<endl;
+l.añadirIzquierda(Nucleo(2));
+
+
+l.añadirDerecha(Nucleo(3));
+//Lista listaR = l.copiarLista();
+//listaR.mostrarLista();
+
+
+/*
+
 while(!salir){
     int opcion;
     cout << "\nQué opción quieres?:\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n|-1 -> Salir\t\t\t1 -> Crear pila de procesos del sistema\t\t2 -> Mostrar pila \t3 -> Borrar pila                                  |\n|                                                                                                                                                         |\n| 4 -> Mostrar cola espera\t5 -> Mostrar procesos en nucleos\t\t6 -> Pasar N minutos\t7 -> Acabar todos los procesos y/o t.medio proc.  |\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n\nIntroduce una opción: ";
@@ -103,7 +116,7 @@ while(!salir){
     }
 }
 
-
+*/
 return 0;
 }
 

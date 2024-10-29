@@ -14,7 +14,7 @@ nucleo=-1;
 }
 
 Proceso::Proceso(int pid, int inicioproceso, int tiempovida, int prior){
-    if  (pid>0  && inicioproceso>0 && tiempovida>0 && prior>=0 && prior<=9){
+    if  (pid>0  && inicioproceso>=0 && tiempovida>0 && prior>=0 && prior<=9){
         PID=pid;
         inicioProceso=inicioproceso;
         tiempoVida=tiempovida;

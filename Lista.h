@@ -10,10 +10,11 @@ class Lista{
         int ctdNucleos;
     public:
         Lista(); //empieza con un núcleo creado
+        Lista(Nucleo nucleo);
         ~Lista();
         
-        void añadirDerecha(); //añade nucleo al final
-        void añadirIzquierda(); //añade nucleo al inicio
+        void añadirDerecha(Nucleo nucleo); //añade nucleo al final
+        void añadirIzquierda(Nucleo nucleo); //añade nucleo al inicio
         Nucleo inicio();
         Nucleo fin();
         void eliminarFin();
@@ -23,9 +24,10 @@ class Lista{
         //bool quedaUno();    cuando solo quede un nucleo. siempre tiene que haber minimo 1
         void mostrarLista(); 
         bool esVacia();
-
+        Lista copiarLista();
         Nucleo menosOcupado(); //devuelve cual es el nucleo menos ocupado
         Nucleo masOcupado(); //devuelve cual es el nucleo con más procesos
 
 };
+
 #endif 

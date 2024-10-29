@@ -71,12 +71,12 @@ void Sistema::apilarSistema(Proceso p){
 */
 void Sistema::pasarTiempo(int N){
 
-    for(int i = 1; i < N + 1; i++){
+    for(int i = 0; i < N; i++){
         procesoComienzo(); //Primero se comprueba si hay algún proceso que inicie en este minuto. Si lo hay, se añade a la cola 
         for(int n = 0; n < 3; n++){//por cada núcleo
             if(nucleos[n].tiempoVida == 0){
                 cout<<"\nHa finalizado el siguiente proceso al final del minuto "<<tiempoTranscurrido-1<<" del sistema: "<<nucleos[n].toString()<<endl; 
-                tiempoFinalizacion+=(tiempoTranscurrido-1);  //como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
+                tiempoFinalizacion+=(tiempoTranscurrido);  //como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
                 nucleos[n] = Proceso(); // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
             
             }

@@ -6,20 +6,36 @@ using namespace std;
 
 
 Lista::Lista(){
-    Nucleo n=Nucleo(1);
-    primero = new NodoLista(n); 
+    primero = NULL; 
+    ultimo = NULL;
+    ctdNucleos=0;
+}
+Lista::Lista(Nucleo n){
+    primero = new NodoLista(n);
     ultimo = primero;
-    ctdNucleos=1;
+    ctdNucleos = 1;
 }
 
 Lista::~Lista() { }
 
-void Lista::añadirDerecha(){ 
+void Lista::añadirIzquierda(Nucleo nucleo){
+    ctdNucleos ++;
+    //Nucleo nucleo = Nucleo(ctdNucleos);
+    NodoLista *nuevo_nodo = new NodoLista(nucleo);
+    nuevo_nodo->siguiente = primero;
+    primero = nuevo_nodo;
+    
+}
+void Lista::añadirDerecha(Nucleo nucleo){ 
     ctdNucleos++;
-    Nucleo nucleo=Nucleo(ctdNucleos);
+    //Nucleo nucleo=Nucleo(ctdNucleos);
+    cout<<6<<endl;
     NodoLista* nuevo_nodo = new NodoLista(nucleo);
-    ultimo->siguiente = nuevo_nodo; //puntero->atributo
+    cout<<8<<endl;
+    ultimo->siguiente = nuevo_nodo; //puntero->atributo -------Falla<<<<
+    cout<<10<<endl;
     ultimo = nuevo_nodo;
+    cout<<5<<endl;
 
 }
 
@@ -72,9 +88,30 @@ Nucleo Lista::fin(){
 
 
 void Lista::mostrarLista(){
-    ////////////////
-}
 
+    while(!esVacia()){
+        inicio().mostrarNucleo();
+        eliminarInicio();
+    }
+}
+Lista Lista::copiarLista(){
+    Lista listaAux;
+    Lista listaResultado;
+    while(!esVacia()){
+        cout<<"!!!"<<endl;
+        inicio().mostrarNucleo();
+        listaAux.añadirDerecha(inicio());
+        listaResultado.añadirDerecha(inicio());
+        eliminarInicio();
+    }
+    while(!listaAux.esVacia()){
+        cout<<"???"<<endl;
+        listaAux.inicio().mostrarNucleo();
+        añadirDerecha(listaAux.inicio());
+        listaAux.eliminarInicio();
+    }
+    return listaResultado;
+}
 
 bool Lista::esVacia(){
      return ((primero == NULL) && (ultimo ==NULL));

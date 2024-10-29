@@ -22,8 +22,11 @@ class Nucleo
         Nucleo();
         Nucleo(int id);
         ~Nucleo();
-        void añadir(Proceso proceso); 
+        void añadirProceso(Proceso proceso); 
+        void desencolarProceso();
         void mostrarNucleo();
+        void ejecutarProceso(Proceso proceso);
+        void terminarProceso();
 };
 
 #endif
