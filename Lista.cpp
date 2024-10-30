@@ -253,9 +253,12 @@ void Lista::masOcupado(){
 bool Lista::comprobarAñadirNuevosNucleos(){
     Lista listaCopia = copiarLista();
     bool añadir = true;
-    listaCopia.eliminarInicio(); //------------ Mirar el núcleo vacío -------------//
+    //listaCopia.eliminarInicio(); //------------ Mirar el núcleo vacío -------------//
     while(!listaCopia.esVacia() && añadir){
         //cout<<"Kfds-->   "<<listaCopia.inicio().colaEspera.get_longitud();
+        cout<<"longitud lista"<<listaCopia.getCtdNucleos()<<endl;
+        cout<<"Aqui:";
+        listaCopia.inicio().mostrarNucleo();
         cout<<"Solucion-->"<<listaCopia.inicio().colaEspera.get_longitud()<<endl;
         if(listaCopia.inicio().colaEspera.get_longitud() < 2){
             cout<<"entraa"<<endl;

@@ -20,16 +20,16 @@ Nucleo::Nucleo(int id){
 void Nucleo::mostrarNucleo(){
     if(ID!=-1){ //nucleo no vacio
         cout<<"------------------------"<<endl;
+        cout<<"Efdsf"<<endl;
         cout<<"NUCLEO---> ID: "<<ID<<endl;
         colaEspera.mostrarCola();
         cout<<procesoEjecucion.toString()<<endl;
         cout<<"------------------------"<<endl;
     }
-    /*
+
     else{
         cout<<"El nucleo está vacío"<<endl;
     }
-    */
     
 }
 
