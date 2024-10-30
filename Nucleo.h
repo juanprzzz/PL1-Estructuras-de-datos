@@ -31,6 +31,7 @@ class Nucleo
         string mostrarProcesoEjecucion();
         void ejecutarProceso(Proceso proceso);
         void terminarProceso();
+        void lenCola(); //provisional
 
 };
 

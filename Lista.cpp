@@ -10,6 +10,7 @@ Lista::Lista()
     ultimo = NULL;
     ctdNucleos = 0;
 }
+
 Lista::Lista(Nucleo n)
 {
     primero = new NodoLista(n);
@@ -121,7 +122,7 @@ Nucleo Lista::fin()
 {
     if (!esVacia())
     {
-        cout<<ultimo->nucleo.colaEspera.es_vacia()<<endl;
+        //cout<<ultimo->nucleo.colaEspera.es_vacia()<<endl;
         return ultimo->nucleo;
     }
     else
@@ -132,11 +133,16 @@ Nucleo Lista::fin()
 
 void Lista::mostrarLista()
 {
-    Lista listaCopia = copiarLista();
-    while (!listaCopia.esVacia())
-    {
-        listaCopia.inicio().mostrarNucleo();
-        listaCopia.eliminarInicio();
+    if(esVacia()){
+        cout<<"lista vacia:) "<<endl;
+    }
+    else{
+        Lista listaCopia = copiarLista();
+        while (!listaCopia.esVacia())
+        {
+            listaCopia.inicio().mostrarNucleo();
+            listaCopia.eliminarInicio();
+        }
     }
 }
 
@@ -145,7 +151,7 @@ Lista Lista::copiarLista()
 {
     Lista listaAux;
     Lista listaResultado;
-    listaAux.inicio().mostrarNucleo();
+    //listaAux.inicio().mostrarNucleo();
     while (!esVacia())
     {
         listaAux.añadirDerecha(inicio());
@@ -269,6 +275,7 @@ bool Lista::comprobarAñadirNuevosNucleos(){
     }
     return añadir;
 }
+
 void Lista::añadirNuevoNucleo(){
     if(comprobarAñadirNuevosNucleos()){
         añadirDerecha(Nucleo(ctdNucleos + 1));

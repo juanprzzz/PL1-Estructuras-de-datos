@@ -11,7 +11,7 @@ class Lista{
 
         friend class SistemaLista; 
     public:
-        Lista(); //empieza con un núcleo creado
+        Lista(); 
         Lista(Nucleo nucleo);
         ~Lista();
         

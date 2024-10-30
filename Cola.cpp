@@ -4,8 +4,7 @@
 
 using namespace std;
 
-Cola::Cola()
-{
+Cola::Cola(){
     primero = NULL;
     ultimo = NULL;
     // longitud = 0;
@@ -13,16 +12,13 @@ Cola::Cola()
 
 Cola::~Cola() {}
 
-void Cola::encolar(Proceso proceso)
-{
+void Cola::encolar(Proceso proceso){
     NodoCola *nuevo_nodo = new NodoCola(proceso);
-    if (es_vacia())
-    {
+    if (es_vacia()){
         primero = nuevo_nodo;
         ultimo = nuevo_nodo;
     }
-    else
-    {
+    else{
         ultimo->siguiente = nuevo_nodo; // puntero->atributo
         ultimo = nuevo_nodo;
     }
@@ -31,8 +27,7 @@ void Cola::encolar(Proceso proceso)
 /*
  *Se encarga de introducir un proceso en el lugar que le corresponde por prioridad en la cola
  */
-void Cola::encolarPrioridad(Proceso proceso)
-{
+void Cola::encolarPrioridad(Proceso proceso){
     Cola aux;
     while (!es_vacia() && inicio().prioridad <= proceso.prioridad)
     { // Mientras que la cola no esté vacía y el primer elemento de la cola sea más prioritario que el otro proceso
@@ -53,21 +48,17 @@ void Cola::encolarPrioridad(Proceso proceso)
     // longitud++;
 }
 
-void Cola::desencolar()
-{
-    if (!es_vacia())
-    {
+void Cola::desencolar(){
+    if (!es_vacia()){
         Proceso elemento = primero->proceso;
         NodoCola *aux = primero;
-        if ((primero == ultimo) && (primero->siguiente == NULL))
-        {
+        if ((primero == ultimo) && (primero->siguiente == NULL)){
             primero = NULL;
             ultimo = NULL;
             aux->siguiente = NULL;
             delete (aux);
         }
-        else
-        {
+        else{
             primero = primero->siguiente;
             aux->siguiente = NULL;
             delete (aux);
@@ -76,32 +67,25 @@ void Cola::desencolar()
     }
 }
 
-Proceso Cola::inicio()
-{
-    if (!es_vacia())
-    {
+Proceso Cola::inicio(){
+    if (!es_vacia()){
         return primero->proceso;
     }
-    else
-    {
+    else{
         return Proceso();
     }
 }
 
-Proceso Cola::fin()
-{
-    if (!es_vacia())
-    {
+Proceso Cola::fin(){
+    if (!es_vacia()){
         return ultimo->proceso;
     }
-    else
-    {
+    else{
         return Proceso();
     }
 }
 
-bool Cola::es_vacia()
-{
+bool Cola::es_vacia(){
     return ((primero == NULL) && (ultimo == NULL));
 }
 
@@ -109,22 +93,16 @@ void Cola::mostrarCola()
 // No es correcto, la cola solo puede verse mostrando el primero y desencolando, se implementa para comprobar código facilmente.
 {
     NodoCola *aux = primero;
-    if (es_vacia())
-    {
-
-        cout << "La cola está vacía\n"
-             << endl;
+    if (es_vacia()) {
+        cout << "La cola está vacía\n"<< endl;
     }
-    else
-    {
+    else{
         cout << "el primero es: " << aux->proceso.toString() << endl;
         cout << "COLA: " << endl;
-        while (aux)
-        {
+        while (aux){
             if(aux->proceso.nucleo != -1){
                 cout << aux->proceso.toString() << endl;
             }
-            
             aux = aux->siguiente;
         }
     }
@@ -151,23 +129,22 @@ Cola Cola::copiarCola()
 int Cola::get_longitud()
 {
     int ctd = 0;
-    if (es_vacia())
-    {
+    if (es_vacia()){
+        cout<<"Cola vacia :) ctd = 0"<<endl;
         return ctd;
     }
-    else
-    {
-        cout<<"fdsfgfd"<<es_vacia()<<endl;
-        cout<<"\n gfdgfdgfd \n"<<endl;
-        cout<<inicio().toString()<<endl;
+    else{
+        //cout<<"es vacia?: "<<es_vacia()<<endl;
+        //cout<<"\n inicio.tostring: \n"<<endl;
+        //cout<<inicio().toString()<<endl;
         Cola aux = copiarCola();
-        cout<<"Copia: "<<aux.inicio().toString()<<endl;
+        //cout<<"Copia: "<<aux.inicio().toString()<<endl;
         while (!aux.es_vacia())
         {
             ctd++;
             aux.desencolar();
         }
-        cout<<"Sale de aquí"<<endl;
+        cout<<"ctd: "<<ctd<<endl;
         return ctd;
     }
 }

@@ -3,6 +3,7 @@
 #include "Sistema.h"
 #include <iostream>
 #include "Lista.h"
+#include "SistemaLista.h"
 using namespace std;
 
 int main(){
@@ -18,9 +19,57 @@ Proceso p6 = Proceso(6,0,8,3);
 //Proceso p10 = Proceso(10,2,4,4);
 //Sistema sistemaPrincipal;
 
+Cola c=Cola();
+c.encolarPrioridad(p1);
+c.encolarPrioridad(p2);
+c.encolarPrioridad(p3);
+c.encolarPrioridad(p4);
+
+Nucleo n1=Nucleo(1);
+Nucleo n2=Nucleo(2);
+Nucleo n3=Nucleo(3);
+
+Lista l=Lista();
+cout<<"mostrar vacia: "<<endl;
+l.mostrarLista();
+
+cout<<"aniado procesos a n2..."<<endl;
+n2.añadirProceso(p1);
+n2.añadirProceso(p2);
+n2.ejecutarProceso(p3);
+
+cout<<"aniado procesos a n1..."<<endl;
+n1.añadirProceso(p4);
+n1.ejecutarProceso(p3);
+
+cout<<"aniado procesos a n1..."<<endl;
+n1.añadirProceso(p4);
+n1.ejecutarProceso(p3);
+
+cout<<"aniado nucleos a cola... "<<endl;
+l.añadirIzquierda(n1);
+l.añadirDerecha(n2);
+l.añadirDerecha(n3);
+cout<<"Creo sl... "<<endl;
+SistemaLista sl=SistemaLista();
+
+
+/*
+cout<<"mostrar2: "<<endl;
+l.mostrarLista();
+cout<<"len cola n2:"<<endl;
+l.fin().lenCola();
+/*
+cout<<"mostrar2: "<<endl;
+l.mostrarLista();
+cout<<"borrando... "<<endl;
+l.eliminarFin();
+l.eliminarInicio();
+l.mostrarLista();
+
 
 //bool salir=false;
-/*
+
 Lista l;
 l.añadirIzquierda(Nucleo(2));
 
@@ -33,7 +82,7 @@ l.añadirDerecha(Nucleo(20));
 l.eliminarFin();
 
 l.fin().mostrarNucleo();
-*/
+
 
 Nucleo n1=Nucleo(1);
 Nucleo n2=Nucleo(2);
@@ -61,7 +110,7 @@ l.añadirDerecha(n2);
 l.añadirNuevoNucleo();
 l.mostrarLista();
 
-
+*/
 /*
 cout<<"añado... "<<endl;
 l.añadirIzquierda(n1);
