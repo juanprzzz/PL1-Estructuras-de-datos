@@ -1,6 +1,7 @@
 #include "Nucleo.h"
 #include "Cola.h"
 #include "Proceso.h"
+#include <string>
 
 
 Nucleo::Nucleo(){
@@ -10,7 +11,8 @@ Nucleo::Nucleo(){
 }
 
 Nucleo::Nucleo(int id){
-    colaEspera=Cola();
+    colaEspera = Cola();
+    cout<<colaEspera.es_vacia();
     procesoEjecucion=Proceso();
     ID=id;
 }
@@ -22,14 +24,21 @@ void Nucleo::mostrarNucleo(){
         colaEspera.mostrarCola();
         cout<<procesoEjecucion.toString()<<endl;
         cout<<"------------------------"<<endl;
-        
     }
+    /*
     else{
         cout<<"El nucleo está vacío"<<endl;
     }
-
+    */
+    
 }
+
 Nucleo::~Nucleo(){}
+
+
+string Nucleo::mostrarProcesoEjecucion(){
+    return procesoEjecucion.toString();
+}
 
 //setters
 void Nucleo::añadirProceso(Proceso p){

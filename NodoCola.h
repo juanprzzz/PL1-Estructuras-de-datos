@@ -6,6 +6,7 @@
 class NodoCola
 {
     friend class Cola;
+    friend class SistemaLista; //borrable
 
     private:
         NodoCola *siguiente;

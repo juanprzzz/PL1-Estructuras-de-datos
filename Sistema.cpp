@@ -7,7 +7,7 @@ Sistema::Sistema(){
     Pila pilaProcesos;
     Cola colaEspera;
     Proceso nucleos[3];
-    int tiempoTranscurrido = 0;
+    //int tiempoTranscurrido = 0;
 }
 
 
@@ -62,8 +62,7 @@ void Sistema::apilarSistema(Proceso p){
     else{
         pilaProcesos.apilar(p);
         ctdProcesos++;
-    }
-    
+    } 
 }
 /*
 * Se encarga de que transcurra en el sistema N minutos. Se encarga de llamar a las funciones correspondientes para mostrar 
@@ -76,7 +75,7 @@ void Sistema::pasarTiempo(int N){
         for(int n = 0; n < 3; n++){//por cada núcleo
             if(nucleos[n].tiempoVida == 0){
                 cout<<"\nHa finalizado el siguiente proceso al final del minuto "<<tiempoTranscurrido-1<<" del sistema: "<<nucleos[n].toString()<<endl; 
-                tiempoFinalizacion+=(tiempoTranscurrido);  //como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
+                tiempoFinalizacion+=tiempoTranscurrido;  //como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
                 nucleos[n] = Proceso(); // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
             
             }
@@ -126,7 +125,9 @@ bool Sistema::asignarSiguienteProcesoDesdeCola(int nucleoLibre){ //nucleo introd
 
 
 void Sistema::acabarProcesos(){
-    cout<<pilaProcesos.esVacia()<<endl;
+/////////////////////////////////////cout<<pilaProcesos.esVacia()<<endl;
+
+
     //solo saldrá del bucle una vez que ninguna condición se cumpla. Es decir, cuando la pila sea vacía y todos los núcleos estén vacíos
     while(!pilaProcesos.esVacia() ||nucleos[0].nucleo!=-1 || nucleos[1].nucleo!=-1 || nucleos[2].nucleo!=-1){
         pasarTiempo(1);

@@ -4,132 +4,172 @@
 
 using namespace std;
 
-
-Cola::Cola(){
-    primero = NULL; 
+Cola::Cola()
+{
+    primero = NULL;
     ultimo = NULL;
-    longitud = 0;
+    // longitud = 0;
 }
 
-Cola::~Cola() { }
+Cola::~Cola() {}
 
-void Cola::encolar(Proceso proceso){ 
-    NodoCola* nuevo_nodo = new NodoCola(proceso);
-    if(es_vacia()){ 
+void Cola::encolar(Proceso proceso)
+{
+    NodoCola *nuevo_nodo = new NodoCola(proceso);
+    if (es_vacia())
+    {
         primero = nuevo_nodo;
         ultimo = nuevo_nodo;
-        }
-    else{ 
-        ultimo->siguiente = nuevo_nodo; //puntero->atributo
+    }
+    else
+    {
+        ultimo->siguiente = nuevo_nodo; // puntero->atributo
         ultimo = nuevo_nodo;
-        
-        }
-    longitud++;
+    }
+    // longitud++;
 }
 /*
-*Se encarga de introducir un proceso en el lugar que le corresponde por prioridad en la cola
-*/
-void Cola::encolarPrioridad(Proceso proceso){
+ *Se encarga de introducir un proceso en el lugar que le corresponde por prioridad en la cola
+ */
+void Cola::encolarPrioridad(Proceso proceso)
+{
     Cola aux;
-    while(!es_vacia() && inicio().prioridad <= proceso.prioridad){ //Mientras que la cola no esté vacía y el primer elemento de la cola sea más prioritario que el otro proceso
+    while (!es_vacia() && inicio().prioridad <= proceso.prioridad)
+    { // Mientras que la cola no esté vacía y el primer elemento de la cola sea más prioritario que el otro proceso
         aux.encolar(inicio());
         desencolar();
     }
-    aux.encolar(proceso); //Cuando la prioridad del primer proceso de la cola es menor, entonces se encola el proceso que quiero (ya que es más prioritario)
-    while(!es_vacia()){ //Tengo que encolar en la cola aux el resto de elementos que se han quedado en la cola principal
+    aux.encolar(proceso); // Cuando la prioridad del primer proceso de la cola es menor, entonces se encola el proceso que quiero (ya que es más prioritario)
+    while (!es_vacia())
+    { // Tengo que encolar en la cola aux el resto de elementos que se han quedado en la cola principal
         aux.encolar(inicio());
         desencolar();
     }
-    while(!aux.es_vacia()){ //Como la función no devuelve nada, si no que modifica la cola principal, tengo que introducir los elementos de la cola aux en la principal
+    while (!aux.es_vacia())
+    { // Como la función no devuelve nada, si no que modifica la cola principal, tengo que introducir los elementos de la cola aux en la principal
         encolar(aux.inicio());
         aux.desencolar();
     }
+    // longitud++;
 }
 
-
-void Cola::desencolar(){ 
-    if(!es_vacia()){
-         Proceso elemento = primero->proceso; 
-         NodoCola* aux = primero;
-         if((primero == ultimo) && (primero->siguiente == NULL )){
+void Cola::desencolar()
+{
+    if (!es_vacia())
+    {
+        Proceso elemento = primero->proceso;
+        NodoCola *aux = primero;
+        if ((primero == ultimo) && (primero->siguiente == NULL))
+        {
             primero = NULL;
             ultimo = NULL;
             aux->siguiente = NULL;
-            delete(aux);}
-         else{
+            delete (aux);
+        }
+        else
+        {
             primero = primero->siguiente;
             aux->siguiente = NULL;
-            delete(aux);}
-         longitud--;
+            delete (aux);
+        }
+        // longitud--;
     }
 }
 
-Proceso Cola::inicio(){
-     if(!es_vacia()){
-         return primero->proceso;
-         }
-         else{return Proceso();}
+Proceso Cola::inicio()
+{
+    if (!es_vacia())
+    {
+        return primero->proceso;
+    }
+    else
+    {
+        return Proceso();
+    }
 }
 
-
-Proceso Cola::fin(){
-     if(!es_vacia()){
-         return ultimo->proceso;
-         }
-         else{return Proceso();}
+Proceso Cola::fin()
+{
+    if (!es_vacia())
+    {
+        return ultimo->proceso;
+    }
+    else
+    {
+        return Proceso();
+    }
 }
 
-int Cola::get_longitud(){
-     return longitud;
+bool Cola::es_vacia()
+{
+    return ((primero == NULL) && (ultimo == NULL));
 }
-
-
-bool Cola::es_vacia(){
-     return ((primero == NULL) && (ultimo ==NULL));
-}
-
 
 void Cola::mostrarCola()
-//No es correcto, la cola solo puede verse mostrando el primero y desencolando, se implementa para comprobar código facilmente.
+// No es correcto, la cola solo puede verse mostrando el primero y desencolando, se implementa para comprobar código facilmente.
 {
-    NodoCola* aux = primero;
-    if (es_vacia()) {
-        cout<<"La cola está vacía\n"<<endl;}
-    else {
-        cout<<"el primero es: "<<aux->proceso.toString()<<endl;
-        cout<<"COLA: "<<endl;
-        while (aux){
-            cout<<aux->proceso.toString()<<endl;
+    NodoCola *aux = primero;
+    if (es_vacia())
+    {
+
+        cout << "La cola está vacía\n"
+             << endl;
+    }
+    else
+    {
+        cout << "el primero es: " << aux->proceso.toString() << endl;
+        cout << "COLA: " << endl;
+        while (aux)
+        {
+            if(aux->proceso.nucleo != -1){
+                cout << aux->proceso.toString() << endl;
+            }
+            
             aux = aux->siguiente;
         }
     }
 }
 
-Cola Cola::copiarCola(){
+Cola Cola::copiarCola()
+{
     Cola aux;
     Cola copia;
-    while(!es_vacia()){
+    while (!es_vacia())
+    {
         aux.encolar(inicio());
         copia.encolar(inicio());
         desencolar();
     }
-    while(!aux.es_vacia()){
+    while (!aux.es_vacia())
+    {
         encolar(aux.inicio());
         aux.desencolar();
     }
     return copia;
 }
 
-
-int Cola::contarElementos(){
-    int ctd=0;
-    if (es_vacia()){return ctd;}
-    else{
-        Cola aux=copiarCola();
-        while(!aux.es_vacia()){
+int Cola::get_longitud()
+{
+    int ctd = 0;
+    if (es_vacia())
+    {
+        return ctd;
+    }
+    else
+    {
+        cout<<"fdsfgfd"<<es_vacia()<<endl;
+        cout<<"\n gfdgfdgfd \n"<<endl;
+        cout<<inicio().toString()<<endl;
+        Cola aux = copiarCola();
+        cout<<"Copia: "<<aux.inicio().toString()<<endl;
+        while (!aux.es_vacia())
+        {
             ctd++;
             aux.desencolar();
         }
+        cout<<"Sale de aquí"<<endl;
         return ctd;
     }
 }
+
+// int Cola::get_longitud(){return longitud;}

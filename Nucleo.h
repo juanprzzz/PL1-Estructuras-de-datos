@@ -2,6 +2,7 @@
 #define NUCLEO_H
 #include "Cola.h"
 #include "Proceso.h"
+#include <string>
 
 class Nucleo 
 {
@@ -17,6 +18,8 @@ class Nucleo
     friend class Cola;
     friend class NodoLista;
     friend class Lista;
+
+    friend class SistemaLista;
        
     public:
         Nucleo();
@@ -25,8 +28,10 @@ class Nucleo
         void añadirProceso(Proceso proceso); 
         void desencolarProceso();
         void mostrarNucleo();
+        string mostrarProcesoEjecucion();
         void ejecutarProceso(Proceso proceso);
         void terminarProceso();
+
 };
 
 #endif

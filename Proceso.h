@@ -19,8 +19,9 @@ class Proceso{
         friend class NodoCola;
         friend class Cola;
         friend class Nucleo;
-        //friend class NodoLista; Necesario para parte 2
-        //friend class Lista; Necesario para Parte 2
+        friend class Lista;
+
+        friend class SistemaLista;
 
     public:
         Proceso();

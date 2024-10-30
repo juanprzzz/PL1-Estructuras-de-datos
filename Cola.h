@@ -7,20 +7,20 @@ class Cola{
     private:
         NodoCola * primero;
         NodoCola * ultimo;
-        int longitud;
+        //int longitud;
     public:
         Cola(); 
         ~Cola();
         void encolar(Proceso);
         void encolarPrioridad(Proceso);
         Proceso inicio();
-        int get_longitud();
+        //int get_longitud();
         Proceso fin();
         void desencolar();
         bool es_vacia();
         void mostrarCola(); //No es correcto, se implementa para ver que está creada correctamente
         Cola copiarCola();
-        int contarElementos();
+        int get_longitud();
 
 };
 #endif // COLA_H

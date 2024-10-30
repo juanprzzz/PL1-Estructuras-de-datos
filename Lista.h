@@ -8,6 +8,8 @@ class Lista{
         NodoLista* primero; //o NodoLista*
         NodoLista* ultimo;
         int ctdNucleos;
+
+        friend class SistemaLista; 
     public:
         Lista(); //empieza con un núcleo creado
         Lista(Nucleo nucleo);
@@ -21,12 +23,17 @@ class Lista{
         void eliminarInicio();
         //int getCtdNucleosOperativos();     
         //int getCtdNucleosVacios();
+        int getCtdNucleos(); //longitud de la lista
         //bool quedaUno();    cuando solo quede un nucleo. siempre tiene que haber minimo 1
         void mostrarLista(); 
         bool esVacia();
         Lista copiarLista();
-        Nucleo menosOcupado(); //devuelve cual es el nucleo menos ocupado
-        Nucleo masOcupado(); //devuelve cual es el nucleo con más procesos
+        void menosOcupado(); //devuelve cual es el nucleo menos ocupado
+        void masOcupado(); //devuelve cual es el nucleo con más procesos
+        bool comprobarAñadirNuevosNucleos();
+        void añadirNuevoNucleo();
+        bool comprobarEliminarNucleos();
+        void eliminarNucleosVacios();
 
 };
 

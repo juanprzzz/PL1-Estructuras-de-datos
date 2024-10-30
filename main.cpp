@@ -20,16 +20,61 @@ Proceso p6 = Proceso(6,0,8,3);
 
 
 //bool salir=false;
-
+/*
 Lista l;
 l.añadirIzquierda(Nucleo(2));
 
 l.añadirDerecha(Nucleo(3));
 cout<<"Lista original: "<<endl;
+l.añadirIzquierda(Nucleo(10));
+l.añadirDerecha(Nucleo(20));
+
+
+l.eliminarFin();
+
+l.fin().mostrarNucleo();
+*/
+
+Nucleo n1=Nucleo(1);
+Nucleo n2=Nucleo(2);
+//Nucleo n3=Nucleo(3);
+//Nucleo n4=Nucleo(4);
+
+n1.añadirProceso(p1);
+n1.añadirProceso(p2);
+//n2.añadirProceso(p3);
+//n2.añadirProceso(p5);
+//n3.añadirProceso(p6);
+//n4.añadirProceso(p3);
+
+cout<<"creo lista..."<<endl;
+Lista l;
+//l.inicio().mostrarNucleo();
+l.añadirDerecha(n1);
+//l.añadirDerecha(n4);
+l.añadirDerecha(n2);
+//l.añadirDerecha(n3);
+//l.añadirDerecha(n3);
+//l.añadirDerecha(n4);
+//l.mostrarLista();
+//n2.mostrarNucleo();
+l.añadirNuevoNucleo();
 l.mostrarLista();
-Lista listaR = l.copiarLista();
-cout<<"Esta es la lista clonada: "<<endl;
-listaR.mostrarLista();
+
+
+/*
+cout<<"añado... "<<endl;
+l.añadirIzquierda(n1);
+l.añadirDerecha(n4);
+l.añadirIzquierda(n2);
+l.añadirDerecha(n3);
+
+
+l.masOcupado();
+
+l.menosOcupado();
+*/
+
 
 
 /*

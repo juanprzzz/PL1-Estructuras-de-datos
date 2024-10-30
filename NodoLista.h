@@ -10,6 +10,7 @@ class NodoLista
         Nucleo nucleo;
     
     friend class Lista;
+    friend class SistemaLista; 
 
     public:
         NodoLista();
