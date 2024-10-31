@@ -312,7 +312,7 @@ int Lista::comprobarEliminarNucleos()
 
         listaCopia.eliminarInicio();
     }
-    if (ctdNucleos - nucleosVacios < 1)
+    if (ctdNucleos - nucleosVacios <= 1)
     {
         nucleosVacios = -1;
     }
