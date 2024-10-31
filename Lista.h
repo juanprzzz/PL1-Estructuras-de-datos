@@ -35,6 +35,11 @@ class Lista{
         bool comprobarEliminarNucleos();
         void eliminarNucleosVacios();
 
+
+
+
+        void quecoñopasa();
+
 };
 
 #endif 

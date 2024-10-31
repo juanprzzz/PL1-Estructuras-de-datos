@@ -7,7 +7,7 @@ using namespace std;
 Cola::Cola(){
     primero = NULL;
     ultimo = NULL;
-    // longitud = 0;
+    len=0;
 }
 
 Cola::~Cola() {}
@@ -22,13 +22,14 @@ void Cola::encolar(Proceso proceso){
         ultimo->siguiente = nuevo_nodo; // puntero->atributo
         ultimo = nuevo_nodo;
     }
-    // longitud++;
+    len++;
 }
 /*
  *Se encarga de introducir un proceso en el lugar que le corresponde por prioridad en la cola
  */
 void Cola::encolarPrioridad(Proceso proceso){
     Cola aux;
+    
     while (!es_vacia() && inicio().prioridad <= proceso.prioridad)
     { // Mientras que la cola no esté vacía y el primer elemento de la cola sea más prioritario que el otro proceso
         aux.encolar(inicio());
@@ -40,12 +41,12 @@ void Cola::encolarPrioridad(Proceso proceso){
         aux.encolar(inicio());
         desencolar();
     }
+    len=0;
     while (!aux.es_vacia())
     { // Como la función no devuelve nada, si no que modifica la cola principal, tengo que introducir los elementos de la cola aux en la principal
         encolar(aux.inicio());
         aux.desencolar();
     }
-    // longitud++;
 }
 
 void Cola::desencolar(){
@@ -63,7 +64,7 @@ void Cola::desencolar(){
             aux->siguiente = NULL;
             delete (aux);
         }
-        // longitud--;
+        len--;
     }
 }
 
@@ -94,7 +95,7 @@ void Cola::mostrarCola()
 {
     NodoCola *aux = primero;
     if (es_vacia()) {
-        cout << "La cola está vacía\n"<< endl;
+        cout << "La cola está vacía"<< endl;
     }
     else{
         cout << "el primero es: " << aux->proceso.toString() << endl;
@@ -112,6 +113,7 @@ Cola Cola::copiarCola()
 {
     Cola aux;
     Cola copia;
+    len=0;
     while (!es_vacia())
     {
         aux.encolar(inicio());
@@ -126,6 +128,7 @@ Cola Cola::copiarCola()
     return copia;
 }
 
+/*
 int Cola::get_longitud()
 {
     Cola aux = copiarCola();
@@ -141,10 +144,13 @@ int Cola::get_longitud()
             ctd++;
             aux.desencolar();
         }
-        //cout<<"ctd: "<<ctd<<endl;
-        
+        //cout<<"ctd: "<<ctd<<endl;     
     }
+    cout<<"ctd: "<<ctd<<endl;  
     return ctd;
-}
+}*/
 
-// int Cola::get_longitud(){return longitud;}
+int Cola::get_longitud(){
+    mostrarCola();
+    cout<<"len="<<len<<endl;
+    return len;}

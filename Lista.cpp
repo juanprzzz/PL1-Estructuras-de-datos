@@ -255,41 +255,27 @@ void Lista::masOcupado(){
 }
 
 
-
 bool Lista::comprobarAñadirNuevosNucleos(){
     Lista listaCopia = copiarLista();
-    cout<<"Al inicio: "<<endl;
-    listaCopia.inicio().mostrarNucleo();
+    listaCopia.mostrarLista();
     bool añadir = true;
-    //listaCopia.eliminarInicio(); //------------ Mirar el núcleo vacío -------------//
     while(!listaCopia.esVacia() && añadir){
-        
-        //cout<<"Longitud cola espera inicio -->   "<<listaCopia.inicio().colaEspera.get_longitud();
-        //cout<<"longitud lista"<<listaCopia.getCtdNucleos()<<endl;
-        //cout<<"Aqui:";
-        cout<<"primero"<<endl;
-        listaCopia.inicio().mostrarNucleo();
-        //cout<<"Solucion-->"<<listaCopia.inicio().colaEspera.get_longitud()<<endl;
-        cout<<"fds"<<endl;
-       // bool funciona = listaCopia.inicio().colaEspera.get_longitud() < 2;
-        cout<<"No llega aqui"<<endl;
-        //cout<<"da esto: "<<listaCopia.inicio().colaEspera.get_longitud()<<endl;
-        if(listaCopia.inicio().colaEspera.get_longitud() < 2){
-            cout<<"entraa"<<endl;
+        Cola c=listaCopia.inicio().colaEspera;
+        int len=c.get_longitud();
+        if(len < 2){
             añadir = false;
         }
-        cout<<"esto no sale"<<endl;
-        cout<<"fdsffsfsdfsdfsdfsdfsd"<<endl;
         listaCopia.eliminarInicio();
     }
     return añadir;
 }
 
+
+
 void Lista::añadirNuevoNucleo(){
     if(comprobarAñadirNuevosNucleos()){
         añadirDerecha(Nucleo(ctdNucleos + 1));
-    }
-        
+    }   
 }
 
 bool Lista::comprobarEliminarNucleos(){
