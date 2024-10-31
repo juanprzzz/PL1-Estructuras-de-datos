@@ -66,7 +66,7 @@ bool wtf=l.comprobarAñadirNuevosNucleos();
 cout<<"wtf: "<<wtf<<endl;
 bool eliminado = l.comprobarEliminarNucleos();
 cout<<"Eklimnar --> "<<eliminado<<endl;
-l.eliminarNucleosVacios();
+l.eliminarNucleosVacios(l.comprobarEliminarNucleos());
 l.mostrarLista();
 //l.quecoñopasa();
 //l.añadirNuevoNucleo();

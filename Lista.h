@@ -32,8 +32,8 @@ class Lista{
         void masOcupado(); //devuelve cual es el nucleo con más procesos
         bool comprobarAñadirNuevosNucleos();
         void añadirNuevoNucleo();
-        bool comprobarEliminarNucleos();
-        void eliminarNucleosVacios();
+        int comprobarEliminarNucleos();
+        void eliminarNucleosVacios(int nucleosVacios);
 
 
 
