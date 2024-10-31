@@ -29,6 +29,8 @@ c.encolarPrioridad(p4);*/
 Nucleo n1=Nucleo(1);
 Nucleo n2=Nucleo(2);
 Nucleo n3=Nucleo(3);
+Nucleo n4 = Nucleo(4);
+Nucleo n5 = Nucleo(5);
 
 Lista l=Lista();
 //cout<<"mostrar vacia: "<<endl;
@@ -48,6 +50,10 @@ cout<<"aniado nucleos a cola... "<<endl;
 l.añadirDerecha(n2);
 l.añadirDerecha(n1);
 l.añadirDerecha(n3);
+n5.ejecutarProceso(p6);
+l.añadirIzquierda(n5);
+l.añadirDerecha(n4);
+
 cout<<"lencolas: "<<endl;
 
 n1.lenCola();
@@ -58,7 +64,10 @@ n3.lenCola();
 cout<<"QUE COÑO PASA "<<endl;
 bool wtf=l.comprobarAñadirNuevosNucleos();
 cout<<"wtf: "<<wtf<<endl;
-
+bool eliminado = l.comprobarEliminarNucleos();
+cout<<"Eklimnar --> "<<eliminado<<endl;
+l.eliminarNucleosVacios();
+l.mostrarLista();
 //l.quecoñopasa();
 //l.añadirNuevoNucleo();
 

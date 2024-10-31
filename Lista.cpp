@@ -300,7 +300,9 @@ void Lista::eliminarNucleosVacios(){
         while(!esVacia()){
             if(!(inicio().colaEspera.es_vacia() && inicio().procesoEjecucion.nucleo == -1)){
                 listaNoEliminados.añadirDerecha(inicio());
+                
             }
+            eliminarInicio();
         }
         while(!listaNoEliminados.esVacia()){
             añadirDerecha(listaNoEliminados.inicio());
