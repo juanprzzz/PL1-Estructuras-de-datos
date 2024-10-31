@@ -128,25 +128,23 @@ Cola Cola::copiarCola()
 
 int Cola::get_longitud()
 {
+    Cola aux = copiarCola();
     int ctd = 0;
-    if (es_vacia()){
-        cout<<"Cola vacia :) ctd = 0"<<endl;
-        return ctd;
-    }
-    else{
+    if (!aux.es_vacia()){
+        //cout<<"Cola vacia :) ctd = 0"<<endl;
         //cout<<"es vacia?: "<<es_vacia()<<endl;
         //cout<<"\n inicio.tostring: \n"<<endl;
         //cout<<inicio().toString()<<endl;
-        Cola aux = copiarCola();
         //cout<<"Copia: "<<aux.inicio().toString()<<endl;
         while (!aux.es_vacia())
         {
             ctd++;
             aux.desencolar();
         }
-        cout<<"ctd: "<<ctd<<endl;
-        return ctd;
+        //cout<<"ctd: "<<ctd<<endl;
+        
     }
+    return ctd;
 }
 
 // int Cola::get_longitud(){return longitud;}

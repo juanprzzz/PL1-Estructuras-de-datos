@@ -258,18 +258,27 @@ void Lista::masOcupado(){
 
 bool Lista::comprobarAñadirNuevosNucleos(){
     Lista listaCopia = copiarLista();
+    cout<<"Al inicio: "<<endl;
+    listaCopia.inicio().mostrarNucleo();
     bool añadir = true;
     //listaCopia.eliminarInicio(); //------------ Mirar el núcleo vacío -------------//
     while(!listaCopia.esVacia() && añadir){
-        //cout<<"Kfds-->   "<<listaCopia.inicio().colaEspera.get_longitud();
-        cout<<"longitud lista"<<listaCopia.getCtdNucleos()<<endl;
-        cout<<"Aqui:";
+        
+        //cout<<"Longitud cola espera inicio -->   "<<listaCopia.inicio().colaEspera.get_longitud();
+        //cout<<"longitud lista"<<listaCopia.getCtdNucleos()<<endl;
+        //cout<<"Aqui:";
+        cout<<"primero"<<endl;
         listaCopia.inicio().mostrarNucleo();
-        cout<<"Solucion-->"<<listaCopia.inicio().colaEspera.get_longitud()<<endl;
+        //cout<<"Solucion-->"<<listaCopia.inicio().colaEspera.get_longitud()<<endl;
+        cout<<"fds"<<endl;
+       // bool funciona = listaCopia.inicio().colaEspera.get_longitud() < 2;
+        cout<<"No llega aqui"<<endl;
+        //cout<<"da esto: "<<listaCopia.inicio().colaEspera.get_longitud()<<endl;
         if(listaCopia.inicio().colaEspera.get_longitud() < 2){
             cout<<"entraa"<<endl;
             añadir = false;
         }
+        cout<<"esto no sale"<<endl;
         cout<<"fdsffsfsdfsdfsdfsdfsd"<<endl;
         listaCopia.eliminarInicio();
     }

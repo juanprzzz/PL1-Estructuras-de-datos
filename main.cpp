@@ -51,6 +51,7 @@ l.añadirIzquierda(n1);
 l.añadirDerecha(n2);
 l.añadirDerecha(n3);
 cout<<"Creo sl... "<<endl;
+l.añadirNuevoNucleo();
 SistemaLista sl=SistemaLista();
 
 
