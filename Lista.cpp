@@ -289,7 +289,7 @@ bool Lista::comprobarEliminarNucleos(){
 
         listaCopia.eliminarInicio();
     }
-    if(nucleosVacios >= 2){
+    if(ctdNucleos - nucleosVacios > 1){
         eliminar = true;
     }
     return eliminar;
