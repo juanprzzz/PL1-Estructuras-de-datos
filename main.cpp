@@ -35,8 +35,8 @@ Nucleo n5 = Nucleo(5);
 Lista l=Lista();
 //cout<<"mostrar vacia: "<<endl;
 //l.mostrarLista();
-/*
 
+/*
 cout<<"aniado procesos a n2..."<<endl;
 n2.añadirProceso(p1);
 n2.añadirProceso(p2); //n2=2
@@ -51,7 +51,7 @@ cout<<"aniado nucleos a cola... "<<endl;
 l.añadirDerecha(n2);
 l.añadirDerecha(n1);
 l.añadirDerecha(n3);
-n5.ejecutarProceso(p6);
+//n5.ejecutarProceso(p6);
 l.añadirIzquierda(n5);
 l.añadirDerecha(n4);
 

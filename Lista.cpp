@@ -312,32 +312,33 @@ int Lista::comprobarEliminarNucleos()
 
         listaCopia.eliminarInicio();
     }
-    if (ctdNucleos - nucleosVacios < 1)
+    if (ctdNucleos - nucleosVacios == 0)
     {
-        nucleosVacios = -1;
+        nucleosVacios--;
+        cout << "n" << nucleosVacios << endl;
     }
     return nucleosVacios;
 }
 void Lista::eliminarNucleosVacios(int nucleosVacios)
 {
-    if (comprobarEliminarNucleos() != -1)
+    Lista listaNoEliminados;
+    for (int i = 0; i < nucleosVacios; i++)
     {
-        Lista listaNoEliminados;
-        for (int i = 0; i < nucleosVacios; i++)
+        cout << i << endl;
+        cout << "longitud lista" << ctdNucleos << endl;
+        cout << "nºveces" << i << endl;
+
+        if (!(inicio().colaEspera.es_vacia() && inicio().procesoEjecucion.nucleo == -1))
         {
-            while (!esVacia())
-            {
-                if (!(inicio().colaEspera.es_vacia() && inicio().procesoEjecucion.nucleo == -1))
-                {
-                    listaNoEliminados.añadirDerecha(inicio());
-                }
-                eliminarInicio();
-            }
-            while (!listaNoEliminados.esVacia())
-            {
-                añadirDerecha(listaNoEliminados.inicio());
-                listaNoEliminados.eliminarInicio();
-            }
+            listaNoEliminados.añadirDerecha(inicio());
         }
+        cout << "es vacía?" << esVacia() << endl;
+
+        eliminarInicio();
+    }
+    while (!listaNoEliminados.esVacia())
+    {
+        añadirDerecha(listaNoEliminados.inicio());
+        listaNoEliminados.eliminarInicio();
     }
 }
