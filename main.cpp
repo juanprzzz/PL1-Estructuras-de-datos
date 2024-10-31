@@ -37,6 +37,7 @@ Lista l=Lista();
 //l.mostrarLista();
 
 /*
+
 cout<<"aniado procesos a n2..."<<endl;
 n2.añadirProceso(p1);
 n2.añadirProceso(p2); //n2=2
@@ -46,6 +47,8 @@ cout<<"aniado procesos a n2..."<<endl;
 n1.añadirProceso(p4); //n1=1
 n1.añadirProceso(p5); 
 */
+
+
 cout<<"aniado nucleos a cola... "<<endl;
 //l.añadirIzquierda(n1);
 l.añadirDerecha(n2);
@@ -68,6 +71,7 @@ cout<<"wtf: "<<wtf<<endl;
 bool eliminado = l.comprobarEliminarNucleos();
 cout<<"Eklimnar --> "<<eliminado<<endl;
 l.eliminarNucleosVacios(l.comprobarEliminarNucleos());
+cout<<"Tras eliminar núcleos queda así:"<<endl;
 l.mostrarLista();
 //l.quecoñopasa();
 //l.añadirNuevoNucleo();

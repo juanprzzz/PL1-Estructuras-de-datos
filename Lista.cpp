@@ -303,40 +303,38 @@ int Lista::comprobarEliminarNucleos()
 {
     Lista listaCopia = copiarLista();
     int nucleosVacios = 0;
-    while (!listaCopia.esVacia() && nucleosVacios != -1)
+    while (!listaCopia.esVacia())
     {
-        if (listaCopia.inicio().colaEspera.es_vacia() && listaCopia.inicio().procesoEjecucion.nucleo == -1)
+        if (listaCopia.inicio().colaEspera.es_vacia() && listaCopia.inicio().procesoEjecucion.nucleo == -1) //Si la cola de espera está vacía y los núcleos no ejecutan ningún proceso
         {
             nucleosVacios++;
         }
 
         listaCopia.eliminarInicio();
     }
-    if (ctdNucleos - nucleosVacios == 0)
+    if (ctdNucleos - nucleosVacios == 0) //Si la diferencia de los núcleos totales y vacíos es 0, entonces puedo eliminar n - 1 núcleos
     {
         nucleosVacios--;
-        cout << "n" << nucleosVacios << endl;
     }
     return nucleosVacios;
 }
 void Lista::eliminarNucleosVacios(int nucleosVacios)
 {
     Lista listaNoEliminados;
-    for (int i = 0; i < nucleosVacios; i++)
+    int nucleosEliminados = 0;
+    while (nucleosEliminados != nucleosVacios) // Elimino tantos núcleos como se indiquen (no sirve con for, eliminaría menos núcleos, pueden pasar 20 núcleos hasta poder eliminar 3 porque el resto están ocupados)
     {
-        cout << i << endl;
-        cout << "longitud lista" << ctdNucleos << endl;
-        cout << "nºveces" << i << endl;
-
-        if (!(inicio().colaEspera.es_vacia() && inicio().procesoEjecucion.nucleo == -1))
+        if (!(inicio().colaEspera.es_vacia() && inicio().procesoEjecucion.nucleo == -1)) // Si la cola de espera no está vacía, y hay un proceso ejecución, no puedo eliminarlo
         {
             listaNoEliminados.añadirDerecha(inicio());
         }
-        cout << "es vacía?" << esVacia() << endl;
-
+        else
+        {
+            nucleosEliminados++;
+        }
         eliminarInicio();
     }
-    while (!listaNoEliminados.esVacia())
+    while (!listaNoEliminados.esVacia()) //Vuelco los núcleos ocupados en la lista principal
     {
         añadirDerecha(listaNoEliminados.inicio());
         listaNoEliminados.eliminarInicio();
