@@ -159,9 +159,8 @@ void SistemaLista::procesoComienzo()
             ///
             if (aux->siguiente == NULL) // Caso 2.1: solo hay un nucleo/elemento en la lista.
             {
-                cout << "longiut<<" << aux->nucleo.colaEspera.get_longitud() << endl;
                 if (aux->nucleo.colaEspera.get_longitud() < 2)
-                {                                            // si el elemento marcado por aux tiene menos de 2 procesos en su cola de espera
+                {                                           // si el elemento marcado por aux tiene menos de 2 procesos en su cola de espera
                     Proceso procesoNuevo = colaNuevos.fin(); // aqui no iria fin? Queremos que en la cola queden los menos prioritarios, para ejecutar los más en otros nucleos inmediatamente
                     ///////////////////////// que pasaría si el nucleo no tuviera nada ejecutandose? se joderian las prioridades?
                     procesoNuevo.nucleo = aux->nucleo.ID; /// eso es lo q queria hacer, pero lo estaba haciendo en otro sitio xd jsjs
@@ -187,12 +186,21 @@ void SistemaLista::procesoComienzo()
                 aux = aux->siguiente;
             }
             if (!añadido) // Caso 2.3: si no se ha podido añadir a ningun nucleo, todos estaban llenos, se crea uno nuevo
-            {             // si todos los nucleos estaban llenos
+            {             // si todos los nucleos estaban llenos (El ultimo elemento tiene aux->siguiente = NULL y por eso se cambian los procesos)
+            if(lista.comprobarAñadirNuevosNucleos()){
                 lista.añadirNuevoNucleo();
                 Proceso procesoNuevo = colaNuevos.inicio();
                 procesoNuevo.nucleo = lista.ultimo->nucleo.ID;
                 lista.ultimo->nucleo.ejecutarProceso(procesoNuevo); // Como los procesos a añadir ya van ordenados por orden de prioridad, se puede ejecutar directamente
                 colaNuevos.desencolar();
+            }
+            else{
+                Proceso procesoNuevo = colaNuevos.fin();
+                procesoNuevo.nucleo = lista.ultimo->nucleo.ID;
+                lista.ultimo->nucleo.añadirProceso(procesoNuevo);
+                colaNuevos.eliminarFin();
+            }
+                
             }
         }
         else // Caso 1.2: lista vacía
@@ -203,6 +211,7 @@ void SistemaLista::procesoComienzo()
             procesoNuevo.nucleo = lista.primero->nucleo.ID;
             lista.primero->nucleo.ejecutarProceso(procesoNuevo); // Como los procesos a añadir ya van ordenador por orden de prioridad, se puede ejecutar directamente
             colaNuevos.desencolar();
+            
         }
 
         // cout << "FIN DE ITERACION. MOSTRAR LISTA ACTUALMENTE" << endl;                     //BORRAR
@@ -271,8 +280,7 @@ void SistemaLista::acabarProcesos()
     {
         //   ahora el while deberia ser mientras que la pila no este vacia, la longitud de la cola no sea 1 ese 1 elemento este vacio
         pasarTiempo(1);
-       
-}
+    }
     double tiempoMedio = (double)(tiempoFinalizacion - tiempoLlegada) / ctdProcesos;
     cout << "La suma de los tiempos de llegada de todos los procesos es: " << tiempoLlegada << endl;
     cout << "La suma de los tiempos de finalización de todos los procesos es: " << tiempoFinalizacion << endl;
