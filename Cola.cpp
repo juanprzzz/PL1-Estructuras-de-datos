@@ -151,6 +151,6 @@ int Cola::get_longitud()
 }*/
 
 int Cola::get_longitud(){
-    mostrarCola();
-    cout<<"len="<<len<<endl;
+    //mostrarCola();
+    //cout<<"len="<<len<<endl;
     return len;}

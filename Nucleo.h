@@ -26,12 +26,14 @@ class Nucleo
         Nucleo(int id);
         ~Nucleo();
         void añadirProceso(Proceso proceso); 
-        void desencolarProceso();
+        void desencolarProceso();  //eliminar el 1er elemento de la cola de espera 
         void mostrarNucleo();
         string mostrarProcesoEjecucion();
         void ejecutarProceso(Proceso proceso);
         void terminarProceso();
         void lenCola(); //provisional
+
+        Proceso PrimeroCola(); //getter delprimer elemento de la cola de espera
 
 };
 

@@ -149,8 +149,10 @@ void Lista::mostrarLista()
         Lista listaCopia = copiarLista();
         while (!listaCopia.esVacia())
         {
+            cout << "------ELEMENTO-----" << endl;
             listaCopia.inicio().mostrarNucleo();
             listaCopia.eliminarInicio();
+            cout << "-------------------" << endl;
         }
     }
 }
@@ -174,6 +176,27 @@ Lista Lista::copiarLista()
     }
     return listaResultado;
 }
+
+/*
+void Lista::copiarListaAOtra(Lista &l2) //paso por referencia
+{//copia otra lista a la que tienes actualmente. Mantiene "l2"
+    Lista listaAux;
+    Lista listaResultado;
+
+    while (!l2.esVacia())
+    {
+        listaAux.añadirDerecha(l2.inicio());
+        añadirDerecha(l2.inicio());
+        l2.eliminarInicio();
+    }
+    l2.ctdNucleos = 0;
+    while (!listaAux.esVacia())
+    {
+        l2.añadirDerecha(listaAux.inicio());
+        listaAux.eliminarInicio();
+    }
+}
+*/
 
 bool Lista::esVacia()
 {
@@ -276,7 +299,7 @@ void Lista::masOcupado()
 bool Lista::comprobarAñadirNuevosNucleos()
 {
     Lista listaCopia = copiarLista();
-    listaCopia.mostrarLista();
+    //listaCopia.mostrarLista();
     bool añadir = true;
     while (!listaCopia.esVacia() && añadir)
     {
@@ -296,6 +319,7 @@ void Lista::añadirNuevoNucleo()
     if (comprobarAñadirNuevosNucleos())
     {
         añadirDerecha(Nucleo(ctdNucleos + 1));
+        cout<<"nucleo nuevo añadido!"<<endl;
     }
 }
 

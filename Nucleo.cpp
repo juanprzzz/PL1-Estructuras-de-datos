@@ -49,6 +49,10 @@ void Nucleo::desencolarProceso(){
     colaEspera.desencolar();
 }
 
+Proceso Nucleo::PrimeroCola(){
+    return colaEspera.inicio();
+}
+
 void Nucleo::ejecutarProceso(Proceso p){
    procesoEjecucion=p;
 }

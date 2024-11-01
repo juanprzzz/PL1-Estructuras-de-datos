@@ -13,6 +13,14 @@ Proceso p3= Proceso(3,0,6,9);
 Proceso p4= Proceso(4,0,7,5);
 Proceso p5 = Proceso(5,0,6,1);
 Proceso p6 = Proceso(6,0,8,3);
+
+SistemaLista sl;
+sl.apilarSistema(p1); //pila= 4,3,2,1
+sl.apilarSistema(p2);
+sl.apilarSistema(p3);
+sl.apilarSistema(p4);
+sl.procesoComienzo();
+
 //Proceso p7 = Proceso(7,15,5,4);
 //Proceso p8 = Proceso(8,12,2,4);
 //Proceso p9 = Proceso(9,23,9,5);
@@ -23,7 +31,7 @@ Cola c=Cola();
 c.encolarPrioridad(p1);
 c.encolarPrioridad(p2);
 c.encolarPrioridad(p3);
-c.encolarPrioridad(p4);*/
+c.encolarPrioridad(p4);
 
 
 Nucleo n1=Nucleo(1);
@@ -32,7 +40,13 @@ Nucleo n3=Nucleo(3);
 Nucleo n4 = Nucleo(4);
 Nucleo n5 = Nucleo(5);
 
-Lista l=Lista();
+Lista l=Lista();*/
+
+
+
+
+
+
 //cout<<"mostrar vacia: "<<endl;
 //l.mostrarLista();
 
@@ -46,7 +60,7 @@ n2.ejecutarProceso(p3);
 cout<<"aniado procesos a n2..."<<endl;
 n1.añadirProceso(p4); //n1=1
 n1.añadirProceso(p5); 
-*/
+
 
 
 cout<<"aniado nucleos a cola... "<<endl;
@@ -58,21 +72,23 @@ l.añadirDerecha(n3);
 l.añadirIzquierda(n5);
 l.añadirDerecha(n4);
 
-cout<<"lencolas: "<<endl;
-
-n1.lenCola();
-n2.lenCola();
-n3.lenCola();
-
-
-cout<<"QUE COÑO PASA "<<endl;
-bool wtf=l.comprobarAñadirNuevosNucleos();
-cout<<"wtf: "<<wtf<<endl;
-bool eliminado = l.comprobarEliminarNucleos();
-cout<<"Eklimnar --> "<<eliminado<<endl;
-l.eliminarNucleosVacios(l.comprobarEliminarNucleos());
-cout<<"Tras eliminar núcleos queda así:"<<endl;
+cout<<"lista: "<<endl;
 l.mostrarLista();
+
+cout<<"l2: "<<endl;
+Lista l2;
+l2.copiarListaAOtra(l); //l2=l
+l2.mostrarLista();
+
+cout<<"borrar inicio: "<<endl;
+l.eliminarInicio();
+
+cout<<"lista: "<<endl;
+l.mostrarLista();
+
+cout<<"l2: "<<endl;
+l2.mostrarLista();
+*/
 //l.quecoñopasa();
 //l.añadirNuevoNucleo();
 

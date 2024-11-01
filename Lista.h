@@ -35,10 +35,7 @@ class Lista{
         int comprobarEliminarNucleos();
         void eliminarNucleosVacios(int nucleosVacios);
 
-
-
-
-        void quecoñopasa();
+        //void copiarListaAOtra(Lista& l);
 
 };
 
