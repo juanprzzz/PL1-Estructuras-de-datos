@@ -32,5 +32,7 @@ class SistemaLista{
         bool pilaVacia();
         bool listaVacia();
         bool nucleosVacios();
+
+        void mostrarOcupacion();
 }; 
 #endif

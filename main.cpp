@@ -9,28 +9,294 @@ using namespace std;
 int main(){
 Proceso p1= Proceso(1,0,5,1);
 Proceso p2= Proceso(2,0,3,2); 
-Proceso p3= Proceso(3,2,6,9);
+Proceso p3= Proceso(3,0,6,9);
 Proceso p4= Proceso(4,0,7,5);
-Proceso p5 = Proceso(5,4,6,1);
+Proceso p5 = Proceso(5,0,6,1);
 Proceso p6 = Proceso(6,0,8,3);
-Proceso p7 = Proceso(7,1,5,4);
-Proceso p8 = Proceso(8,8,2,4);
-Proceso p9 = Proceso(9,4,9,5);
-Proceso p10 = Proceso(10,2,4,4);
+Proceso p7 = Proceso(7,0,5,4);
+Proceso p8 = Proceso(8,0,2,4);
+Proceso p9 = Proceso(9,0,9,5);
+Proceso p10 = Proceso(10,0,4,4);
 
 
 SistemaLista sl;
-sl.apilarSistema(p1); //pila= 4,3,2,1
-sl.apilarSistema(p2);
-sl.apilarSistema(p3);
-sl.apilarSistema(p4);
-sl.apilarSistema(p5);
-sl.apilarSistema(p6);
-sl.apilarSistema(p7);
-sl.apilarSistema(p8);
-sl.apilarSistema(p9);
-sl.apilarSistema(p10);
-sl.acabarProcesos();
+Sistema sistemaPrincipal;
+
+
+bool exit=false;
+
+while(!exit){
+bool salir=false;
+int menu;
+cout<<"Pulse -1 para salir del programa, 1 para la primera parte y 2 para la segunda"<<endl;
+cin >> menu;
+cout << menu<<endl;
+if (menu==-1){exit=true;}
+else if (menu==1){
+    
+    while(!salir){
+    int opcion;
+    cout << "\nQué opción quieres?:\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n|-1 -> Salir\t\t\t1 -> Crear pila de procesos del sistema\t\t2 -> Mostrar pila \t3 -> Borrar pila                                  |\n|                                                                                                                                                         |\n| 4 -> Mostrar cola espera\t5 -> Mostrar procesos en nucleos\t\t6 -> Pasar N minutos\t7 -> Acabar todos los procesos y/o t.medio proc.  |\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n\nIntroduce una opción: ";
+    cin >> opcion;
+    cout << opcion<<endl;
+
+    switch (opcion)
+    {
+    case -1:
+        salir=true;
+        break;
+
+    case 1: //crear pila de procesos
+        if(sistemaPrincipal.pilaVacia()){
+            cout << "Creando pila..."<<endl;
+            sistemaPrincipal.apilarSistema(p1);
+            sistemaPrincipal.apilarSistema(p2);
+            sistemaPrincipal.apilarSistema(p3);
+            sistemaPrincipal.apilarSistema(p4);
+            sistemaPrincipal.apilarSistema(p5);
+            sistemaPrincipal.apilarSistema(p6);
+            sistemaPrincipal.apilarSistema(p7);
+            sistemaPrincipal.apilarSistema(p8);
+            sistemaPrincipal.apilarSistema(p9);
+            sistemaPrincipal.apilarSistema(p10);
+        }
+        else{
+            cout<<"¡Ya tienes una pila con procesos!"<<endl;
+        }
+        break;
+
+    case 2: //mostrar la pila de procesos
+        sistemaPrincipal.mostrarPilaProcesos();
+        break;
+
+    case 3: //borrar la pila de procesos
+        cout << "Borrando pila..."<<endl;
+        sistemaPrincipal.borrarPila();
+        break;
+
+    case 4: //mostrar la cola de prioridades
+        sistemaPrincipal.mostrarColaPrioridad();
+        break;
+
+    case 5: //mostrar los procesos activos en los nucleos
+        sistemaPrincipal.mostrarProcesosNucleo();
+        break;
+
+    case 6://Pasa n minutos en el sistema  
+        if(sistemaPrincipal.pilaVacia() && sistemaPrincipal.colaVacia() && sistemaPrincipal.nucleosVacios()){
+            cout<<"No hay procesos que ejecutar"<<endl;
+        }
+        else{
+            int minutos;
+            cout << "Cuantos minutos quieres que pasen: ";
+            cin >> minutos;
+            if (minutos>0){
+                sistemaPrincipal.pasarTiempo(minutos);
+            }
+            else{
+                cout << "Por favor, introduzca un núme10ro mayor que 0 "<<endl;
+            }
+        } 
+        
+        break;
+
+    case 7:  //Pasa todo el tiempo hasta que acaben todos los procesos
+        if(sistemaPrincipal.pilaVacia() && sistemaPrincipal.colaVacia() && sistemaPrincipal.nucleosVacios()){
+            cout<<"No hay procesos que ejecutar"<<endl;
+        }
+        else{
+            sistemaPrincipal.acabarProcesos();
+        }   
+        
+        break;
+
+    default:
+        cout << "Opción no válida "<<endl;
+        break;
+    }
+}
+
+}
+
+
+else if (menu==2) {
+    while(!salir){
+        int opcion;
+        cout << "\nQué opción quieres?:\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n|-1 -> Volver\t\t\t1 -> Crear pila de procesos del sistema\t\t2 -> Mostrar pila \t3 -> Borrar pila                                  |\n|                                                                                                                                                         |\n| 4 -> Consultar ocupación  \t5 -> Mostrar procesos en nucleos\t\t6 -> Pasar N minutos\t7 -> Acabar todos los procesos y/o t.medio proc.  |\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n\nIntroduce una opción: ";
+        cin >> opcion;
+        cout << opcion<<endl;
+
+        switch (opcion){
+            case -1:
+                salir=true;
+                break;
+
+            case 1: //crear pila de procesos
+                if(sl.pilaVacia()){
+                    cout << "Creando pila..."<<endl;
+                    sl.apilarSistema(p1);
+                    sl.apilarSistema(p2);
+                    sl.apilarSistema(p3);
+                    sl.apilarSistema(p4);
+                    sl.apilarSistema(p5);
+                    sl.apilarSistema(p6);
+                    sl.apilarSistema(p7);
+                    sl.apilarSistema(p8);
+                    sl.apilarSistema(p9);
+                    sl.apilarSistema(p10);
+                    }
+                else{
+                    cout<<"¡Ya tienes una pila con procesos!"<<endl;
+                     }
+        
+                    break;
+
+            case 2: //mostrar la pila de procesos
+                sl.mostrarPilaProcesos();
+                break;
+
+            case 3: //borrar la pila de procesos
+                cout << "Borrando pila..."<<endl;
+                sl.borrarPila();
+                break;
+
+            case 4: //mostrar nucleo mas y menos ocupado
+                sl.mostrarOcupacion();
+                break;
+
+            case 5: //mostrar los procesos activos en los nucleos
+                sl.mostrarProcesosNucleo();
+                break;
+
+            case 6://Pasa n minutos en el sistema  
+                if(sl.pilaVacia() && sl.listaVacia() && sl.nucleosVacios()){  //////////////////comprobar
+                    cout<<"No hay procesos que ejecutar"<<endl;
+                }
+                else{
+                    int minutos;
+                    cout << "Cuantos minutos quieres que pasen: ";
+                    cin >> minutos;
+                    if (minutos>0){
+                        sl.pasarTiempo(minutos);
+                    }
+                    else{
+                        cout << "Por favor, introduzca un núme10ro mayor que 0 "<<endl;
+                    }
+                } 
+        
+                break;
+
+            case 7:  //Pasa todo el tiempo hasta que acaben todos los procesos
+                    if(sl.pilaVacia() && sl.listaVacia()  && sl.nucleosVacios()){
+                        cout<<"No hay procesos que ejecutar"<<endl;
+                    }
+                    else{
+                        sl.acabarProcesos();
+                }   
+        
+                    break;
+
+            default:
+                    cout << "Opción no válida "<<endl;
+                    break;
+            }
+        }
+    }
+else{
+    cout << "Opción no válida "<<endl;
+}
+
+}
+return 0;
+}
+
+
+
+/*
+
+while(!salir){
+    int opcion;
+    cout << "\nQué opción quieres?:\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n|-1 -> Salir\t\t\t1 -> Crear pila de procesos del sistema\t\t2 -> Mostrar pila \t3 -> Borrar pila                                  |\n|                                                                                                                                                         |\n| 4 -> Mostrar cola espera\t5 -> Mostrar procesos en nucleos\t\t6 -> Pasar N minutos\t7 -> Acabar todos los procesos y/o t.medio proc.  |\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n\nIntroduce una opción: ";
+    cin >> opcion;
+    cout << opcion<<endl;
+
+    switch (opcion)
+    {
+    case -1:
+        salir=true;
+        break;
+
+    case 1: //crear pila de procesos
+        if(sistemaPrincipal.pilaVacia()){
+            cout << "Creando pila..."<<endl;
+            sistemaPrincipal.apilarSistema(p1);
+            sistemaPrincipal.apilarSistema(p2);
+            sistemaPrincipal.apilarSistema(p3);
+            sistemaPrincipal.apilarSistema(p4);
+            sistemaPrincipal.apilarSistema(p5);
+            sistemaPrincipal.apilarSistema(p6);
+            //sistemaPrincipal.apilarSistema(p7);
+            //sistemaPrincipal.apilarSistema(p8);
+            //sistemaPrincipal.apilarSistema(p9);
+            //sistemaPrincipal.apilarSistema(p10);
+        }
+        else{
+            cout<<"¡Ya tienes una pila con procesos!"<<endl;
+        }
+        
+        break;
+
+    case 2: //mostrar la pila de procesos
+        sistemaPrincipal.mostrarPilaProcesos();
+        break;
+
+    case 3: //borrar la pila de procesos
+        cout << "Borrando pila..."<<endl;
+        sistemaPrincipal.borrarPila();
+        break;
+
+    case 4: //mostrar la cola de prioridades
+        sistemaPrincipal.mostrarColaPrioridad();
+        break;
+
+    case 5: //mostrar los procesos activos en los nucleos
+        sistemaPrincipal.mostrarProcesosNucleo();
+        break;
+
+    case 6://Pasa n minutos en el sistema  
+        if(sistemaPrincipal.pilaVacia() && sistemaPrincipal.colaVacia() && sistemaPrincipal.nucleosVacios()){
+            cout<<"No hay procesos que ejecutar"<<endl;
+        }
+        else{
+            int minutos;
+            cout << "Cuantos minutos quieres que pasen: ";
+            cin >> minutos;
+            if (minutos>0){
+                sistemaPrincipal.pasarTiempo(minutos);
+            }
+            else{
+                cout << "Por favor, introduzca un núme10ro mayor que 0 "<<endl;
+            }
+        } 
+        
+        break;
+
+    case 7:  //Pasa todo el tiempo hasta que acaben todos los procesos
+        if(sistemaPrincipal.pilaVacia() && sistemaPrincipal.colaVacia() && sistemaPrincipal.nucleosVacios()){
+            cout<<"No hay procesos que ejecutar"<<endl;
+        }
+        else{
+            sistemaPrincipal.acabarProcesos();
+        }   
+        
+        break;
+
+    default:
+        cout << "Opción no válida "<<endl;
+        break;
+    }
+}
+*/
 
 
 //Sistema sistemaPrincipal;
@@ -172,94 +438,5 @@ l.menosOcupado();
 */
 
 
-
-/*
-
-while(!salir){
-    int opcion;
-    cout << "\nQué opción quieres?:\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n|-1 -> Salir\t\t\t1 -> Crear pila de procesos del sistema\t\t2 -> Mostrar pila \t3 -> Borrar pila                                  |\n|                                                                                                                                                         |\n| 4 -> Mostrar cola espera\t5 -> Mostrar procesos en nucleos\t\t6 -> Pasar N minutos\t7 -> Acabar todos los procesos y/o t.medio proc.  |\n|---------------------------------------------------------------------------------------------------------------------------------------------------------|\n\nIntroduce una opción: ";
-    cin >> opcion;
-    cout << opcion<<endl;
-
-    switch (opcion)
-    {
-    case -1:
-        salir=true;
-        break;
-
-    case 1: //crear pila de procesos
-        if(sistemaPrincipal.pilaVacia()){
-            cout << "Creando pila..."<<endl;
-            sistemaPrincipal.apilarSistema(p1);
-            sistemaPrincipal.apilarSistema(p2);
-            sistemaPrincipal.apilarSistema(p3);
-            sistemaPrincipal.apilarSistema(p4);
-            sistemaPrincipal.apilarSistema(p5);
-            sistemaPrincipal.apilarSistema(p6);
-            //sistemaPrincipal.apilarSistema(p7);
-            //sistemaPrincipal.apilarSistema(p8);
-            //sistemaPrincipal.apilarSistema(p9);
-            //sistemaPrincipal.apilarSistema(p10);
-        }
-        else{
-            cout<<"¡Ya tienes una pila con procesos!"<<endl;
-        }
-        
-        break;
-
-    case 2: //mostrar la pila de procesos
-        sistemaPrincipal.mostrarPilaProcesos();
-        break;
-
-    case 3: //borrar la pila de procesos
-        cout << "Borrando pila..."<<endl;
-        sistemaPrincipal.borrarPila();
-        break;
-
-    case 4: //mostrar la cola de prioridades
-        sistemaPrincipal.mostrarColaPrioridad();
-        break;
-
-    case 5: //mostrar los procesos activos en los nucleos
-        sistemaPrincipal.mostrarProcesosNucleo();
-        break;
-
-    case 6://Pasa n minutos en el sistema  
-        if(sistemaPrincipal.pilaVacia() && sistemaPrincipal.colaVacia() && sistemaPrincipal.nucleosVacios()){
-            cout<<"No hay procesos que ejecutar"<<endl;
-        }
-        else{
-            int minutos;
-            cout << "Cuantos minutos quieres que pasen: ";
-            cin >> minutos;
-            if (minutos>0){
-                sistemaPrincipal.pasarTiempo(minutos);
-            }
-            else{
-                cout << "Por favor, introduzca un núme10ro mayor que 0 "<<endl;
-            }
-        } 
-        
-        break;
-
-    case 7:  //Pasa todo el tiempo hasta que acaben todos los procesos
-        if(sistemaPrincipal.pilaVacia() && sistemaPrincipal.colaVacia() && sistemaPrincipal.nucleosVacios()){
-            cout<<"No hay procesos que ejecutar"<<endl;
-        }
-        else{
-            sistemaPrincipal.acabarProcesos();
-        }   
-        
-        break;
-
-    default:
-        cout << "Opción no válida "<<endl;
-        break;
-    }
-}
-
-*/
-return 0;
-}
 
 

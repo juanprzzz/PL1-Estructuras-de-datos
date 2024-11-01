@@ -45,6 +45,13 @@ void SistemaLista::mostrarProcesosNucleo()
     lista.mostrarLista();
 }
 
+void SistemaLista::mostrarOcupacion(){
+    cout<<"Màs ocupado:"<<endl;
+    lista.masOcupado();
+    cout<<"Menos ocupado:"<<endl;
+    lista.menosOcupado();
+}
+
 void SistemaLista::apilarSistema(Proceso p)
 {
     if (p.inicioProceso < tiempoTranscurrido)
