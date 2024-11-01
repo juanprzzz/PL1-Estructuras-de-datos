@@ -319,7 +319,6 @@ void Lista::añadirNuevoNucleo()
     if (comprobarAñadirNuevosNucleos())
     {
         añadirDerecha(Nucleo(ctdNucleos + 1));
-        cout<<"nucleo nuevo añadido!"<<endl;
     }
 }
 

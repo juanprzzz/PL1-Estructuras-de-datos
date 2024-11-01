@@ -17,6 +17,7 @@ class Cola{
         //int get_longitud();
         Proceso fin();
         void desencolar();
+        void eliminarFin();
         bool es_vacia();
         void mostrarCola(); //No es correcto, se implementa para ver que está creada correctamente
         Cola copiarCola();

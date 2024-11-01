@@ -12,7 +12,6 @@ Nucleo::Nucleo(){
 
 Nucleo::Nucleo(int id){
     colaEspera = Cola();
-    cout<<colaEspera.es_vacia();
     procesoEjecucion=Proceso();
     ID=id;
 }

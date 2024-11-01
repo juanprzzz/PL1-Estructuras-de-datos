@@ -68,6 +68,57 @@ void Cola::desencolar(){
     }
 }
 
+void Cola::eliminarFin(){
+    if (!es_vacia()){
+        NodoCola *aux = primero;
+        //Proceso elemento = primero->proceso;
+
+        if ((primero == ultimo) && (primero->siguiente == NULL)){
+            primero = NULL;
+            ultimo = NULL;
+            aux->siguiente = NULL;
+            //delete (aux);
+        }
+        else {
+            while (aux->siguiente->siguiente!=NULL){
+                aux=aux->siguiente;
+            }
+            ultimo=aux;
+            ultimo->siguiente=NULL;
+            //delete (aux);
+        }
+        len--;
+        
+    }
+}
+
+
+
+
+
+
+/*
+  if (!esVacia() && ctdNucleos >= 2)
+    { // si solo hay 1 no puedo hacer siguiente->siguiente
+        aux = primero;
+        while (aux->siguiente->siguiente != NULL)
+        { // si el elemento siguiente tiene como atributo "siguiente" null (si el siguiente del aux es el ultimo)
+            aux = aux->siguiente;
+        }
+        ultimo = aux;
+        ultimo->siguiente = NULL;
+        // delete aux;
+        ctdNucleos--;
+    }
+
+    else if (ctdNucleos == 1)
+    {
+        primero = NULL;
+        ultimo = NULL;
+        ctdNucleos--;
+    }*/
+
+
 Proceso Cola::inicio(){
     if (!es_vacia()){
         return primero->proceso;
