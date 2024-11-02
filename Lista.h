@@ -28,8 +28,9 @@ class Lista{
         void mostrarLista(); 
         bool esVacia();
         Lista copiarLista();
-        void menosOcupado(); //devuelve cual es el nucleo menos ocupado
-        void masOcupado(); //devuelve cual es el nucleo con más procesos
+        void menosOcupado(); //muestra cual es el nucleo menos ocupado 
+        int posicMenosOcupado(); //igual que menos ocupado pero devuelve la posicion
+        void masOcupado(); //muestra cual es el nucleo con más procesos
         bool comprobarAñadirNuevosNucleos();
         void añadirNuevoNucleo();
         int comprobarEliminarNucleos();

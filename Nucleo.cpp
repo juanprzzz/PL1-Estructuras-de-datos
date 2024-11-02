@@ -18,16 +18,16 @@ Nucleo::Nucleo(int id){
 
 void Nucleo::mostrarNucleo(){
     if(ID!=-1){ //nucleo no vacio
-        cout<<"------------------------"<<endl;
-        cout<<"NUCLEO---> ID: "<<ID<<endl;
+        cout<<"\n---------------------NUCLEO "<<ID<<"---------------------"<<endl;
+        //cout<<"NUCLEO---> ID: "<<ID<<endl;
         colaEspera.mostrarCola();
         cout<<"PROCESO EJECUTÁNDOSE:"<<endl;
         if (procesoEjecucion.PID!=-1){cout<<procesoEjecucion.toString()<<endl;}
         else{cout<<"Proceso vacío. Nada se está ejecutando."<<endl;}
-        cout<<"------------------------"<<endl;
+        cout<<"---------------------------------------------------"<<endl;
     }
     else{
-        cout<<"El nucleo está vacío"<<endl;
+        cout<<"El nucleo "<<ID<<" está vacío"<<endl;
     }
     
 }

@@ -7,18 +7,17 @@
 using namespace std;
 
 int main(){
-Proceso p1= Proceso(1,0,3,1);
+Proceso p1= Proceso(1,0,1,1);
 Proceso p2= Proceso(2,0,3,0); 
 Proceso p3= Proceso(3,0,6,9);
 Proceso p4= Proceso(4,0,7,5);
 Proceso p5 = Proceso(5,0,6,1);
 Proceso p6 = Proceso(6,0,8,3);
+Proceso p7 = Proceso(7,3,5,2);
 
-
-Proceso p7 = Proceso(7,0,5,4);
-Proceso p8 = Proceso(8,0,2,4);
-Proceso p9 = Proceso(9,0,9,5);
-Proceso p10 = Proceso(10,0,4,4);
+Proceso p8 = Proceso(8,1,2,4);
+Proceso p9 = Proceso(9,1,9,5);
+Proceso p10 = Proceso(10,2,4,4);
 
 
 SistemaLista sl;
@@ -142,10 +141,10 @@ else if (menu==2) {
                     sl.apilarSistema(p4);
                     sl.apilarSistema(p5);
                     sl.apilarSistema(p6);
-                    //sl.apilarSistema(p7);
-                    //sl.apilarSistema(p8);
-                    //sl.apilarSistema(p9);
-                    //sl.apilarSistema(p10);
+                    sl.apilarSistema(p7);
+                    sl.apilarSistema(p8);
+                    sl.apilarSistema(p9);
+                    sl.apilarSistema(p10);
                     }
                 else{
                     cout<<"¡Ya tienes una pila con procesos!"<<endl;

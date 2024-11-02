@@ -149,7 +149,7 @@ void Cola::mostrarCola()
         cout << "La cola está vacía"<< endl;
     }
     else{
-        cout << "el primero es: " << aux->proceso.toString() << endl;
+        //cout << "el primero es: " << aux->proceso.toString() << endl;
         cout << "COLA: " << endl;
         while (aux){
             if(aux->proceso.nucleo != -1){
