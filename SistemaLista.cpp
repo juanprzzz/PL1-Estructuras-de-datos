@@ -85,12 +85,12 @@ void SistemaLista::pasarTiempo(int N)
         // cout<<"PROCESOS AÑADIDOS. EMPEZAMOS! --> ";
         // cout << aux.esVacia() << endl;
         while (!aux.esVacia())
-        { // por cada núcleo
-          // Nucleo prim = aux.primero->nucleo;
+        { 
             if (aux.primero->nucleo.procesoEjecucion.tiempoVida == 0)
             {
                 cout << "\nHa finalizado el siguiente proceso al final del minuto " << tiempoTranscurrido - 1 << " del sistema: " << aux.primero->nucleo.mostrarProcesoEjecucion() << endl;
                 tiempoFinalizacion += tiempoTranscurrido; // como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
+                cout << "La suma de los tiempos de finalización de todos los procesos es: " << tiempoFinalizacion << endl;
                 aux.primero->nucleo.terminarProceso();    // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
             }
             if (aux.primero->nucleo.procesoEjecucion.PID == -1 && !aux.primero->nucleo.colaEspera.es_vacia())
@@ -103,17 +103,18 @@ void SistemaLista::pasarTiempo(int N)
 
                 cout << "\nSe ha introducido al inicio del minuto " << tiempoTranscurrido << " del sistema, el siguiente proceso: " << aux.primero->nucleo.mostrarProcesoEjecucion() << endl;
             }
-            if (aux.primero->nucleo.procesoEjecucion.PID > -1)
-            {
-                if (aux.primero->nucleo.procesoEjecucion.tiempoVida > 0)
-                {
-                    aux.primero->nucleo.procesoEjecucion.tiempoVida--;
-                }
-                // cout<<"En aux ----->"<<aux.inicio().procesoEjecucion.tiempoVida<<endl;
-            }
-            // meter la funcion de borrar todos los que esten vacios si se puede:
             aux.eliminarNucleosVacios(aux.comprobarEliminarNucleos());
 
+           // if (aux.primero->nucleo.procesoEjecucion.PID > -1)
+            //{
+                //if (aux.primero->nucleo.procesoEjecucion.tiempoVida > 0)
+                //{
+                    aux.primero->nucleo.procesoEjecucion.tiempoVida--;
+                //}
+                // cout<<"En aux ----->"<<aux.inicio().procesoEjecucion.tiempoVida<<endl;
+            //}
+            // meter la funcion de borrar todos los que esten vacios si se puede:
+            
             lista.añadirDerecha(aux.inicio());
             // cout<<"después de eliminar en aux "<<aux.inicio().procesoEjecucion.tiempoVida<<endl; //en el de tiempo de vida 6 lo hace bien creo, en el de tvida 5 deberia dar 4 tonces ta mal
             // cout<<"Esto está bien "<<lista.inicio().procesoEjecucion.tiempoVida<<endl;
@@ -152,6 +153,17 @@ void SistemaLista::procesoComienzo()
             bool añadido = false;
 
             // meter aqui el ver si ya acabo proceso?
+/*
+            if (aux->nucleo.procesoEjecucion.tiempoVida == 0)
+            {
+                cout << "\nHa finalizado el siguiente proceso al final del minuto " << tiempoTranscurrido - 1 << " del sistema: " << aux->nucleo.mostrarProcesoEjecucion() << endl;
+                tiempoFinalizacion += tiempoTranscurrido; // como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
+                cout << "La suma de los tiempos de finalización de todos los procesos es: " << tiempoFinalizacion << endl;
+                aux->nucleo.terminarProceso();    // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
+            }*/
+
+
+
             if (aux->nucleo.colaEspera.get_longitud() == 2 && aux->nucleo.procesoEjecucion.PID == -1)
             { // compruebo si hay algo que meter a ejecutar desde la cola del propio nucleo.
                 // si la cola estuviera llena con 2 procesos y no hubiera ninguno ejecutandose, no cabrian mas y se crearia un nuevo nucleo.
@@ -226,57 +238,6 @@ void SistemaLista::procesoComienzo()
     }
 }
 
-/*
-void SistemaLista::procesoComienzo()
-{
-    while (tiempoTranscurrido == pilaProcesos.mostrar().inicioProceso)
-    {
-        if (lista.primero != NULL)
-        {
-            NodoLista *aux;
-            aux = lista.primero;
-
-            bool añadido = false;
-            while (aux->siguiente != NULL && !añadido)
-            {
-                cout<<"Entras aquí para asignarle un núcleo al proceso, intentas buscar un núcleo con capacidad"<<endl;
-                cout << "???" << endl;
-                if (aux->nucleo.colaEspera.get_longitud() < 2)
-                { // si el elemento marcado por aux tiene menos de 2 procesos en su cola de espera
-                    cout << "por cojones entras aquí" << endl;
-                    cout << "Y aqui??" << endl;
-                    aux->nucleo.añadirProceso(pilaProcesos.mostrar());
-                    pilaProcesos.desapilar();
-                    añadido = true;
-                }
-                cout << "aqui no" << endl;
-                aux = aux->siguiente;
-            }
-
-            if (!añadido)
-            { // si todos los nucleos estaban llenos
-                lista.añadirNuevoNucleo();
-                lista.ultimo->nucleo.añadirProceso(pilaProcesos.mostrar());
-                pilaProcesos.desapilar();
-            }
-            // colaEspera.encolarPrioridad(pilaProcesos.mostrar());
-            // pilaProcesos.desapilar();
-
-            tiempoLlegada += tiempoTranscurrido;
-        }
-        else
-        {
-            cout << "Entras aquí porque en el sistema no hay núcleos" << endl;
-            lista.añadirNuevoNucleo();
-            lista.primero->nucleo.añadirProceso(pilaProcesos.mostrar());
-            pilaProcesos.desapilar();
-            tiempoLlegada += tiempoTranscurrido;
-            cout << "Salde de aqui" << endl;
-        }
-    }
-}
-
-*/
 
 void SistemaLista::acabarProcesos()
 {
