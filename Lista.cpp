@@ -202,10 +202,11 @@ int Lista::posicMenosOcupado(){
             int len2=0;
             int procesovacio1=0;
             int procesovacio2=0;
+            int contadordiferencia=1; 
 
             while (aux->siguiente != NULL){ // hasta que llegue al final de los elementos
                 aux = aux->siguiente;
-
+                contadordiferencia++;
                 if(nucleoAux.procesoEjecucion.tiempoVida>0){procesovacio1=1;}
                 else{procesovacio1=0;}
                 if(aux->nucleo.procesoEjecucion.tiempoVida>0){procesovacio2=1;}
@@ -217,7 +218,7 @@ int Lista::posicMenosOcupado(){
                     resultado.~Lista(); // si encuentra que el siguiente nucleo de la lista está menos ocupado, borra la lista y lo mete
                     nucleoAux = aux->nucleo;
                     resultado.añadirDerecha(nucleoAux);
-                    posic++; //si hay mas de 1 devuelve la posic del primero
+                    posic=contadordiferencia; 
                 }
                 else if (len1 == len2){
                     nucleoAux = aux->nucleo; // si encuentra que el siguiente nucleo esta igual de ocupado, lo añade también a la lista

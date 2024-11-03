@@ -145,7 +145,6 @@ void SistemaLista::procesoComienzo()
                 aux->nucleo.terminarProceso();    // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
             }
 
-
             if (!aux->nucleo.colaEspera.es_vacia() && aux->nucleo.procesoEjecucion.PID == -1)
             { // compruebo si hay algo que meter a ejecutar desde la cola del propio nucleo o si es mas prioritario el nuevo a añadir.
                 // si la cola estuviera llena con 2 procesos y no hubiera ninguno ejecutandose, no cabrian mas y se crearia un nuevo nucleo.

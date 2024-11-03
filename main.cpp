@@ -11,18 +11,12 @@ int main(){
     Proceso p2= Proceso(2,2,3,0);    
     Proceso p3= Proceso(3,3,6,9);
     Proceso p4= Proceso(4,0,7,5);
-    //Proceso p5 = Proceso(5,0,6,1);
-    Proceso p5 = Proceso(5,4,3,6); //acaba igual a p2, los primeros de n1 y n2 respectivamente
+    Proceso p5 = Proceso(5,4,3,6); 
     Proceso p6 = Proceso(6,7,8,3);
     Proceso p7 = Proceso(7,5,5,4);
-    Proceso p8 = Proceso(8,3,2,0); //similar a p7. quiero que se meta a n2 a la vez
-//Proceso p8 = Proceso(8,1,2,4);
+    Proceso p8 = Proceso(8,3,2,0);
     Proceso p9 = Proceso(9,1,8,5);
     Proceso p10 = Proceso(10,2,4,4);
-
-
-
-
 
 
 SistemaLista sl;
@@ -226,7 +220,6 @@ else{
     cout << "Opción no válida "<<endl;
 }
 }
-
 
 
 return 0;
