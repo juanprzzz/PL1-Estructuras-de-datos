@@ -79,12 +79,11 @@ void SistemaLista::pasarTiempo(int N)
         lista.~Lista();
 
         while (!aux.esVacia())
-        { 
+        {
             if (aux.primero->nucleo.procesoEjecucion.tiempoVida ==0)
             {
                 cout << "\nHa finalizado el siguiente proceso al final del minuto " << tiempoTranscurrido - 1 << " del sistema: " << aux.primero->nucleo.mostrarProcesoEjecucion() << endl;
                 tiempoFinalizacion += tiempoTranscurrido; // como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
-                cout << "La suma de los tiempos de finalización de todos los procesos es: " << tiempoFinalizacion << endl;
                 aux.primero->nucleo.terminarProceso();    // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
             }else{
                 aux.primero->nucleo.procesoEjecucion.tiempoVida--; 
@@ -98,10 +97,11 @@ void SistemaLista::pasarTiempo(int N)
 
                 cout << "\nSe ha introducido al inicio del minuto " << tiempoTranscurrido << " del sistema, el Proceso con PID " << aux.primero->nucleo.procesoEjecucion.PID << endl;
             }
-            aux.eliminarNucleosVacios(aux.comprobarEliminarNucleos()); //compruebo si se pueden eliminar nucleos vacios 
             lista.añadirDerecha(aux.inicio());//meto cada elemento de aux,lista pero modificado, de vuelta en lista
             aux.eliminarInicio();
         }
+        lista.eliminarNucleosVacios(lista.comprobarEliminarNucleos()); //compruebo si se pueden eliminar nucleos vacios 
+        
         cout << "\nESTADO DE LOS NÚCLEOS. MINUTO: " << tiempoTranscurrido << endl;
         lista.mostrarLista();
 
@@ -138,12 +138,10 @@ void SistemaLista::procesoComienzo()
             for (int i=1;i<posic;i++){
                 if (aux->siguiente != NULL){aux = aux->siguiente;}
             }
-
             if (aux->nucleo.procesoEjecucion.tiempoVida == 0)
             {
                 cout << "\nHa finalizado el siguiente proceso al final del minuto " << tiempoTranscurrido - 1 << " del sistema: " << aux->nucleo.mostrarProcesoEjecucion() << endl;
                 tiempoFinalizacion += tiempoTranscurrido; // como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
-                cout << "La suma de los tiempos de finalización de todos los procesos es: " << tiempoFinalizacion << endl;
                 aux->nucleo.terminarProceso();    // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
             }
 

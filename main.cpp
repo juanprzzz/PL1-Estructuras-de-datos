@@ -7,17 +7,17 @@
 using namespace std;
 
 int main(){
-    Proceso p1= Proceso(1,0,1,1,2);
-    Proceso p2= Proceso(2,0,3,0);    
-    Proceso p3= Proceso(3,0,6,9);
+    Proceso p1= Proceso(1,0,5,1,2);
+    Proceso p2= Proceso(2,2,3,0);    
+    Proceso p3= Proceso(3,3,6,9);
     Proceso p4= Proceso(4,0,7,5);
     //Proceso p5 = Proceso(5,0,6,1);
-    Proceso p5 = Proceso(5,0,3,1); //acaba igual a p2, los primeros de n1 y n2 respectivamente
-    Proceso p6 = Proceso(6,0,8,3);
-    Proceso p7 = Proceso(7,3,5,2);
+    Proceso p5 = Proceso(5,4,3,6); //acaba igual a p2, los primeros de n1 y n2 respectivamente
+    Proceso p6 = Proceso(6,7,8,3);
+    Proceso p7 = Proceso(7,5,5,4);
     Proceso p8 = Proceso(8,3,2,0); //similar a p7. quiero que se meta a n2 a la vez
 //Proceso p8 = Proceso(8,1,2,4);
-    Proceso p9 = Proceso(9,1,9,5);
+    Proceso p9 = Proceso(9,1,8,5);
     Proceso p10 = Proceso(10,2,4,4);
 
 
@@ -34,10 +34,10 @@ bool exit=false;
 while(!exit){
 bool salir=false;
 int menu;
-cout << "╔══════════════╗      ╔════════════════╗\n";
-cout << "║   COLA DE    ║      ║      CPU       ║\n";
-cout << "║   PROCESOS   ║─────▶║   PROCESANDO   ║\n";
-cout << "╚══════════════╝      ╚════════════════╝\n\n";
+cout << "|--------------|      |----------------|\n";
+cout << "|   COLA DE    |      |      CPU       |\n";
+cout << "|   PROCESOS   |----->|   PROCESANDO   |\n";
+cout << "|--------------|      |----------------|\n\n";
 cout<<"\t|------------------------|"<<endl;
 cout<<"\t|                        |"<<endl;
 cout<<"\t|PLANIFICADOR DE PROCESOS|"<<endl;
@@ -49,7 +49,7 @@ cout<<"\t|                        |"<<endl;
 cout<<"\t|2 -> Segunda parte      |"<<endl;
 cout<<"\t|                        |"<<endl;
 cout<<"\t|------------------------|"<<endl;
-cout<<"\nIntroduce una opción: "<<endl;
+cout<<"\nIntroduce una opción: ";
 cin >> menu;
 if (menu==-1){exit=true;}
 else if (menu==1){
