@@ -24,6 +24,18 @@ Proceso::Proceso(int pid, int inicioproceso, int tiempovida, int prior){
         Proceso();
     }
 }
+Proceso::Proceso(int pid, int inicioproceso, int tiempovida, int prior, int ppid){
+    if  (pid>0  && inicioproceso>=0 && tiempovida>0 && prior>=0 && prior<=9 && ppid>0){
+        PID=pid;
+        inicioProceso=inicioproceso;
+        tiempoVida=tiempovida;
+        prioridad=prior;
+        PPID=ppid;
+       
+    }else{
+        Proceso();
+    }
+}
 
 Proceso::~Proceso(){
 //dtor

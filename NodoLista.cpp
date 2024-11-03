@@ -1,7 +1,7 @@
 #include "NodoLista.h"
 
 NodoLista::NodoLista(){
-nucleo=Nucleo(); //////null?
+nucleo=Nucleo(); 
 siguiente=NULL;
 //constructor por defecto
 }

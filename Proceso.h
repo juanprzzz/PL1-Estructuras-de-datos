@@ -26,6 +26,7 @@ class Proceso{
     public:
         Proceso();
         Proceso(int PID,int inicioProceso, int tiempoVida, int prioridad); 
+        Proceso(int PID,int inicioProceso, int tiempoVida, int prioridad, int ppid); 
         ~Proceso();
         string toString(); 
 

@@ -29,7 +29,6 @@ Lista::~Lista()
 void Lista::añadirIzquierda(Nucleo nucleo)
 {
     ctdNucleos++;
-    // Nucleo nucleo = Nucleo(ctdNucleos);
     NodoLista *nuevo_nodo = new NodoLista(nucleo);
     if (esVacia())
     {
@@ -54,8 +53,7 @@ void Lista::añadirDerecha(Nucleo nucleo)
     }
     else
     {
-        // Nucleo nucleo=Nucleo(ctdNucleos);
-        ultimo->siguiente = nuevo_nodo; // puntero->atributo -------Falla<<<<
+        ultimo->siguiente = nuevo_nodo; 
         ultimo = nuevo_nodo;
     }
 }
@@ -72,7 +70,6 @@ void Lista::eliminarFin()
         }
         ultimo = aux;
         ultimo->siguiente = NULL;
-        // delete aux;
         ctdNucleos--;
     }
 
@@ -87,11 +84,11 @@ void Lista::eliminarFin()
 void Lista::eliminarInicio()
 {
     if (!esVacia())
-    { //////////////cuidado, siempre tiene que haber al menos 1 nucleo en lista!
+    { 
         Nucleo elemento = primero->nucleo;
         NodoLista *aux = primero;
         if ((primero == ultimo) && (primero->siguiente == NULL))
-        { // si solo hay 1 elemento. podria ser if (ctdNucleos==1) DUDA: Si primero es el último entonces su puntero al siguiente será null, entonces ¿Por qué comprobarlo?
+        { 
             primero = NULL;
             ultimo = NULL;
             aux->siguiente = NULL;
@@ -129,7 +126,6 @@ Nucleo Lista::fin()
 {
     if (!esVacia())
     {
-        // cout<<ultimo->nucleo.colaEspera.es_vacia()<<endl;
         return ultimo->nucleo;
     }
     else
@@ -159,7 +155,6 @@ Lista Lista::copiarLista()
 {
     Lista listaAux;
     Lista listaResultado;
-    // listaAux.inicio().mostrarNucleo();
     while (!esVacia())
     {
         listaAux.añadirDerecha(inicio());
@@ -187,22 +182,15 @@ int Lista::getCtdNucleos()
 }
 
 int Lista::posicMenosOcupado(){
-    {
- if (esVacia())
-    {
-        //cout << "Está vacía. posic=-1" << endl;
+    if (esVacia()){
         return -1;
     }
-else
-    {
-        if (ctdNucleos == 1)
-        {
-           // cout << "Hay 1 núcleo solo. posic=1" << endl;
+    else{
+        if (ctdNucleos == 1){
             return 1;
         }
 
-        else // if (ctdNucleos > 1)
-        {
+        else{ 
             NodoLista *aux; // puntero aux para manipular el nodo
             Lista resultado;
             Nucleo nucleoAux;
@@ -210,29 +198,35 @@ else
             nucleoAux = primero->nucleo;
             resultado.añadirDerecha(nucleoAux);
             int posic=1;
+            int len1=0; 
+            int len2=0;
+            int procesovacio1=0;
+            int procesovacio2=0;
 
-            while (aux->siguiente != NULL)
-            { // hasta que llegue al final de los elementos
+            while (aux->siguiente != NULL){ // hasta que llegue al final de los elementos
                 aux = aux->siguiente;
-                if (nucleoAux.colaEspera.get_longitud() > aux->nucleo.colaEspera.get_longitud())
-                {
+
+                if(nucleoAux.procesoEjecucion.tiempoVida>0){procesovacio1=1;}
+                else{procesovacio1=0;}
+                if(aux->nucleo.procesoEjecucion.tiempoVida>0){procesovacio2=1;}
+                else{procesovacio2=0;}
+                len1=(nucleoAux.colaEspera.get_longitud()+procesovacio1);
+                len2=(aux->nucleo.colaEspera.get_longitud()+procesovacio2);
+
+                if (len1 > len2){
                     resultado.~Lista(); // si encuentra que el siguiente nucleo de la lista está menos ocupado, borra la lista y lo mete
                     nucleoAux = aux->nucleo;
                     resultado.añadirDerecha(nucleoAux);
                     posic++; //si hay mas de 1 devuelve la posic del primero
                 }
-                else if (nucleoAux.colaEspera.get_longitud() == aux->nucleo.colaEspera.get_longitud())
-                {
+                else if (len1 == len2){
                     nucleoAux = aux->nucleo; // si encuentra que el siguiente nucleo esta igual de ocupado, lo añade también a la lista
                     resultado.añadirDerecha(nucleoAux);
                 }
-            }
-            //cout << "posicion: " << posic << endl;
-            //resultado.mostrarLista();
+            } 
             return posic;
         }
     }
-}
 }
 
 void Lista::menosOcupado()
@@ -249,35 +243,45 @@ else
             mostrarLista();
         }
 
-        else // if (ctdNucleos > 1)
+        else
         {
             NodoLista *aux; // puntero aux para manipular el nodo
             Lista resultado;
             Nucleo nucleoAux;
             aux = primero;
             nucleoAux = primero->nucleo;
-            resultado.añadirDerecha(nucleoAux);
-            while (aux->siguiente != NULL)
-            { // hasta que llegue al final de los elementos
+            resultado.añadirDerecha(nucleoAux);int posic=1;
+            int len1=0; 
+            int len2=0;
+            int procesovacio1=0;
+            int procesovacio2=0;
+
+            while (aux->siguiente != NULL){ // hasta que llegue al final de los elementos
                 aux = aux->siguiente;
-                if (nucleoAux.colaEspera.get_longitud() > aux->nucleo.colaEspera.get_longitud())
+
+                if(nucleoAux.procesoEjecucion.tiempoVida>0){procesovacio1=1;}
+                else{procesovacio1=0;}
+                if(aux->nucleo.procesoEjecucion.tiempoVida>0){procesovacio2=1;}
+                else{procesovacio2=0;}
+                len1=(nucleoAux.colaEspera.get_longitud()+procesovacio1);
+                len2=(aux->nucleo.colaEspera.get_longitud()+procesovacio2);
+
+                if (len1 > len2)
                 {
                     resultado.~Lista(); // si encuentra que el siguiente nucleo de la lista está menos ocupado, borra la lista y lo mete
                     nucleoAux = aux->nucleo;
                     resultado.añadirDerecha(nucleoAux);
                    
                 }
-                else if (nucleoAux.colaEspera.get_longitud() == aux->nucleo.colaEspera.get_longitud())
+                else if (len1 == len2)
                 {
                     nucleoAux = aux->nucleo; // si encuentra que el siguiente nucleo esta igual de ocupado, lo añade también a la lista
                     resultado.añadirDerecha(nucleoAux);
                 }
             }
             resultado.mostrarLista();
-
         }
     }
-
 }
 
 void Lista::masOcupado()
@@ -286,39 +290,50 @@ void Lista::masOcupado()
     {
         cout << "Está vacía" << endl;
     }
-    else
+else
     {
         if (ctdNucleos == 1)
         {
             cout << "Hay 1 núcleo solo:" << endl;
-            primero->nucleo.mostrarNucleo();
+            mostrarLista();
         }
 
-        else // if (ctdNucleos > 1)
+        else 
         {
             NodoLista *aux; // puntero aux para manipular el nodo
             Lista resultado;
             Nucleo nucleoAux;
             aux = primero;
             nucleoAux = primero->nucleo;
-            resultado.añadirDerecha(nucleoAux);
+            resultado.añadirDerecha(nucleoAux);int posic=1;
+            int len1=0; 
+            int len2=0;
+            int procesovacio1=0;
+            int procesovacio2=0;
 
-            while (aux->siguiente != NULL)
-            { // hasta que llegue al final de los elementos
+            while (aux->siguiente != NULL){ // hasta que llegue al final de los elementos
                 aux = aux->siguiente;
-                if (nucleoAux.colaEspera.get_longitud() < aux->nucleo.colaEspera.get_longitud())
+                //Se tendrá en cuenta la longitud de la cola y si el proceso es vacío o no
+                if(nucleoAux.procesoEjecucion.tiempoVida>0){procesovacio1=1;}
+                else{procesovacio1=0;}
+                if(aux->nucleo.procesoEjecucion.tiempoVida>0){procesovacio2=1;}
+                else{procesovacio2=0;}
+                len1=(nucleoAux.colaEspera.get_longitud()+procesovacio1);
+                len2=(aux->nucleo.colaEspera.get_longitud()+procesovacio2); 
+
+                if (len1 < len2)
                 {
                     resultado.~Lista(); // si encuentra que el siguiente nucleo de la lista está más ocupado, borra la lista y lo mete
                     nucleoAux = aux->nucleo;
                     resultado.añadirDerecha(nucleoAux);
+                   
                 }
-                else if (nucleoAux.colaEspera.get_longitud() == aux->nucleo.colaEspera.get_longitud())
+                else if (len1 == len2)
                 {
                     nucleoAux = aux->nucleo; // si encuentra que el siguiente nucleo esta igual de ocupado, lo añade también a la lista
                     resultado.añadirDerecha(nucleoAux);
                 }
             }
-            cout << "mas ocupado; ctd nucleos:" << ctdNucleos << endl;
             resultado.mostrarLista();
         }
     }
@@ -327,7 +342,6 @@ void Lista::masOcupado()
 bool Lista::comprobarAñadirNuevosNucleos()
 {
     Lista listaCopia = copiarLista();
-    //listaCopia.mostrarLista();
     bool añadir = true;
     while (!listaCopia.esVacia() && añadir)
     {

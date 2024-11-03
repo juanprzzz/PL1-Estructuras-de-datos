@@ -21,10 +21,7 @@ class Lista{
         Nucleo fin();
         void eliminarFin();
         void eliminarInicio();
-        //int getCtdNucleosOperativos();     
-        //int getCtdNucleosVacios();
         int getCtdNucleos(); //longitud de la lista
-        //bool quedaUno();    cuando solo quede un nucleo. siempre tiene que haber minimo 1
         void mostrarLista(); 
         bool esVacia();
         Lista copiarLista();
@@ -35,8 +32,6 @@ class Lista{
         void añadirNuevoNucleo();
         int comprobarEliminarNucleos();
         void eliminarNucleosVacios(int nucleosVacios);
-
-        //void copiarListaAOtra(Lista& l);
 
 };
 

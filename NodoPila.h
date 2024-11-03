@@ -7,7 +7,7 @@ class NodoPila
     private:
         NodoPila *siguiente;
         Proceso proceso;
-        friend class Pila;//claase pila podra acceder tanto a metodos publicos como privados
+        friend class Pila;//clase pila podra acceder tanto a metodos publicos como privados
 
     public:
         NodoPila(); //constructor

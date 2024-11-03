@@ -7,7 +7,6 @@ Sistema::Sistema(){
     Pila pilaProcesos;
     Cola colaEspera;
     Proceso nucleos[3];
-    //int tiempoTranscurrido = 0;
 }
 
 

@@ -71,13 +71,12 @@ void Cola::desencolar(){
 void Cola::eliminarFin(){
     if (!es_vacia()){
         NodoCola *aux = primero;
-        //Proceso elemento = primero->proceso;
-
+    
         if ((primero == ultimo) && (primero->siguiente == NULL)){
             primero = NULL;
             ultimo = NULL;
             aux->siguiente = NULL;
-            //delete (aux);
+           
         }
         else {
             while (aux->siguiente->siguiente!=NULL){
@@ -85,38 +84,12 @@ void Cola::eliminarFin(){
             }
             ultimo=aux;
             ultimo->siguiente=NULL;
-            //delete (aux);
+         
         }
         len--;
         
     }
 }
-
-
-
-
-
-
-/*
-  if (!esVacia() && ctdNucleos >= 2)
-    { // si solo hay 1 no puedo hacer siguiente->siguiente
-        aux = primero;
-        while (aux->siguiente->siguiente != NULL)
-        { // si el elemento siguiente tiene como atributo "siguiente" null (si el siguiente del aux es el ultimo)
-            aux = aux->siguiente;
-        }
-        ultimo = aux;
-        ultimo->siguiente = NULL;
-        // delete aux;
-        ctdNucleos--;
-    }
-
-    else if (ctdNucleos == 1)
-    {
-        primero = NULL;
-        ultimo = NULL;
-        ctdNucleos--;
-    }*/
 
 
 Proceso Cola::inicio(){
@@ -149,7 +122,6 @@ void Cola::mostrarCola()
         cout << "La cola está vacía"<< endl;
     }
     else{
-        //cout << "el primero es: " << aux->proceso.toString() << endl;
         cout << "COLA: " << endl;
         while (aux){
             if(aux->proceso.nucleo != -1){
@@ -179,29 +151,6 @@ Cola Cola::copiarCola()
     return copia;
 }
 
-/*
-int Cola::get_longitud()
-{
-    Cola aux = copiarCola();
-    int ctd = 0;
-    if (!aux.es_vacia()){
-        //cout<<"Cola vacia :) ctd = 0"<<endl;
-        //cout<<"es vacia?: "<<es_vacia()<<endl;
-        //cout<<"\n inicio.tostring: \n"<<endl;
-        //cout<<inicio().toString()<<endl;
-        //cout<<"Copia: "<<aux.inicio().toString()<<endl;
-        while (!aux.es_vacia())
-        {
-            ctd++;
-            aux.desencolar();
-        }
-        //cout<<"ctd: "<<ctd<<endl;     
-    }
-    cout<<"ctd: "<<ctd<<endl;  
-    return ctd;
-}*/
 
 int Cola::get_longitud(){
-    //mostrarCola();
-    //cout<<"len="<<len<<endl;
     return len;}

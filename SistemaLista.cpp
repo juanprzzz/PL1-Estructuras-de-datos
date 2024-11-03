@@ -70,37 +70,35 @@ void SistemaLista::apilarSistema(Proceso p)
  * los núcleos cada minuto, asignación de procesos...
  */
 
-///////////////////////meter que si hay alguno vacio se tiene que borrar
 void SistemaLista::pasarTiempo(int N)
 {
-
     for (int i = 0; i < N; i++)
-    {
-       
+    {       
         procesoComienzo(); // Se comprueba si hay algún proceso que inicie en este minuto. Si lo hay, se añade a la cola
         Lista aux = lista.copiarLista();
         lista.~Lista();
 
         while (!aux.esVacia())
         { 
-            if (aux.primero->nucleo.procesoEjecucion.tiempoVida == 0)
+            if (aux.primero->nucleo.procesoEjecucion.tiempoVida ==0)
             {
                 cout << "\nHa finalizado el siguiente proceso al final del minuto " << tiempoTranscurrido - 1 << " del sistema: " << aux.primero->nucleo.mostrarProcesoEjecucion() << endl;
                 tiempoFinalizacion += tiempoTranscurrido; // como ha acabado un proceso, se suma el tiempo actual al tiempo de finalización
                 cout << "La suma de los tiempos de finalización de todos los procesos es: " << tiempoFinalizacion << endl;
                 aux.primero->nucleo.terminarProceso();    // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
+            }else{
+                aux.primero->nucleo.procesoEjecucion.tiempoVida--; 
             }
             if (aux.primero->nucleo.procesoEjecucion.PID == -1 && !aux.primero->nucleo.colaEspera.es_vacia())
             { // Si el proceso en ejecucion está vacío (no hay) y la cola no está vacía
                 Proceso procesoNuevo = aux.primero->nucleo.PrimeroCola();//primerocola=colaEspera.inicio()
-                //procesoNuevo.nucleo = aux.primero->nucleo.ID; //creo que sobra////////////////////////////////////////////////
                 aux.primero->nucleo.ejecutarProceso(procesoNuevo);
                 aux.primero->nucleo.colaEspera.desencolar();
+                aux.primero->nucleo.procesoEjecucion.tiempoVida--; 
 
-                cout << "\nSe ha introducido al inicio del minuto " << tiempoTranscurrido << " del sistema, el siguiente proceso: " << aux.primero->nucleo.mostrarProcesoEjecucion() << endl;
+                cout << "\nSe ha introducido al inicio del minuto " << tiempoTranscurrido << " del sistema, el Proceso con PID " << aux.primero->nucleo.procesoEjecucion.PID << endl;
             }
             aux.eliminarNucleosVacios(aux.comprobarEliminarNucleos()); //compruebo si se pueden eliminar nucleos vacios 
-            aux.primero->nucleo.procesoEjecucion.tiempoVida--; 
             lista.añadirDerecha(aux.inicio());//meto cada elemento de aux,lista pero modificado, de vuelta en lista
             aux.eliminarInicio();
         }
@@ -130,13 +128,16 @@ void SistemaLista::procesoComienzo()
     // si hay elementos que inician en este minuto...
     while (!colaNuevos.es_vacia())
     {
-        if (lista.primero != NULL) // Caso 1.1: lista con más de un nucleo ya; lista no vacia
+        if (lista.primero != NULL) // Lista no vacia
         {
             NodoLista *aux;
             aux = lista.primero;
             bool añadido = false;
 
-            // meter aqui el ver si ya acabo proceso?
+            int posic=lista.posicMenosOcupado();
+            for (int i=1;i<posic;i++){
+                if (aux->siguiente != NULL){aux = aux->siguiente;}
+            }
 
             if (aux->nucleo.procesoEjecucion.tiempoVida == 0)
             {
@@ -146,11 +147,6 @@ void SistemaLista::procesoComienzo()
                 aux->nucleo.terminarProceso();    // Además, como ahora el núcleo está vacío, se sustituye el proceso finalizado por uno vacío con todos los valores a -1
             }
 
-            int posic=lista.posicMenosOcupado();
-            for (int i=1;i<posic;i++){
-                if (aux->siguiente != NULL){aux = aux->siguiente;}
-                //cout<<"i= "<<i<<endl;
-            }
 
             if (!aux->nucleo.colaEspera.es_vacia() && aux->nucleo.procesoEjecucion.PID == -1)
             { // compruebo si hay algo que meter a ejecutar desde la cola del propio nucleo o si es mas prioritario el nuevo a añadir.
@@ -169,25 +165,21 @@ void SistemaLista::procesoComienzo()
                     aux->nucleo.desencolarProceso(); }
                 //ejecutar.nucleo = aux->nucleo.ID;
                 aux->nucleo.ejecutarProceso(ejecutar);
-                cout << "\nSe ha introducido al inicio del minuto " << tiempoTranscurrido << " del sistema, el siguiente proceso: " << aux->nucleo.mostrarProcesoEjecucion() << endl;
+                cout << "\nSe ha introducido al inicio del minuto " << tiempoTranscurrido << " del sistema, el Proceso con PID " << aux->nucleo.procesoEjecucion.PID << endl;
                 
-                //ejecutar = aux->nucleo.colaEspera.fin(); // creo q ya entiendo por qué Pero si es 1 la longitud?
             }
 
             if (!añadido && aux->nucleo.colaEspera.get_longitud() < 2)
                 { // si el elemento marcado por aux tiene menos de 2 procesos en su cola de espera puedo añadir un nuevo proceso
-                    // Proceso procesoNuevo = colaNuevos.inicio();
-                    
                     Proceso procesoNuevo = colaNuevos.fin();
                     procesoNuevo.nucleo = aux->nucleo.ID;
                     aux->nucleo.añadirProceso(procesoNuevo);
-                    // colaNuevos.desencolar();
                     colaNuevos.eliminarFin();
                     añadido = true;
                 }
             
                
-            if (!añadido) // Caso 2.3: si no se ha podido añadir a ningun nucleo, todos estaban llenos, se crea uno nuevo
+            if (!añadido) // Si no se ha podido añadir a ningun nucleo, todos estaban llenos, se crea uno nuevo
             {             // si todos los nucleos estaban llenos (El ultimo elemento tiene aux->siguiente = NULL y por eso se cambian los procesos)
                 
                 if(lista.comprobarAñadirNuevosNucleos()){
@@ -197,7 +189,7 @@ void SistemaLista::procesoComienzo()
                     lista.ultimo->nucleo.ejecutarProceso(procesoNuevo); // Como los procesos a añadir ya van ordenados por orden de prioridad, se puede ejecutar directamente
                     colaNuevos.desencolar();
                 }
-                else{//////////////////////???borrar?
+                else{
                     Proceso procesoNuevo = colaNuevos.fin();
                     procesoNuevo.nucleo = lista.ultimo->nucleo.ID;
                     lista.ultimo->nucleo.añadirProceso(procesoNuevo);
@@ -205,7 +197,7 @@ void SistemaLista::procesoComienzo()
                 }    
             }
         }
-        else // Caso 1.2: lista vacía
+        else // Lista vacía
         {
             // si la lista está vacia se crea nuevo nucleo, y como es nuevo puedo comenzar a ejecutar el proceso más prioritario actual de la cola
             lista.añadirNuevoNucleo(); // si la lista está vacia se crea nuevo nucleo
@@ -215,9 +207,6 @@ void SistemaLista::procesoComienzo()
             colaNuevos.desencolar();
             
         }
-
-         //cout << "FIN DE ITERACION. MOSTRAR LISTA ACTUALMENTE" << endl;                     //BORRAR
-         //lista.mostrarLista();     //BORRAR
     }
 }
 

@@ -19,7 +19,6 @@ Nucleo::Nucleo(int id){
 void Nucleo::mostrarNucleo(){
     if(ID!=-1){ //nucleo no vacio
         cout<<"\n---------------------NUCLEO "<<ID<<"---------------------"<<endl;
-        //cout<<"NUCLEO---> ID: "<<ID<<endl;
         colaEspera.mostrarCola();
         cout<<"PROCESO EJECUTÁNDOSE:"<<endl;
         if (procesoEjecucion.PID!=-1){cout<<procesoEjecucion.toString()<<endl;}

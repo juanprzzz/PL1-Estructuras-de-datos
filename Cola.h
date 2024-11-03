@@ -14,7 +14,6 @@ class Cola{
         void encolar(Proceso);
         void encolarPrioridad(Proceso);
         Proceso inicio();
-        //int get_longitud();
         Proceso fin();
         void desencolar();
         void eliminarFin();
